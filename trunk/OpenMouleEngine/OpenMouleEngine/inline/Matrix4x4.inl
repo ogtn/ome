@@ -32,7 +32,7 @@ Matrix4x4<T> &Matrix4x4<T>::makeIdentity()
 {
     for(int i = 0; i < 4; i++)
         for(int j = 0; j < 4; j++)
-            data[i][j] = i == j ? 1 : 0;
+            data[i][j] = i == j ? T(1) : T(0);
     
     return *this;
 }
@@ -70,7 +70,7 @@ template <typename T>
 Matrix4x4<T> &Matrix4x4<T>::rotate(const Vector3<T> &axis, T theta)
 {
     Vector3<T> v(axis);
-    theta *= M_PI / 180;
+    theta *= T(M_PI) / 180;
     T ct = cos(theta), st = sin(theta);
     Matrix4x4<T> m;
     
@@ -161,16 +161,6 @@ std::ostream &operator<<(std::ostream &ostr, const Matrix4x4<T> &m)
 {
     for(int i = 0; i < 16; i++)
         ostr << ((float*)m.data)[i] << " ";
-        
-        /*
-    for(int i = 0; i < 4; i++)
-    {
-        for(int j = 0; j < 4; j++)
-            ostr << m.data[i][j] << "  ";
-        
-        ostr << std::endl;
-    }
-    */
-    
+
     return ostr;
 }
