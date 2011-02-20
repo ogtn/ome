@@ -4,8 +4,6 @@
 ////////////////////////////////////////////////////////////////////////
 
 #include "Engine.hpp"
-#define GL3_PROTOTYPES 1
-#include <GL/gl3.h>
 
 namespace OpenMouleEngine
 {

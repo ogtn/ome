@@ -7,6 +7,9 @@
 #define HPP_VECTOR3
 
 #include <cmath>
+#ifndef M_PI
+#define M_PI 3.141592653589793238462643
+#endif
 #include <iostream>
 
 namespace OpenMouleEngine
