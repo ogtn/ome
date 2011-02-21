@@ -7,6 +7,7 @@
 #define HPP_MATRIX4X4
 
 #include "Vector3.hpp"
+#define GLEW_STATIC
 #include <GL/glew.h>
 
 namespace OpenMouleEngine
