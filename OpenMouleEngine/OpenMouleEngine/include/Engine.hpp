@@ -27,4 +27,6 @@ namespace OpenMouleEngine
     };
 } // namespace
 
+namespace ome = OpenMouleEngine;
+
 #endif // HPP_ENGINE

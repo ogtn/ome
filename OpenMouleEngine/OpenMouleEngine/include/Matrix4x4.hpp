@@ -7,10 +7,7 @@
 #define HPP_MATRIX4X4
 
 #include "Vector3.hpp"
-#ifdef _WIN32
-#include <Windows.h>
-#endif
-#include <GL/gl.h>
+#include <GL/glew.h>
 
 namespace OpenMouleEngine
 {
