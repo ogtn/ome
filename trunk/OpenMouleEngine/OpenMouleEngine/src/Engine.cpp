@@ -51,12 +51,9 @@ namespace OpenMouleEngine
     {
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
         glVertexAttribPointer(0, 2, GL_FLOAT, 0, 0, BUFFER_OFFSET(0));
-        //glVertexPointer(2, GL_FLOAT, 0, BUFFER_OFFSET(0));
         glEnableVertexAttribArray(0);
-        //glEnableClientState(GL_VERTEX_ARRAY);
         glDrawArrays(GL_TRIANGLES, 0, 3);
         glDisableVertexAttribArray(0);
-        //glDisableClientState(GL_VERTEX_ARRAY);
 
         return *this;
     }
