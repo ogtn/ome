@@ -1,14 +1,12 @@
 ////////////////////////////////////////////////////////////////////////
-// Matrix4x4.cpp
+// Matrix4x4.inl
 // Copyright (C) 2011  Olivier Guittonneau openmengine@gmail.com
 ////////////////////////////////////////////////////////////////////////
 
 template <typename T>
 Matrix4x4<T>::Matrix4x4()
 {
-    for(int i = 0; i < 4; i++)
-        for(int j = 0; j < 4; j++)
-            data[i][j] = 0;
+    makeIdentity();
 }
 
 
