@@ -1,0 +1,22 @@
+////////////////////////////////////////////////////////////////////////
+// %NAME.hpp
+// Copyright (C) 2011  Olivier Guittonneau openmengine@gmail.com
+////////////////////////////////////////////////////////////////////////
+
+#pragma once
+#ifndef %GUARD
+#define %GUARD
+
+namespace OpenMouleEngine
+{
+    class %NAME
+    {
+    public:
+        %NAME();
+
+        ~%NAME();
+    private:
+    };
+} // namespace
+
+#endif // %GUARD

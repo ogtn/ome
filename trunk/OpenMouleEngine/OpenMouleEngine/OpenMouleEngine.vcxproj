@@ -94,12 +94,16 @@
     <ClCompile Include="src\Renderable.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="cpp.template" />
+    <None Include="hpp.template" />
     <None Include="inline\Matrix4x4.inl" />
     <None Include="inline\Vector3.inl" />
+    <None Include="licence.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Engine.hpp" />
     <ClInclude Include="include\Matrix4x4.hpp" />
+    <ClInclude Include="include\OpenMouleEngine.hpp" />
     <ClInclude Include="include\Renderable.hpp" />
     <ClInclude Include="include\Vector3.hpp" />
   </ItemGroup>

@@ -1,8 +1,9 @@
 ////////////////////////////////////////////////////////////////////////
-// Engine.cpp
+// Engine.hpp
 // Copyright (C) 2011  Olivier Guittonneau openmengine@gmail.com
 ////////////////////////////////////////////////////////////////////////
 
+#pragma once
 #ifndef HPP_ENGINE
 #define HPP_ENGINE
 
@@ -30,7 +31,5 @@ namespace OpenMouleEngine
         std::vector<GLfloat> vertices;
     };
 } // namespace
-
-namespace ome = OpenMouleEngine;
 
 #endif // HPP_ENGINE
