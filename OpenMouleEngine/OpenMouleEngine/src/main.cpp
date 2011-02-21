@@ -22,7 +22,7 @@ int main(void)
     cout << glfwGetNumberOfProcessors() << " CPUs detected" << endl; 
     
     // Open an OpenGL window
-    if (!glfwOpenWindow(500, 500, 8, 8, 8, 8, 8, 0, GLFW_WINDOW))
+    if (!glfwOpenWindow(500, 500, 8, 8, 8, 8, 24, 0, GLFW_WINDOW))
     {
         cout << "Error: glfwOpenWindow() failed" << endl;
         glfwTerminate();
@@ -31,7 +31,9 @@ int main(void)
 
     glfwSetWindowTitle("OpenMouleEngine");
     ome::Engine engine;
-    
+    ome::Shader shader;
+    shader.link().bind();
+
     while(running) 
     {
         engine.clearColorBuffer();
