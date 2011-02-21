@@ -7,6 +7,7 @@
 #define HPP_ENGINE
 
 #include "Matrix4x4.hpp"
+#include <vector>
 
 namespace OpenMouleEngine
 {
@@ -23,7 +24,10 @@ namespace OpenMouleEngine
         Engine &render();
         
         Engine &clearColorBuffer();
+
     private:
+        GLuint vbo;
+        std::vector<GLfloat> vertices;
     };
 } // namespace
 
