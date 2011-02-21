@@ -35,6 +35,15 @@
     <None Include="inline\Vector3.inl">
       <Filter>inline</Filter>
     </None>
+    <None Include="licence.txt">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="cpp.template">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="hpp.template">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Engine.hpp">
@@ -47,6 +56,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Vector3.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OpenMouleEngine.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
