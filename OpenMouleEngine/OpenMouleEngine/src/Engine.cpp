@@ -12,6 +12,8 @@ namespace OpenMouleEngine
 {
     Engine::Engine()
     {
+        glewInit();
+
         // a few prints
         std::cout << "Software: OpenGL " << glGetString(GL_VERSION) << std::endl;
         std::cout << "Hardware: " << glGetString(GL_RENDERER);
