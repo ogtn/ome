@@ -26,21 +26,21 @@ namespace OpenMouleEngine
 
         ~Matrix4x4();
         
-        Matrix4x4<T> &makeIdentity();
+        Matrix4x4 &makeIdentity();
 
-        Matrix4x4<T> &makeOrtho(T left, T right, T bottom, T top, T zNear, T zFar);
+        Matrix4x4 &makeOrtho(T left, T right, T bottom, T top, T zNear, T zFar);
         
-        Matrix4x4<T> &translate(const Vector3<T> &v);
+        Matrix4x4 &translate(const Vector3<T> &v);
         
-        Matrix4x4<T> &scale(const Vector3<T> &v);
+        Matrix4x4 &scale(const Vector3<T> &v);
         
-        Matrix4x4<T> &rotate(const Vector3<T> &axis, T theta);
+        Matrix4x4 &rotate(const Vector3<T> &axis, T theta);
         
-        Matrix4x4<T> &transpose();
+        Matrix4x4 &transpose();
         
-        const Matrix4x4<T> &load(bool transpose = true) const;
+        const Matrix4x4 &load(bool transpose = true) const;
 
-        Matrix4x4 &send(GLint location);
+        Matrix4x4<T> &send(GLint location);
         
         const Matrix4x4 operator*(const Matrix4x4 &m) const;
         

@@ -8,7 +8,7 @@
 #define HPP_UNIFORM
 
 #include <GL/glew.h>
-
+#include <iostream>
 namespace OpenMouleEngine
 {
     class Uniform

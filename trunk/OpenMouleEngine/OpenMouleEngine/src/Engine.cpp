@@ -26,17 +26,17 @@ namespace OpenMouleEngine
         std::cout << " (" << glGetString(GL_VENDOR) << ")" << std::endl;
 
         // OpenGL initialisation
-        projection.makeOrtho(0, 500, 0, 500, -1000, 1000);
+        projection.makeOrtho(0, 1, 0, 1, -1, 1);
         shader = new Shader();
         shader->link();
 
         // VBO
-        vertices.push_back(100);
-        vertices.push_back(100);
-        vertices.push_back(250);
-        vertices.push_back(400);
-        vertices.push_back(400);
-        vertices.push_back(100);
+        vertices.push_back(-1.f);
+        vertices.push_back(-1.f);
+        vertices.push_back(1.f);
+        vertices.push_back(-1.f);
+        vertices.push_back(0.f);
+        vertices.push_back(1.f);
 
         glGenBuffers(1, &vbo);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
