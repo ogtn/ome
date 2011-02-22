@@ -37,6 +37,24 @@ Matrix4x4<T> &Matrix4x4<T>::makeIdentity()
 
 
 template <typename T>
+Matrix4x4<T> &Matrix4x4<T>::makeOrtho(T left, T right, T bottom, T top, T zNear, T zFar)
+{
+    makeIdentity();
+
+    data[0][0] = 2 / (right - left);
+    data[0][3] = -(right + left) / (right - left);
+
+    data[1][1] = 2 / (top - bottom);
+    data[1][3] = -(top + bottom) / (top - bottom);
+
+    data[2][2] = 2 / (zFar - zNear);
+    data[2][3] = -(zFar + zNear) / (zFar - zNear);
+
+    return *this;
+}
+
+
+template <typename T>
 Matrix4x4<T> &Matrix4x4<T>::translate(const Vector3<T> &v)
 {
     Matrix4x4<T> m;
@@ -104,18 +122,27 @@ Matrix4x4<T> &Matrix4x4<T>::transpose()
 }
 
 
-template <typename T>
-const Matrix4x4<T> &Matrix4x4<T>::load(bool transpose) const
+template <typename GLfloat>
+const Matrix4x4<GLfloat> &Matrix4x4<GLfloat>::load(bool transpose) const
 {
     if(transpose)
     {
-        Matrix4x4<T> copy(*this);
+        Matrix4x4<GLfloat> copy(*this);
         
         copy.transpose();
-        glLoadMatrixf((float*)copy.data);
+        glLoadMatrixf((GLfloat *)copy.data);
     }
     else
-        glLoadMatrixf((float*)data);
+        glLoadMatrixf((GLfloat *)data);
+
+    return *this;
+}
+
+
+template <typename GLfloat>
+Matrix4x4<GLfloat> &Matrix4x4<GLfloat>::send(GLint location)
+{
+    glUniformMatrix4fv(location, 16, GL_TRUE, (GLfloat *)data);
 
     return *this;
 }

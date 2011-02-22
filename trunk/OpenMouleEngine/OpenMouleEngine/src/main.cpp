@@ -30,9 +30,8 @@ int main(void)
     }
 
     glfwSetWindowTitle("OpenMouleEngine");
+
     ome::Engine engine;
-    ome::Shader shader;
-    shader.link().bind();
 
     while(running) 
     {

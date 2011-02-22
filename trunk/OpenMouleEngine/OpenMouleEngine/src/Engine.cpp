@@ -12,7 +12,13 @@ namespace OpenMouleEngine
 {
     Engine::Engine()
     {
-        glewInit();
+        // glew initialisation
+        GLenum err = glewInit();
+
+        if(err != GLEW_OK)
+            std::cout << "Error: glewInit() failed: " << glewGetErrorString(err) << std::endl;
+        
+        std::cout << "Status: Using GLEW " << glewGetString(GLEW_VERSION) << std::endl;
 
         // a few prints
         std::cout << "Software: OpenGL " << glGetString(GL_VERSION) << std::endl;
@@ -20,12 +26,9 @@ namespace OpenMouleEngine
         std::cout << " (" << glGetString(GL_VENDOR) << ")" << std::endl;
 
         // OpenGL initialisation
-        Mat4f projection, modelview;
-        glMatrixMode(GL_PROJECTION);
-        projection.load();
-        glOrtho(0, 500, 0, 500, -1000, 1000);
-        glMatrixMode(GL_MODELVIEW);
-        modelview.load();
+        projection.makeOrtho(0, 500, 0, 500, -1000, 1000);
+        shader = new Shader();
+        shader->link();
 
         // VBO
         vertices.push_back(100);
@@ -43,6 +46,7 @@ namespace OpenMouleEngine
     
     Engine::~Engine()
     {
+        delete shader;
         glDeleteBuffers(1, &vbo);
     }
     
@@ -52,7 +56,12 @@ namespace OpenMouleEngine
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
         glVertexAttribPointer(0, 2, GL_FLOAT, 0, 0, BUFFER_OFFSET(0));
         glEnableVertexAttribArray(0);
+        shader->bind();
+        shader->sendUniform("projection", projection);
+        shader->sendUniform("modelview", modelview);
         glDrawArrays(GL_TRIANGLES, 0, 3);
+        shader->unbind();
+        
         glDisableVertexAttribArray(0);
 
         return *this;

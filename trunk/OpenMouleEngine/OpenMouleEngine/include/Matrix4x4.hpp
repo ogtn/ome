@@ -8,16 +8,16 @@
 #define HPP_MATRIX4X4
 
 #include "Vector3.hpp"
-#include <GL/glew.h>
 
 namespace OpenMouleEngine
 {
     // forward declaration, to avoid warning about the friend
     template <typename T> class Matrix4x4;
+    typedef Matrix4x4<GLfloat> mat4;
     template <typename T> std::ostream &operator<<(std::ostream &ostr, const Matrix4x4<T> &m);
         
     template <typename T>
-    class Matrix4x4
+    class Matrix4x4: public Uniform
     {
     public:
         Matrix4x4();
@@ -27,6 +27,8 @@ namespace OpenMouleEngine
         ~Matrix4x4();
         
         Matrix4x4<T> &makeIdentity();
+
+        Matrix4x4<T> &makeOrtho(T left, T right, T bottom, T top, T zNear, T zFar);
         
         Matrix4x4<T> &translate(const Vector3<T> &v);
         
@@ -37,6 +39,8 @@ namespace OpenMouleEngine
         Matrix4x4<T> &transpose();
         
         const Matrix4x4<T> &load(bool transpose = true) const;
+
+        Matrix4x4 &send(GLint location);
         
         const Matrix4x4 operator*(const Matrix4x4 &m) const;
         

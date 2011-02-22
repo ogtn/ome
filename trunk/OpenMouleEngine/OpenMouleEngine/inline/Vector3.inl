@@ -32,6 +32,15 @@ Vector3<T> &Vector3<T>::normalize()
 }
 
 
+template <typename GLfloat>
+Vector3<GLfloat> &Vector3<GLfloat>::send(GLint location)
+{
+    glUniform3f(location, x, y, z);
+    
+    return *this;
+}
+
+
 template <typename T>
 std::ostream &operator<<(std::ostream &ostr, const Vector3<T> &v)
 {

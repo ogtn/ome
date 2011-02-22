@@ -7,6 +7,7 @@
 #ifndef HPP_VECTOR3
 #define HPP_VECTOR3
 
+#include "Uniform.hpp"
 #include <cmath>
 #ifndef M_PI
 #define M_PI 3.141592653589793238462643
@@ -17,10 +18,11 @@ namespace OpenMouleEngine
 {
     // forward declaration, to avoid warning about the friend
     template <typename T> class Vector3;
+    typedef Vector3<GLfloat> vec3;
     template <typename T> std::ostream &operator<<(std::ostream &ostr, const Vector3<T> &v);
 
     template <typename T>
-    class Vector3
+    class Vector3: public Uniform
     {
     public:
         Vector3(T x = 0, T y = 0, T z = 0);
@@ -28,6 +30,8 @@ namespace OpenMouleEngine
         ~Vector3();
         
         Vector3 &normalize();
+
+        Vector3 &send(GLint location);
         
         friend std::ostream &operator<< <> (std::ostream &ostr, const Vector3 &v);
                 
