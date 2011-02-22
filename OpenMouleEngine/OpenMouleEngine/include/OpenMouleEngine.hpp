@@ -29,7 +29,7 @@
 #include "Shader.hpp"
 
 namespace OpenMouleEngine
-{	
+{
 } // namespace
 
 namespace ome = OpenMouleEngine;

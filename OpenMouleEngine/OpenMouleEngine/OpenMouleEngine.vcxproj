@@ -107,6 +107,7 @@
     <ClInclude Include="include\OpenMouleEngine.hpp" />
     <ClInclude Include="include\Renderable.hpp" />
     <ClInclude Include="include\Shader.hpp" />
+    <ClInclude Include="include\Uniform.hpp" />
     <ClInclude Include="include\Vector3.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

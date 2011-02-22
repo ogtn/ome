@@ -7,8 +7,10 @@
 #ifndef HPP_SHADER
 #define HPP_SHADER
 
-#include <GL\glew.h>
+#include "Uniform.hpp"
+#include <GL/glew.h>
 #include <iostream>
+#include <map>
 
 namespace OpenMouleEngine
 {
@@ -25,13 +27,19 @@ namespace OpenMouleEngine
 
         Shader &unbind();
 
+        Shader &sendUniform(std::string name, Uniform &data);
     private:
-        GLuint fragmentShader;
-        GLuint vertexShader;
+        // OpenGL objects
         GLuint program;
+        GLuint vertexShader;
+        GLuint fragmentShader;
 
+        // shaders code
         std::string fragmentCode;
         std::string vertexCode;
+
+        // uniform location cache
+        std::map<std::string, GLuint> uniformLocation;
     };
 } // namespace
 
