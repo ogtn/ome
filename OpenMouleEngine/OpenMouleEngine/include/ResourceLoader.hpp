@@ -8,6 +8,7 @@
 #define HPP_RESOURCELOADER
 
 #include <iostream>
+#include <string>
 
 namespace OpenMouleEngine
 {

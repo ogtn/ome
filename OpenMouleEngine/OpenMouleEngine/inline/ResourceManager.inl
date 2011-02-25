@@ -5,19 +5,17 @@
 
 
 template <typename T>
-T *ResourceManager::get(std::string fileName)
+T *ResourceManager::get(std::string name)
 {
-    Mesh *mesh;
+    T *res;
 
-    if(resources.find(fileName) == resources.end())
+    if(resources.find(name) == resources.end())
     {
-        char name[256];
-        sprintf(name, "Mesh_%d", cpt++);
-        std::string sname(name);
-        mesh = new Mesh(name);
+        res = new T(name); // rechercher et utiliser le loader approprié
+        resources[name] = res;
     }
     else
-        mesh = resources[name];
+        res = static_cast<T *>(resources[name]);
 
-    return mesh;
+    return res;
 }

@@ -9,11 +9,22 @@ namespace OpenMouleEngine
 {
     ResourceManager::ResourceManager()
     {
-        cpt = 0;
     }
 
 
     ResourceManager::~ResourceManager()
     {
+    }
+
+
+    Mesh *ResourceManager::getMesh(std::string name)
+    {
+        return get<Mesh>(name);
+    }
+
+
+    Shader *ResourceManager::getShader(std::string name)
+    {
+        return get<Shader>(name);
     }
 } // namespace

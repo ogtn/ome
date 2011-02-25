@@ -7,10 +7,11 @@
 #ifndef HPP_RESOURCEMANAGER
 #define HPP_RESOURCEMANAGER
 
-#include <iostream>
 #include <map>
-#include "ShaderProgram.hpp"
+#include <string>
 #include "Mesh.hpp"
+#include "Shader.hpp"
+#include "ResourceLoader.hpp"
 
 namespace OpenMouleEngine
 {
@@ -26,13 +27,14 @@ namespace OpenMouleEngine
 
         Mesh *getMesh(std::string name);
 
-        Mesh *getShaderProgram(std::string name);
+        Shader *getShader(std::string name);
 
     private:
         typedef std::map<std::string, Resource *> ResourceMap;
+        typedef std::map<std::string, ResourceLoader<Resource> *> LoaderMap;
 
+        LoaderMap loaders;
         ResourceMap resources;
-        unsigned int cpt;
     };
 
     #include "ResourceManager.inl"
