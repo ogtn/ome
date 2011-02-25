@@ -13,6 +13,8 @@ namespace OpenMouleEngine
     linked(false)
     {
         program = glCreateProgram();
+        //vertexShader = ResourceManager::getInstance().getShader("blabla.vert");
+        //fragmentShader = ResourceManager::getInstance().getShader("blabla.frag");
     }
 
 
