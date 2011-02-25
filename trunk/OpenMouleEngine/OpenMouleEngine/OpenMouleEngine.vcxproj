@@ -91,22 +91,33 @@
   <ItemGroup>
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Mesh.cpp" />
     <ClCompile Include="src\Renderable.cpp" />
+    <ClCompile Include="src\Resource.cpp" />
+    <ClCompile Include="src\ResourceManager.cpp" />
     <ClCompile Include="src\Shader.cpp" />
+    <ClCompile Include="src\ShaderProgram.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.template" />
     <None Include="hpp.template" />
     <None Include="inline\Matrix4x4.inl" />
+    <None Include="inline\ResourceLoader.inl" />
+    <None Include="inline\ResourceManager.inl" />
     <None Include="inline\Vector3.inl" />
     <None Include="licence.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Engine.hpp" />
     <ClInclude Include="include\Matrix4x4.hpp" />
+    <ClInclude Include="include\Mesh.hpp" />
     <ClInclude Include="include\OpenMouleEngine.hpp" />
     <ClInclude Include="include\Renderable.hpp" />
+    <ClInclude Include="include\Resource.hpp" />
+    <ClInclude Include="include\ResourceLoader.hpp" />
+    <ClInclude Include="include\ResourceManager.hpp" />
     <ClInclude Include="include\Shader.hpp" />
+    <ClInclude Include="include\ShaderProgram.hpp" />
     <ClInclude Include="include\Uniform.hpp" />
     <ClInclude Include="include\Vector3.hpp" />
   </ItemGroup>

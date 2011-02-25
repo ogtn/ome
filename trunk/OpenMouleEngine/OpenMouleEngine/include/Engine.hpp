@@ -8,7 +8,7 @@
 #define HPP_ENGINE
 
 #include "Matrix4x4.hpp"
-#include "Shader.hpp"
+#include "ShaderProgram.hpp"
 #include <vector>
 
 namespace OpenMouleEngine
@@ -28,7 +28,7 @@ namespace OpenMouleEngine
         GLuint vbo;
         std::vector<GLfloat> vertices;
         mat4 projection, modelview;
-        Shader *shader;
+        ShaderProgram *shader;
     };
 } // namespace
 

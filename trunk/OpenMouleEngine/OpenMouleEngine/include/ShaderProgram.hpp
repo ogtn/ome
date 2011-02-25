@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////
-// Shader.hpp
+// ShaderProgram.hpp
 // Copyright (C) 2011  Olivier Guittonneau openmengine@gmail.com
 ////////////////////////////////////////////////////////////////////////
 
@@ -7,27 +7,28 @@
 #ifndef HPP_SHADER
 #define HPP_SHADER
 
+#include "Resource.hpp"
 #include "Uniform.hpp"
 #include <GL/glew.h>
-#include <iostream>
+#include <string>
 #include <map>
 
 namespace OpenMouleEngine
 {
-    class Shader
+    class ShaderProgram
     {
     public:
-        Shader();
+        ShaderProgram(std::string vertFile, std::string fragFile);
 
-        ~Shader();
+        ~ShaderProgram();
 
-        Shader &link();
+        ShaderProgram &link();
 
-        Shader &bind();
+        ShaderProgram &bind();
 
-        Shader &unbind();
+        ShaderProgram &unbind();
 
-        Shader &sendUniform(std::string name, Uniform &data);
+        ShaderProgram &sendUniform(std::string name, Uniform &data);
     private:
         // OpenGL objects
         GLuint program;
@@ -39,7 +40,8 @@ namespace OpenMouleEngine
         std::string vertexCode;
 
         // uniform location cache
-        std::map<std::string, GLuint> uniformLocation;
+        typedef std::map<std::string, GLuint>  LocationMap;
+        LocationMap uniformLocation;
     };
 } // namespace
 

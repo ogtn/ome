@@ -26,7 +26,7 @@
 #define HPP_OPENMOULEENGINE
 
 #include "Engine.hpp"
-#include "Shader.hpp"
+#include "ShaderProgram.hpp"
 
 namespace OpenMouleEngine
 {

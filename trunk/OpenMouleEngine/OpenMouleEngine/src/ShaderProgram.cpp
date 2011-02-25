@@ -1,13 +1,13 @@
 ////////////////////////////////////////////////////////////////////////
-// Shader.cpp
+// ShaderProgram.cpp
 // Copyright (C) 2011  Olivier Guittonneau openmengine@gmail.com
 ////////////////////////////////////////////////////////////////////////
 
-#include "Shader.hpp"
+#include "ShaderProgram.hpp"
 
 namespace OpenMouleEngine
 {
-    Shader::Shader(): 
+    ShaderProgram::ShaderProgram(std::string vertFile, std::string fragFile):
 vertexCode("\
 #version 140\n\
 in vec2 a_Vertex;\n\
@@ -27,8 +27,8 @@ void main()\n\
 {\n\
     outColor = vec4(0.3, 0.1, 0.7, 1);\n\
 }\n\
-"),
-uniformLocation()
+")//,
+//uniformLocation()
     {
         // creating OpenGL objects
         program = glCreateProgram();
@@ -37,7 +37,7 @@ uniformLocation()
     }
 
 
-    Shader::~Shader()
+    ShaderProgram::~ShaderProgram()
     {
         unbind();
 
@@ -52,12 +52,12 @@ uniformLocation()
     }
 
 
-    Shader &Shader::link()
+    ShaderProgram &ShaderProgram::link()
     {
         GLint status;
         GLsizei size;
         const GLchar *tmp;
-        char log[512]; // glGetShader with the value GL_INFO_LOG_LENGTH to get the right size
+        char log[512]; // glGetShaderProgram with the value GL_INFO_LOG_LENGTH to get the right size
         
         // sending sources
         tmp = static_cast<const GLchar *>(fragmentCode.c_str());
@@ -108,7 +108,7 @@ uniformLocation()
     }
 
 
-    Shader &Shader::bind()
+    ShaderProgram &ShaderProgram::bind()
     {
         glUseProgram(program);
 
@@ -116,7 +116,7 @@ uniformLocation()
     }
 
 
-    Shader &Shader::unbind()
+    ShaderProgram &ShaderProgram::unbind()
     {
         glUseProgram(0);
 
@@ -124,16 +124,12 @@ uniformLocation()
     }
 
 
-    Shader &Shader::sendUniform(std::string name, Uniform &data)
+    ShaderProgram &ShaderProgram::sendUniform(std::string name, Uniform &data)
     {
-        /*
-        mise en cache
         if(uniformLocation.find(name) == uniformLocation.end())
             uniformLocation[name] = glGetUniformLocation(program, name.c_str());
 
         data.send(uniformLocation[name]);
-
-        */
 
         GLint location = glGetUniformLocation(program, name.c_str());
 

@@ -27,7 +27,7 @@ namespace OpenMouleEngine
 
         // OpenGL initialisation
         projection.makeOrtho(0, 1, 0, 1, -1, 1);
-        shader = new Shader();
+        shader = new ShaderProgram(std::string("prout"), std::string("zob"));
         shader->link();
 
         // VBO
