@@ -5,17 +5,34 @@
 
 
 template <typename T>
-T *ResourceManager::get(std::string name)
+T *ResourceManager::get(const std::string &name)
 {
     T *res;
-
+    
     if(resources.find(name) == resources.end())
     {
-        res = new T(name); // rechercher et utiliser le loader approprié
+        std::string::size_type pos = name.find_last_of('.');
+        std::string extension = name.substr(pos + 1);
+
+        if(loaders.find(extension) == loaders.end())
+        {
+            std::cout << "Loader introuvable" << std::endl;
+            return NULL;
+        }
+
+        ResourceLoader<T> *loader = reinterpret_cast<ResourceLoader<T> *>(loaders[extension]);
+        res = loader->loadFromFile(name);
         resources[name] = res;
     }
     else
         res = static_cast<T *>(resources[name]);
 
     return res;
+}
+
+
+template <typename T>
+void ResourceManager::add(ResourceLoader<T> *loader, const std::string &extensions)
+{
+    loaders[extensions] = reinterpret_cast<ResourceLoader<Resource> *>(loader);
 }

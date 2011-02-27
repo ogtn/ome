@@ -23,11 +23,14 @@ namespace OpenMouleEngine
         ~ResourceManager();
 
         template <typename T>
-        T *get(std::string name);
+        void add(ResourceLoader<T> *loader, const std::string &extensions);
 
-        Mesh *getMesh(std::string name);
+        template <typename T>
+        T *get(const std::string &name);
 
-        Shader *getShader(std::string name);
+        Mesh *getMesh(const std::string &name);
+
+        Shader *getShader(const std::string &name);
 
     private:
         typedef std::map<std::string, Resource *> ResourceMap;

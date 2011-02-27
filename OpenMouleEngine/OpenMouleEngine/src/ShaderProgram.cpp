@@ -13,8 +13,15 @@ namespace OpenMouleEngine
     linked(false)
     {
         program = glCreateProgram();
-        //vertexShader = ResourceManager::getInstance().getShader("blabla.vert");
-        //fragmentShader = ResourceManager::getInstance().getShader("blabla.frag");
+    }
+
+
+    ShaderProgram::ShaderProgram(std::string vertFile, std::string fragFile):
+    linked(false)
+    {
+        program = glCreateProgram();
+        //vertexShader = ResourceManager::getInstance().getShader("vertFile");
+        //fragmentShader = ResourceManager::getInstance().getShader("fragFile");
     }
 
 

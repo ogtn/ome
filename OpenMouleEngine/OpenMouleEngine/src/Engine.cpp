@@ -27,31 +27,12 @@ namespace OpenMouleEngine
 
         // OpenGL initialisation
         projection.makeOrtho(0, 1, 0, 1, -1, 1);
-
-        std::string vertCode("\
-                             #version 140\n\
-                             in vec2 a_Vertex;\n\
-                             uniform mat4 projection;\n\
-                             uniform mat4 modelview;\n\
-                             void main()\n\
-                             {\n\
-                             vec4 pos = modelview * vec4(a_Vertex, 0, 1.0);\n\
-                             gl_Position = projection * pos;\n\
-                             //gl_Position = vec4(a_Vertex, 0, 1) * modelview;\n\
-                             }\n\
-                             ");
-
-        std::string fragCode("\
-                             #version 140\n\
-                             out vec4 outColor;\n\
-                             void main()\n\
-                             {\n\
-                             outColor = vec4(0.3, 0.1, 0.7, 1);\n\
-                             }\n\
-                             ");
-
-        Shader *vertShader = new Shader(std::string("Prout"), GL_VERTEX_SHADER, vertCode);
-        Shader *fragShader = new Shader(std::string("Pouet"), GL_FRAGMENT_SHADER, fragCode);
+        
+        // Shaders
+        rm.add(new DummyVShaderLoader(), "vert");
+        rm.add(new DummyFShaderLoader(), "frag");
+        Shader *vertShader = rm.getShader("shader.vert");
+        Shader *fragShader = rm.getShader("shader.frag");
         shader = new ShaderProgram(vertShader, fragShader);
         vertShader->compile();
         fragShader->compile();
