@@ -17,13 +17,13 @@ namespace OpenMouleEngine
     }
 
 
-    Mesh *ResourceManager::getMesh(std::string name)
+    Mesh *ResourceManager::getMesh(const std::string &name)
     {
         return get<Mesh>(name);
     }
 
 
-    Shader *ResourceManager::getShader(std::string name)
+    Shader *ResourceManager::getShader(const std::string &name)
     {
         return get<Shader>(name);
     }

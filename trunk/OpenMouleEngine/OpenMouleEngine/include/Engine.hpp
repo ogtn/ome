@@ -9,6 +9,7 @@
 
 #include "Matrix4x4.hpp"
 #include "ShaderProgram.hpp"
+#include "ResourceManager.hpp"
 #include <vector>
 
 namespace OpenMouleEngine
@@ -29,6 +30,7 @@ namespace OpenMouleEngine
         std::vector<GLfloat> vertices;
         mat4 projection, modelview;
         ShaderProgram *shader;
+        ResourceManager rm;
     };
 } // namespace
 
