@@ -90,6 +90,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine.cpp" />
+    <ClCompile Include="src\FileName.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Mesh.cpp" />
     <ClCompile Include="src\Renderable.cpp" />
@@ -109,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Engine.hpp" />
+    <ClInclude Include="include\FileName.hpp" />
     <ClInclude Include="include\Matrix4x4.hpp" />
     <ClInclude Include="include\Mesh.hpp" />
     <ClInclude Include="include\OpenMouleEngine.hpp" />
