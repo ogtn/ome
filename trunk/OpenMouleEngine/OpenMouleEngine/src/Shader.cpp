@@ -4,6 +4,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 #include "Shader.hpp"
+#include <iostream>
 
 namespace OpenMouleEngine
 {
@@ -41,7 +42,7 @@ namespace OpenMouleEngine
         if(status == GL_FALSE)
         {
             std::cout << "Echec de la compilation du fragment shader:" << std::endl;
-            //std::cout << code.c_str() << std::endl;
+            //std::cout << code << std::endl;
             glGetShaderInfoLog(id, 512, &size, log);
             std::cout << log << std::endl;
         }

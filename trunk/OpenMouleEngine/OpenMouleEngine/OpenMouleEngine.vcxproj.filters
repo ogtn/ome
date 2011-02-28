@@ -45,6 +45,9 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Test</Filter>
     </ClCompile>
+    <ClCompile Include="src\FileName.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="inline\Matrix4x4.inl">
@@ -104,6 +107,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Shader.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FileName.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

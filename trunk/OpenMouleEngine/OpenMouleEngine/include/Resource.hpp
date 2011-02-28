@@ -7,7 +7,7 @@
 #ifndef HPP_RESOURCE
 #define HPP_RESOURCE
 
-#include <iostream>
+#include "FileName.hpp"
 
 namespace OpenMouleEngine
 {
@@ -19,7 +19,7 @@ namespace OpenMouleEngine
         ~Resource();
 
     private:
-        std::string name;
+        FileName name;
     };
 } // namespace
 
