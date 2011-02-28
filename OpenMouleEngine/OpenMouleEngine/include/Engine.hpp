@@ -26,10 +26,9 @@ namespace OpenMouleEngine
         Engine &clearColorBuffer();
 
     private:
-        GLuint vbo;
-        std::vector<GLfloat> vertices;
         mat4 projection, modelview;
         ShaderProgram *shader;
+        Mesh *mesh;
         ResourceManager rm;
     };
 } // namespace

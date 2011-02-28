@@ -28,7 +28,7 @@ namespace OpenMouleEngine
     #include "ResourceLoader.inl"
 
     // just for a temporary test
-    class DummyVShaderLoader: public ResourceLoader<Shader>
+    class DefaultVertexShader: public ResourceLoader<Shader>
     {
         Shader *loadFromFile(std::string fileName)
         {
@@ -50,7 +50,7 @@ namespace OpenMouleEngine
     };
 
     // just for a temporary test
-    class DummyFShaderLoader: public ResourceLoader<Shader>
+    class DefaultFragmentShader: public ResourceLoader<Shader>
     {
         Shader *loadFromFile(std::string fileName)
         {
@@ -67,6 +67,14 @@ namespace OpenMouleEngine
         }
     };
 
+    // just for a temporary test
+    class DefaultMesh: public ResourceLoader<Mesh>
+    {
+        Mesh *loadFromFile(std::string fileName)
+        {
+            return new Mesh(fileName);
+        }
+    };
 } // namespace
 
 

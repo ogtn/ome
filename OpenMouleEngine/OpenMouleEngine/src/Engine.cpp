@@ -6,8 +6,6 @@
 #include "Engine.hpp"
 #include <iostream>
 
-#define BUFFER_OFFSET(i) ((char *)NULL + i)
-
 namespace OpenMouleEngine
 {
     Engine::Engine()
@@ -29,49 +27,33 @@ namespace OpenMouleEngine
         projection.makeOrtho(0, 1, 0, 1, -1, 1);
         
         // Shaders
-        rm.add(new DummyVShaderLoader(), "vert");
-        rm.add(new DummyFShaderLoader(), "frag");
+        rm.add(new DefaultVertexShader(), "vert");
+        rm.add(new DefaultFragmentShader(), "frag");
+        rm.add(new DefaultMesh(), "mesh");
         Shader *vertShader = rm.getShader("shader.vert");
         Shader *fragShader = rm.getShader("shader.frag");
+        mesh = rm.getMesh("monMesh.mesh");
         shader = new ShaderProgram(vertShader, fragShader);
         vertShader->compile();
         fragShader->compile();
         shader->link();
-
-        // VBO
-        vertices.push_back(-1.f);
-        vertices.push_back(-1.f);
-        vertices.push_back(1.f);
-        vertices.push_back(-1.f);
-        vertices.push_back(0.f);
-        vertices.push_back(1.f);
-
-        glGenBuffers(1, &vbo);
-        glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
     }
 
     
     Engine::~Engine()
     {
         delete shader;
-        glDeleteBuffers(1, &vbo);
     }
     
 
     Engine &Engine::render()
     {
-        glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glVertexAttribPointer(0, 2, GL_FLOAT, 0, 0, BUFFER_OFFSET(0));
-        glEnableVertexAttribArray(0);
         shader->bind();
         shader->sendUniform("projection", projection);
         shader->sendUniform("modelview", modelview);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        mesh->render();
         shader->unbind();
-        
-        glDisableVertexAttribArray(0);
-
+       
         return *this;
     }
 

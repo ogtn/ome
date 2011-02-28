@@ -20,7 +20,10 @@ namespace OpenMouleEngine
 
         ~Mesh();
 
+        void render();
+
     private:
+        GLuint vbo;
         std::vector<GLfloat> verticesPositions;
     };
 } // namespace
