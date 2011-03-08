@@ -42,12 +42,12 @@ int main(void)
     bool running = true;
 
     makeWindow();
-    ome::Engine engine;
+    ome::Engine *engine = ome::Engine::getInstance();
 
     while(running) 
     {
-        engine.clearColorBuffer();
-        engine.render();
+        engine->clearColorBuffer();
+        engine->render();
 
         glfwSwapBuffers();
         running = !glfwGetKey(GLFW_KEY_ESC) && glfwGetWindowParam(GLFW_OPENED);

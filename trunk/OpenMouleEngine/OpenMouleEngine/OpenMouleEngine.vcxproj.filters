@@ -48,6 +48,12 @@
     <ClCompile Include="src\FileName.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\SceneGraph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SceneNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="inline\Matrix4x4.inl">
@@ -69,6 +75,9 @@
       <Filter>inline</Filter>
     </None>
     <None Include="inline\ResourceManager.inl">
+      <Filter>inline</Filter>
+    </None>
+    <None Include="inline\Singleton.inl">
       <Filter>inline</Filter>
     </None>
   </ItemGroup>
@@ -110,6 +119,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\FileName.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Singleton.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SceneGraph.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SceneNode.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

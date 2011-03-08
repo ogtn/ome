@@ -96,6 +96,8 @@
     <ClCompile Include="src\Renderable.cpp" />
     <ClCompile Include="src\Resource.cpp" />
     <ClCompile Include="src\ResourceManager.cpp" />
+    <ClCompile Include="src\SceneGraph.cpp" />
+    <ClCompile Include="src\SceneNode.cpp" />
     <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\ShaderProgram.cpp" />
   </ItemGroup>
@@ -105,6 +107,7 @@
     <None Include="inline\Matrix4x4.inl" />
     <None Include="inline\ResourceLoader.inl" />
     <None Include="inline\ResourceManager.inl" />
+    <None Include="inline\Singleton.inl" />
     <None Include="inline\Vector3.inl" />
     <None Include="licence.txt" />
   </ItemGroup>
@@ -118,8 +121,11 @@
     <ClInclude Include="include\Resource.hpp" />
     <ClInclude Include="include\ResourceLoader.hpp" />
     <ClInclude Include="include\ResourceManager.hpp" />
+    <ClInclude Include="include\SceneGraph.hpp" />
+    <ClInclude Include="include\SceneNode.hpp" />
     <ClInclude Include="include\Shader.hpp" />
     <ClInclude Include="include\ShaderProgram.hpp" />
+    <ClInclude Include="include\Singleton.hpp" />
     <ClInclude Include="include\Uniform.hpp" />
     <ClInclude Include="include\Vector3.hpp" />
   </ItemGroup>

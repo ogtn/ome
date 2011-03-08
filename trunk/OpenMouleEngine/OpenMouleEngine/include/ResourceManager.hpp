@@ -11,17 +11,19 @@
 #include <string>
 #include "Mesh.hpp"
 #include "Shader.hpp"
+#include "Singleton.hpp"
 #include "ResourceLoader.hpp"
 
 namespace OpenMouleEngine
 {
-    class ResourceManager
+    class ResourceManager: public Singleton<ResourceManager>
     {
-    public:
+    private:
         ResourceManager();
 
         ~ResourceManager();
 
+    public:
         template <typename T>
         void add(ResourceLoader<T> *loader, const std::string &extensions);
 
@@ -38,6 +40,8 @@ namespace OpenMouleEngine
 
         LoaderMap loaders;
         ResourceMap resources;
+
+        friend class Singleton<ResourceManager>;
     };
 
     #include "ResourceManager.inl"
