@@ -30,7 +30,7 @@ namespace OpenMouleEngine
     }
 
 
-    void Mesh::render()
+    void Mesh::render() const
     {
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
         glVertexAttribPointer(0, 2, GL_FLOAT, 0, 0, BUFFER_OFFSET(0));

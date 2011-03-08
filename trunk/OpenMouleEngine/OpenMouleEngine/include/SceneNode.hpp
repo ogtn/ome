@@ -17,7 +17,7 @@ namespace OpenMouleEngine
     public:
         SceneNode();
 
-        virtual ~SceneNode() = 0;
+        virtual ~SceneNode();
 
         void add(SceneNode &node);
 

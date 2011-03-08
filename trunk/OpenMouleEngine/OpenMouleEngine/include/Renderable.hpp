@@ -16,15 +16,15 @@ namespace OpenMouleEngine
     public:
         Renderable();
 
-        ~Renderable();
+        virtual ~Renderable();
         
-        virtual Renderable &render() const = 0;
+        virtual void render() const = 0;
         
-        Renderable &translate(const Vector3<float> &v);
+        void translate(const Vector3<float> &v);
         
-        Renderable &scale(const Vector3<float> &v);
+        void scale(const Vector3<float> &v);
         
-        Renderable &rotate(const Vector3<float> &v, float theta);
+        void rotate(const Vector3<float> &v, float theta);
         
     private:
         Matrix4x4<float> modelView;

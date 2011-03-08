@@ -7,20 +7,21 @@
 #ifndef HPP_MESH
 #define HPP_MESH
 
+#include "SceneNode.hpp"
 #include "Resource.hpp"
 #include <GL/glew.h>
 #include <vector>
 
 namespace OpenMouleEngine
 {
-    class Mesh: public Resource
+    class Mesh: public Resource, public SceneNode
     {
     public:
         Mesh(std::string name);
 
         ~Mesh();
 
-        void render();
+        void render() const;
 
     private:
         GLuint vbo;
