@@ -14,13 +14,14 @@
 
 namespace OpenMouleEngine
 {    
-    class Engine
+    class Engine: public Singleton<Engine>
     {
-    public:
+    private:
         Engine();
         
         ~Engine();
         
+    public:
         Engine &render();
         
         Engine &clearColorBuffer();
@@ -29,7 +30,9 @@ namespace OpenMouleEngine
         mat4 projection, modelview;
         ShaderProgram *shader;
         Mesh *mesh;
-        ResourceManager rm;
+        ResourceManager *rm;
+
+        friend class Singleton<Engine>;
     };
 } // namespace
 
