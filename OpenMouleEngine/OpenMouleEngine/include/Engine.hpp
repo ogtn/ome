@@ -8,6 +8,7 @@
 #define HPP_ENGINE
 
 #include "Matrix4x4.hpp"
+#include "SceneGraph.hpp"
 #include "ShaderProgram.hpp"
 #include "ResourceManager.hpp"
 #include <vector>
@@ -31,6 +32,7 @@ namespace OpenMouleEngine
         ShaderProgram *shader;
         Mesh *mesh;
         ResourceManager *rm;
+        SceneGraph *sg;
 
         friend class Singleton<Engine>;
     };

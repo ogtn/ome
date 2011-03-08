@@ -38,6 +38,9 @@ namespace OpenMouleEngine
         vertShader->compile();
         fragShader->compile();
         shader->link();
+
+        sg = SceneGraph::getInstance();
+        sg->add(*mesh);
     }
 
     
