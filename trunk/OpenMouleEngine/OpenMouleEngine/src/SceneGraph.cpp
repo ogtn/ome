@@ -21,4 +21,13 @@ namespace OpenMouleEngine
     {
         nodes.insert(&node);
     }
+
+
+    void SceneGraph::renderAll()
+    {
+        std::set<SceneNode*>::iterator it;
+
+        for(it = nodes.begin(); it != nodes.end(); ++it)
+            (*it)->render();
+    }
 } // namespace

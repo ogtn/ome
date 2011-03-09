@@ -7,6 +7,7 @@
 #ifndef HPP_MESH
 #define HPP_MESH
 
+#include "ShaderProgram.hpp"
 #include "SceneNode.hpp"
 #include "Resource.hpp"
 #include <GL/glew.h>
@@ -22,10 +23,13 @@ namespace OpenMouleEngine
         ~Mesh();
 
         void render() const;
+    
+        void setShader(ShaderProgram *s);
 
     private:
         GLuint vbo;
         std::vector<GLfloat> verticesPositions;
+        ShaderProgram *shader;
     };
 } // namespace
 

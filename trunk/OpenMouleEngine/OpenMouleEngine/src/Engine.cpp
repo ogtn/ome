@@ -26,19 +26,20 @@ namespace OpenMouleEngine
         // OpenGL initialisation
         projection.makeOrtho(0, 1, 0, 1, -1, 1);
         
-        // Shaders
+        // Shaders et mesh
         rm = ResourceManager::getInstance();
         rm->add(new DefaultVertexShader(), "vert");
         rm->add(new DefaultFragmentShader(), "frag");
         rm->add(new DefaultMesh(), "mesh");
+
         Shader *vertShader = rm->getShader("shader.vert");
         Shader *fragShader = rm->getShader("shader.frag");
-        mesh = rm->getMesh("monMesh.mesh");
-        shader = new ShaderProgram(vertShader, fragShader);
+        ShaderProgram *shader = new ShaderProgram(vertShader, fragShader);
         vertShader->compile();
         fragShader->compile();
         shader->link();
-
+        mesh = rm->getMesh("monMesh.mesh");
+        mesh->setShader(shader);
         sg = SceneGraph::getInstance();
         sg->add(*mesh);
     }
@@ -46,26 +47,29 @@ namespace OpenMouleEngine
     
     Engine::~Engine()
     {
-        delete shader;
     }
     
 
-    Engine &Engine::render()
+    void Engine::render()
     {
-        shader->bind();
-        shader->sendUniform("projection", projection);
-        shader->sendUniform("modelview", modelview);
-        mesh->render();
-        shader->unbind();
-       
-        return *this;
+        sg->renderAll();
     }
 
 
-    Engine &Engine::clearColorBuffer()
+    void Engine::clearColorBuffer()
     {
         glClear(GL_COLOR_BUFFER_BIT);
+    }
 
-        return *this;
+
+    mat4 &Engine::getProjection()
+    {
+        return projection;
+    }
+
+
+    mat4 &Engine::getModelView()
+    {
+        return modelview;
     }
 } // namespace

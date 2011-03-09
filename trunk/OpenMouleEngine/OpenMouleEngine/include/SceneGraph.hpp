@@ -22,6 +22,8 @@ namespace OpenMouleEngine
     public:
         void add(SceneNode &node);
 
+        void renderAll();
+
     private:
         std::set<SceneNode*> nodes;
 
