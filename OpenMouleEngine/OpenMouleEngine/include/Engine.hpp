@@ -9,7 +9,6 @@
 
 #include "Matrix4x4.hpp"
 #include "SceneGraph.hpp"
-#include "ShaderProgram.hpp"
 #include "ResourceManager.hpp"
 #include <vector>
 
@@ -23,13 +22,16 @@ namespace OpenMouleEngine
         ~Engine();
         
     public:
-        Engine &render();
+        void render();
         
-        Engine &clearColorBuffer();
+        void clearColorBuffer();
+
+        mat4 &getProjection();
+
+        mat4 &getModelView();
 
     private:
         mat4 projection, modelview;
-        ShaderProgram *shader;
         Mesh *mesh;
         ResourceManager *rm;
         SceneGraph *sg;
