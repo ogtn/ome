@@ -140,11 +140,9 @@ const Matrix4x4<GLfloat> &Matrix4x4<GLfloat>::load(bool transpose) const
 
 
 template <typename T>
-Matrix4x4<T> &Matrix4x4<T>::send(GLint location)
+void Matrix4x4<T>::send(GLint location)
 {
     glUniformMatrix4fv(location, 1, GL_TRUE, (GLfloat *)data);
-
-    return *this;
 }
 
 

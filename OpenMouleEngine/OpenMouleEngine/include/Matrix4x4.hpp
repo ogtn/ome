@@ -40,7 +40,7 @@ namespace OpenMouleEngine
         
         const Matrix4x4 &load(bool transpose = true) const;
 
-        Matrix4x4<T> &send(GLint location);
+        void send(GLint location);
         
         const Matrix4x4 operator*(const Matrix4x4 &m) const;
         

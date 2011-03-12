@@ -35,12 +35,15 @@ namespace OpenMouleEngine
 
     void Mesh::render() const
     {
+        Color c(.212f, .54f, .81f);
+
         // shader
         shader->bind();
 
         // uniforms
         shader->sendUniform("projection", Engine::getInstance()->getProjection());
         shader->sendUniform("modelview", Engine::getInstance()->getModelView());
+        shader->sendUniform("prout", c);
 
         // buffer
         glBindBuffer(GL_ARRAY_BUFFER, vbo);

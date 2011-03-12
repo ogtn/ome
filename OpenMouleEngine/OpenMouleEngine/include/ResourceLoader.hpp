@@ -57,9 +57,10 @@ namespace OpenMouleEngine
             std::string fragCode("\
                              #version 140\n\
                              out vec4 outColor;\n\
+                             uniform vec4 prout;\n\
                              void main()\n\
                              {\n\
-                             outColor = vec4(0.3, 0.1, 0.7, 1);\n\
+                             outColor = prout;\n\
                              }\n\
                              ");
 
