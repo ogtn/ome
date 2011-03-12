@@ -28,10 +28,9 @@ namespace OpenMouleEngine
         
         // Shaders et mesh
         rm = ResourceManager::getInstance();
-        rm->add(new DefaultVertexShader(), "vert");
-        rm->add(new DefaultFragmentShader(), "frag");
-        rm->add(new DefaultMesh(), "mesh");
+        sg = SceneGraph::getInstance();
 
+        /*
         Shader *vertShader = rm->getShader("shader.vert");
         Shader *fragShader = rm->getShader("shader.frag");
         ShaderProgram *shader = new ShaderProgram(vertShader, fragShader);
@@ -42,6 +41,7 @@ namespace OpenMouleEngine
         mesh->setShader(shader);
         sg = SceneGraph::getInstance();
         sg->add(*mesh);
+        */
     }
 
     

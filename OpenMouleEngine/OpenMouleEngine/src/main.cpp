@@ -5,21 +5,22 @@
 
 using std::cout;
 using std::endl;
+using namespace ome;
 
 void makeWindow()
 {
     int major, minor, rev;
-    
+
     if (!glfwInit()) 
     {
         cout << "Error: glfwInit() failed" << endl;
         exit(EXIT_FAILURE);
     }
-    
+
     glfwGetVersion(&major, &minor, &rev);
     cout << "GLFW " << major << "." << minor << " rev " << rev << endl;
     cout << glfwGetNumberOfProcessors() << " CPUs detected" << endl; 
-    
+
     //forward compatibility OpenGL 3.3
     glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 3);
     glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 3);
@@ -39,21 +40,39 @@ void makeWindow()
 
 int main(void)
 {
-    bool running = true;
-
     makeWindow();
-    ome::Engine *engine = ome::Engine::getInstance();
+
+    Engine *engine = Engine::getInstance();
+    ResourceManager *rm = ResourceManager::getInstance();
+    SceneGraph *sg = SceneGraph::getInstance();
+
+    // setting loaders
+    rm->add(new DefaultVertexShader(), "vert");
+    rm->add(new DefaultFragmentShader(), "frag");
+    rm->add(new DefaultMesh(), "mesh");
+
+    // creating a mesh
+    Mesh *mesh = rm->getMesh("monMesh.mesh");
+    ShaderProgram shader("", "");
+    shader.link();
+    mesh->setShader(&shader);
+    sg->add(*mesh);
+
+    // main loop
+    bool running = true;
 
     while(running) 
     {
+        // events
+        running = !glfwGetKey(GLFW_KEY_ESC) && glfwGetWindowParam(GLFW_OPENED);
+        
+        // display
         engine->clearColorBuffer();
         engine->render();
-
         glfwSwapBuffers();
-        running = !glfwGetKey(GLFW_KEY_ESC) && glfwGetWindowParam(GLFW_OPENED);
     }
-    
+
     glfwTerminate();
 
-    exit(EXIT_SUCCESS);
+    return EXIT_SUCCESS;
 }
