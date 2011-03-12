@@ -20,7 +20,7 @@ namespace OpenMouleEngine
     public:
         ShaderProgram(Shader *vertexShader, Shader *fragmentShader);
 
-        ShaderProgram(std::string vertFile, std::string fragFile);
+        ShaderProgram(const std::string &vertFile, const std::string &fragFile);
 
         ~ShaderProgram();
 

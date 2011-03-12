@@ -4,6 +4,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 #include "ShaderProgram.hpp"
+#include "ResourceManager.hpp"
 
 namespace OpenMouleEngine
 {
@@ -16,12 +17,12 @@ namespace OpenMouleEngine
     }
 
 
-    ShaderProgram::ShaderProgram(std::string vertFile, std::string fragFile):
+    ShaderProgram::ShaderProgram(const std::string &vertFile, const std::string &fragFile):
     linked(false)
     {
         program = glCreateProgram();
-        //vertexShader = ResourceManager::getInstance().getShader("vertFile");
-        //fragmentShader = ResourceManager::getInstance().getShader("fragFile");
+        vertexShader = ResourceManager::getInstance()->getShader("vertFile.vert");
+        fragmentShader = ResourceManager::getInstance()->getShader("fragFile.frag");
     }
 
 
@@ -43,6 +44,13 @@ namespace OpenMouleEngine
         GLsizei size;
         char log[512]; // glGetShaderProgram with the value GL_INFO_LOG_LENGTH to get the right size
         
+        // compiling shaders if needed
+        if(!vertexShader->isCompiled())
+            vertexShader->compile();
+
+        if(!fragmentShader->isCompiled())
+            fragmentShader->compile();
+
         // attaching shaders to the program
         vertexShader->attach(program);
         fragmentShader->attach(program);
