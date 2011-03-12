@@ -8,13 +8,13 @@
 #define HPP_UNIFORM
 
 #include <GL/glew.h>
-#include <iostream>
+
 namespace OpenMouleEngine
 {
     class Uniform
     {
     public:
-        virtual Uniform &send(GLint location) = 0;
+        virtual void send(GLint location) = 0;
 
     private:
     };

@@ -31,7 +31,7 @@ namespace OpenMouleEngine
         
         Vector3 &normalize();
 
-        Vector3 &send(GLint location);
+        void send(GLint location);
         
         friend std::ostream &operator<< <> (std::ostream &ostr, const Vector3 &v);
                 

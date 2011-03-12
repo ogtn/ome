@@ -53,6 +53,7 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -89,6 +90,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Color.cpp" />
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\FileName.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -112,6 +114,7 @@
     <None Include="licence.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Color.hpp" />
     <ClInclude Include="include\Engine.hpp" />
     <ClInclude Include="include\FileName.hpp" />
     <ClInclude Include="include\Matrix4x4.hpp" />

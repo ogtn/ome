@@ -89,19 +89,19 @@ namespace OpenMouleEngine
     ShaderProgram &ShaderProgram::sendUniform(std::string name, Uniform &data)
     {
         if(uniformLocation.find(name) == uniformLocation.end())
-            uniformLocation[name] = glGetUniformLocation(program, name.c_str());
+        {
+            GLint location = glGetUniformLocation(program, name.c_str());
+
+            if(location == -1)
+            {
+                std::cout << "Error: aucune variable uniforme " + name + " dans le shader." << std::endl;
+                std::getchar();
+            }
+
+            uniformLocation[name] = location;
+        }
 
         data.send(uniformLocation[name]);
-
-        GLint location = glGetUniformLocation(program, name.c_str());
-
-        if(location != -1)
-            data.send(location);
-        else
-        {
-            std::cout << "Error: aucune variable uniforme " << name.c_str() << " dans le shader." << std::endl;
-            std::getchar();
-        }
 
         return *this;
     }

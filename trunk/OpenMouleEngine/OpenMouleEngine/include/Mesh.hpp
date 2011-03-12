@@ -10,6 +10,7 @@
 #include "ShaderProgram.hpp"
 #include "SceneNode.hpp"
 #include "Resource.hpp"
+#include "Color.hpp"
 #include <GL/glew.h>
 #include <vector>
 
