@@ -14,12 +14,17 @@ namespace OpenMouleEngine
     Resource(name),
     shader(NULL)
     {
-        verticesPositions.push_back(-1.f);
-        verticesPositions.push_back(-1.f);
-        verticesPositions.push_back(1.f);
-        verticesPositions.push_back(-1.f);
-        verticesPositions.push_back(0.f);
-        verticesPositions.push_back(1.f);
+        verticesPositions.push_back(0.1f);
+        verticesPositions.push_back(0.1f);
+        verticesPositions.push_back(0.9f);
+        verticesPositions.push_back(0.9f);
+        verticesPositions.push_back(0.9f);
+        verticesPositions.push_back(0.1f);
+
+        verticesPositions.push_back(0.1f);
+        verticesPositions.push_back(0.9f);
+        verticesPositions.push_back(0.1f);
+        verticesPositions.push_back(0.1f);
 
         glGenBuffers(1, &vbo);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -51,7 +56,7 @@ namespace OpenMouleEngine
         glEnableVertexAttribArray(0);
 
         // render
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, verticesPositions.size() / 2);
 
         // buffer
         glDisableVertexAttribArray(0);

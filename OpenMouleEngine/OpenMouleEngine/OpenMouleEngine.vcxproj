@@ -132,6 +132,11 @@
     <ClInclude Include="include\Uniform.hpp" />
     <ClInclude Include="include\Vector3.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Object Include="data\obj\2plans.obj" />
+    <Object Include="data\obj\3cubes.obj" />
+    <Object Include="data\obj\chamfer.obj" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
