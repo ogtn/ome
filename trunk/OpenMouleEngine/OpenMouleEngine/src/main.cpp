@@ -70,6 +70,7 @@ int main(void)
         engine->clearColorBuffer();
         engine->render();
         glfwSwapBuffers();
+        glfwSleep(0.016);
     }
 
     glfwTerminate();
