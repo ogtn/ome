@@ -137,15 +137,4 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <Object Include="data\obj\2plans.obj">
-      <Filter>Resource Files</Filter>
-    </Object>
-    <Object Include="data\obj\3cubes.obj">
-      <Filter>Resource Files</Filter>
-    </Object>
-    <Object Include="data\obj\chamfer.obj">
-      <Filter>Resource Files</Filter>
-    </Object>
-  </ItemGroup>
 </Project>
