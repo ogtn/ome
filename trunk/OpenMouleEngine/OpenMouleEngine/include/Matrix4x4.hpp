@@ -8,6 +8,7 @@
 #define HPP_MATRIX4X4
 
 #include "Vector3.hpp"
+#include "Uniform.hpp"
 
 namespace OpenMouleEngine
 {
@@ -29,6 +30,10 @@ namespace OpenMouleEngine
         Matrix4x4 &makeIdentity();
 
         Matrix4x4 &makeOrtho(T left, T right, T bottom, T top, T zNear, T zFar);
+
+        Matrix4x4 &makePerspective(T angle, T ratio, T near, T far);
+
+        Matrix4x4 &lookAt(Vector3<T> pos, Vector3<T> target = Vector3<T>(), Vector3<T> up = Vector3<T>(0, 0, 1));
         
         Matrix4x4 &translate(const Vector3<T> &v);
         

@@ -50,9 +50,10 @@ int main(void)
     rm->add(new DefaultVertexShader(), "vert");
     rm->add(new DefaultFragmentShader(), "frag");
     rm->add(new DefaultMesh(), "mesh");
+    rm->add(new ObjLoader(), "obj");
 
     // creating a mesh
-    Mesh *mesh = rm->getMesh("monMesh.mesh");
+    Mesh *mesh = rm->getMesh("data/obj/2plans.obj");
     ShaderProgram shader("", "");
     shader.link();
     mesh->setShader(&shader);

@@ -55,6 +55,56 @@ Matrix4x4<T> &Matrix4x4<T>::makeOrtho(T left, T right, T bottom, T top, T zNear,
 
 
 template <typename T>
+Matrix4x4<T> &Matrix4x4<T>::makePerspective(T angle, T ratio, T near, T far)
+{
+    makeIdentity();
+
+    T f = 1 / tan(angle / 2);
+
+    data[0][0] = f / ratio;
+    data[1][1] = f;
+    data[2][2] = (near + far) / (near - far);
+    data[2][3] = (2 * near * far) / (near - far);
+    data[3][2] = -1;
+    data[3][3] = 0;
+
+    return *this;
+}
+
+
+template <typename T>
+Matrix4x4<T> &Matrix4x4<T>::lookAt(Vector3<T> pos, Vector3<T> target, Vector3<T> up)
+{
+    makeIdentity();
+
+    Vector3<T> forward = target - pos;
+    forward.normalize();
+
+    Vector3<T> side = forward * up;
+    side.normalize();
+
+    Vector3<T> newUP = side * forward;
+    newUP.normalize();
+
+    Matrix4x4<T> mat;
+
+    mat.data[0][0] = side.x;
+    mat.data[0][1] = side.y;
+    mat.data[0][2] = side.z;
+
+    mat.data[1][0] = newUP.x;
+    mat.data[1][1] = newUP.y;
+    mat.data[1][2] = newUP.z;
+
+    mat.data[2][0] = -forward.x;
+    mat.data[2][1] = -forward.y;
+    mat.data[2][2] = -forward.z;
+
+    return *this;
+}
+
+
+template <typename T>
 Matrix4x4<T> &Matrix4x4<T>::translate(const Vector3<T> &v)
 {
     Matrix4x4<T> m;

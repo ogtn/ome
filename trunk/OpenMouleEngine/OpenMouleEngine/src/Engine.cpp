@@ -25,23 +25,12 @@ namespace OpenMouleEngine
 
         // OpenGL initialisation
         projection.makeOrtho(0, 1, 0, 1, -1, 1);
+        projection.makePerspective(70, 1, 0.1, 1000);
+        modelview.lookAt(vec3(1, 1, 1));
         
         // Shaders et mesh
         rm = ResourceManager::getInstance();
         sg = SceneGraph::getInstance();
-
-        /*
-        Shader *vertShader = rm->getShader("shader.vert");
-        Shader *fragShader = rm->getShader("shader.frag");
-        ShaderProgram *shader = new ShaderProgram(vertShader, fragShader);
-        vertShader->compile();
-        fragShader->compile();
-        shader->link();
-        mesh = rm->getMesh("monMesh.mesh");
-        mesh->setShader(shader);
-        sg = SceneGraph::getInstance();
-        sg->add(*mesh);
-        */
     }
 
     

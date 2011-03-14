@@ -10,25 +10,14 @@
 
 namespace OpenMouleEngine
 {
-    Mesh::Mesh(std::string name):
+    Mesh::Mesh(std::string name, std::vector<vec3> pos):
     Resource(name),
-    shader(NULL)
+    shader(NULL),
+    verticesPositions(pos)
     {
-        verticesPositions.push_back(0.1f);
-        verticesPositions.push_back(0.1f);
-        verticesPositions.push_back(0.9f);
-        verticesPositions.push_back(0.9f);
-        verticesPositions.push_back(0.9f);
-        verticesPositions.push_back(0.1f);
-
-        verticesPositions.push_back(0.1f);
-        verticesPositions.push_back(0.9f);
-        verticesPositions.push_back(0.1f);
-        verticesPositions.push_back(0.1f);
-
         glGenBuffers(1, &vbo);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * verticesPositions.size(), &verticesPositions[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * verticesPositions.size(), &verticesPositions[0], GL_STATIC_DRAW);
     }
 
 
@@ -52,11 +41,11 @@ namespace OpenMouleEngine
 
         // buffer
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glVertexAttribPointer(0, 2, GL_FLOAT, 0, 0, BUFFER_OFFSET(0));
+        glVertexAttribPointer(0, 3, GL_FLOAT, 0, 0, BUFFER_OFFSET(0));
         glEnableVertexAttribArray(0);
 
         // render
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, verticesPositions.size() / 2);
+        glDrawArrays(GL_TRIANGLES, 0, verticesPositions.size());
 
         // buffer
         glDisableVertexAttribArray(0);

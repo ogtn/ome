@@ -7,12 +7,12 @@
 #ifndef HPP_VECTOR3
 #define HPP_VECTOR3
 
-#include "Uniform.hpp"
 #include <cmath>
 #ifndef M_PI
 #define M_PI 3.141592653589793238462643
 #endif
 #include <iostream>
+#include <GL/glew.h>
 
 namespace OpenMouleEngine
 {
@@ -22,7 +22,7 @@ namespace OpenMouleEngine
     template <typename T> std::ostream &operator<<(std::ostream &ostr, const Vector3<T> &v);
 
     template <typename T>
-    class Vector3: public Uniform
+    class Vector3
     {
     public:
         Vector3(T x = 0, T y = 0, T z = 0);
@@ -30,6 +30,10 @@ namespace OpenMouleEngine
         ~Vector3();
         
         Vector3 &normalize();
+
+        Vector3 operator-(Vector3<T> v);
+
+        Vector3 operator*(Vector3<T> v);
 
         void send(GLint location);
         
