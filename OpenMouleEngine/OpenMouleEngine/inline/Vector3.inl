@@ -61,3 +61,12 @@ std::ostream &operator<<(std::ostream &ostr, const Vector3<T> &v)
 {
     return ostr << "(" << v.x << ", " << v.y << ", " << v.z << ")";
 }
+
+
+template <typename T>
+std::istream &operator>>(std::istream &istr, Vector3<T> &v)
+{
+    istr >> v.x >> v.y >> v.z;
+
+    return istr;
+}

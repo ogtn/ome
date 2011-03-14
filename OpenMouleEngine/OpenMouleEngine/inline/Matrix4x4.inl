@@ -59,12 +59,26 @@ Matrix4x4<T> &Matrix4x4<T>::makePerspective(T angle, T ratio, T near, T far)
 {
     makeIdentity();
 
-    T f = 1 / tan(angle / 2);
+    angle *= M_PI / 180;
+    //T f = 1 / tan(angle / 2);
 
-    data[0][0] = f / ratio;
-    data[1][1] = f;
-    data[2][2] = (near + far) / (near - far);
-    data[2][3] = (2 * near * far) / (near - far);
+    //data[0][0] = f / ratio;
+    //data[1][1] = f;
+    //data[2][2] = (near + far) / (near - far);
+    //data[2][3] = (2 * near * far) / (near - far);
+    //data[3][2] = -1;
+    //data[3][3] = 0;
+
+    T f = tan(angle / 2) * near;
+    T left = -f * ratio;
+    T right = f * ratio;
+    T bottom = -f;
+    T top = f;
+
+    data[0][0] = 2 * near / (right - left);
+    data[1][1] = 2 * near / (top - bottom);
+    data[2][2] = -(far + near) / (far - near);
+    data[2][3] = (2 * far * near) / (far - near);
     data[3][2] = -1;
     data[3][3] = 0;
 
@@ -225,7 +239,7 @@ const Vector3<T> Matrix4x4<T>::operator*(const Vector3<T> &v) const
     res.y = data[1][0] * v.x + data[1][1] * v.y + data[1][2] * v.z + data[1][3];
     res.z = data[2][0] * v.x + data[2][1] * v.y + data[2][2] * v.z + data[2][3];
     
-    return res; // cette fonction fait de la merde, il manque une dimension au vecteur...
+    return NULL; // cette fonction fait de la merde, il manque une dimension au vecteur...
 }
 
 

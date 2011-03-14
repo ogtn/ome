@@ -6,6 +6,7 @@
 #include "ObjLoader.hpp"
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 
 namespace OpenMouleEngine
 {
@@ -46,13 +47,21 @@ namespace OpenMouleEngine
             if(line.find("v ") == 0)
             {
                 line_stream.ignore();
-                line_stream >> v.x >> v.y >> v.z;
+                line_stream >> v;
                 tmp_positions.push_back(v);
             }
             // face
             else if(line.find("f ") == 0)
             {
                 int offset;
+                int nb = std::count(line.begin(), line.end(), '/') / 2;
+
+                // only triangles are valid
+                if(nb != 3)
+                {
+                    std::cout << "Erreur dans le chargement de " + fileName << std::endl;
+                    return NULL;
+                }
 
                 line_stream.ignore();
 

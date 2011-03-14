@@ -62,6 +62,19 @@ int main(void)
     // main loop
     bool running = true;
 
+#pragma comment(lib, "glu32.lib")
+    GLfloat m[16];
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glGetFloatv(GL_PROJECTION_MATRIX, m);
+
+    mat4 mp1(m);
+
+    cout << mp1;
+
+    gluPerspective(70, 1, 0.1, 1000);
+    glGetFloatv(GL_PROJECTION_MATRIX, m);
+
     while(running) 
     {
         // events
