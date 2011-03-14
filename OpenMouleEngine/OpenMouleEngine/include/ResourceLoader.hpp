@@ -9,6 +9,8 @@
 
 #include <iostream>
 #include <string>
+#include "Shader.hpp"
+#include "Mesh.hpp"
 
 namespace OpenMouleEngine
 {
@@ -73,7 +75,8 @@ namespace OpenMouleEngine
     {
         Mesh *loadFromFile(std::string fileName)
         {
-            return new Mesh(fileName);
+            return NULL;
+            //return new Mesh(fileName);
         }
     };
 } // namespace

@@ -19,7 +19,7 @@ namespace OpenMouleEngine
     class Mesh: public Resource, public SceneNode
     {
     public:
-        Mesh(std::string name);
+        Mesh(std::string name, std::vector<vec3> pos);
 
         ~Mesh();
 
@@ -29,7 +29,7 @@ namespace OpenMouleEngine
 
     private:
         GLuint vbo;
-        std::vector<GLfloat> verticesPositions;
+        std::vector<vec3> verticesPositions;
         ShaderProgram *shader;
     };
 } // namespace

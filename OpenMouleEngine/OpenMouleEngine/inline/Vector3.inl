@@ -32,6 +32,23 @@ Vector3<T> &Vector3<T>::normalize()
 }
 
 
+template <typename T>
+Vector3<T> Vector3<T>::operator-(Vector3<T> v)
+{
+    return Vector3<T>(x - v.x, y - v.y, z - v.z);
+}
+
+
+template <typename T>
+Vector3<T> Vector3<T>::operator*(Vector3<T> v)
+{
+    return Vector3<T>(
+        (y * v.z - z * v.y),
+        (z * v.x - x * v.z),
+        (x * v.y - y * v.x));
+}
+
+
 template <typename GLfloat>
 void Vector3<GLfloat>::send(GLint location)
 {

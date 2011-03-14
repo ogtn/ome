@@ -27,6 +27,7 @@
 
 #include "Engine.hpp"
 #include "ShaderProgram.hpp"
+#include "ObjLoader.hpp"
 
 namespace OpenMouleEngine
 {
