@@ -20,6 +20,7 @@ namespace OpenMouleEngine
     template <typename T> class Vector3;
     typedef Vector3<GLfloat> vec3;
     template <typename T> std::ostream &operator<<(std::ostream &ostr, const Vector3<T> &v);
+    template <typename T> std::istream &operator>>(std::istream &istr, Vector3<T> &v);
 
     template <typename T>
     class Vector3
@@ -38,6 +39,8 @@ namespace OpenMouleEngine
         void send(GLint location);
         
         friend std::ostream &operator<< <> (std::ostream &ostr, const Vector3 &v);
+
+        friend std::istream &operator>> <> (std::istream &istr, Vector3 &v);
                 
         T x, y, z;
     };
