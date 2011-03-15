@@ -22,9 +22,9 @@ void makeWindow()
     cout << glfwGetNumberOfProcessors() << " CPUs detected" << endl; 
 
     //forward compatibility OpenGL 3.3
-    glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 3);
-    glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 3);
-    glfwOpenWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    //glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 3);
+    //glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 3);
+    //glfwOpenWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
     // Open an OpenGL window
     if (!glfwOpenWindow(500, 500, 8, 8, 8, 8, 24, 0, GLFW_WINDOW))
@@ -35,6 +35,17 @@ void makeWindow()
     }
 
     glfwSetWindowTitle("OpenMouleEngine");
+}
+
+
+#pragma comment(lib, "glu32.lib")
+void errorCheck()
+{
+    GLenum err = glGetError();
+    if(err != GL_NO_ERROR)
+        cout << gluErrorString(err) << endl;
+    else
+        cout << "Jusqu'ici, tout va bien..." << endl;
 }
 
 
@@ -53,7 +64,7 @@ int main(void)
     rm->add(new ObjLoader(), "obj");
 
     // creating a mesh
-    Mesh *mesh = rm->getMesh("data/obj/2plans.obj");
+    Mesh *mesh = rm->getMesh("data/obj/chamfer.obj");
     ShaderProgram shader("", "");
     shader.link();
     mesh->setShader(&shader);
@@ -62,20 +73,28 @@ int main(void)
     // main loop
     bool running = true;
 
-#pragma comment(lib, "glu32.lib")
+    // putain de merde pourquoi ça ne marche pas ???
     GLfloat m[16];
+
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
+    gluPerspective(75, 4/3.f, 0.1, 1000);
     glGetFloatv(GL_PROJECTION_MATRIX, m);
+    cout << "gluPerspective():" << endl << mat4(m) << endl;
+    cout << "makePerspective():" << endl << engine->getProjection().transpose() << endl;
 
-    mat4 mp1(m);
+    //engine->getProjection() = mat4(m);
 
-    cout << mp1;
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    gluLookAt(50, 50, 15, 0, 0, 0, 0, 0, 1);
+    glGetFloatv(GL_MODELVIEW_MATRIX, m);  
+    cout << "gluLookAt():" << endl << mat4(m) << endl;
+    cout << "lookAt():" << endl << engine->getModelView().transpose() << endl;
 
-    gluPerspective(70, 1, 0.1, 1000);
-    glGetFloatv(GL_PROJECTION_MATRIX, m);
+    engine->getModelView() = mat4(m);
 
-    while(running) 
+    while(running)
     {
         // events
         running = !glfwGetKey(GLFW_KEY_ESC) && glfwGetWindowParam(GLFW_OPENED);

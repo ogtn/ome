@@ -60,27 +60,14 @@ Matrix4x4<T> &Matrix4x4<T>::makePerspective(T angle, T ratio, T near, T far)
     makeIdentity();
 
     angle *= M_PI / 180;
-    //T f = 1 / tan(angle / 2);
+    T f = 1 / tan(angle / 2);
 
-    //data[0][0] = f / ratio;
-    //data[1][1] = f;
-    //data[2][2] = (near + far) / (near - far);
-    //data[2][3] = (2 * near * far) / (near - far);
-    //data[3][2] = -1;
-    //data[3][3] = 0;
-
-    T f = tan(angle / 2) * near;
-    T left = -f * ratio;
-    T right = f * ratio;
-    T bottom = -f;
-    T top = f;
-
-    data[0][0] = 2 * near / (right - left);
-    data[1][1] = 2 * near / (top - bottom);
-    data[2][2] = -(far + near) / (far - near);
-    data[2][3] = (2 * far * near) / (far - near);
-    data[3][2] = -1;
+    data[0][0] = f / ratio;
+    data[1][1] = f;
+    data[2][2] = (near + far) / (near - far);
     data[3][3] = 0;
+    data[2][3] = (2 * near * far) / (near - far);
+    data[3][2] = -1;
 
     return *this;
 }
@@ -93,26 +80,21 @@ Matrix4x4<T> &Matrix4x4<T>::lookAt(Vector3<T> pos, Vector3<T> target, Vector3<T>
 
     Vector3<T> forward = target - pos;
     forward.normalize();
-
-    Vector3<T> side = forward * up;
-    side.normalize();
-
+    Vector3<T> side = forward * up.normalize();
     Vector3<T> newUP = side * forward;
-    newUP.normalize();
 
-    Matrix4x4<T> mat;
+    data[0][0] = side.x;
+    data[0][1] = side.y;
+    data[0][2] = side.z;
 
-    mat.data[0][0] = side.x;
-    mat.data[0][1] = side.y;
-    mat.data[0][2] = side.z;
+    data[1][0] = newUP.x;
+    data[1][1] = newUP.y;
+    data[1][2] = newUP.z;
 
-    mat.data[1][0] = newUP.x;
-    mat.data[1][1] = newUP.y;
-    mat.data[1][2] = newUP.z;
-
-    mat.data[2][0] = -forward.x;
-    mat.data[2][1] = -forward.y;
-    mat.data[2][2] = -forward.z;
+    data[2][0] = -forward.x;
+    data[2][1] = -forward.y;
+    data[2][2] = -forward.z;
+    data[2][3] = -2.345;
 
     return *this;
 }
@@ -206,7 +188,7 @@ const Matrix4x4<GLfloat> &Matrix4x4<GLfloat>::load(bool transpose) const
 template <typename T>
 void Matrix4x4<T>::send(GLint location)
 {
-    glUniformMatrix4fv(location, 1, GL_TRUE, (GLfloat *)data);
+    glUniformMatrix4fv(location, 1, GL_FALSE, (GLfloat *)data);
 }
 
 
@@ -247,7 +229,11 @@ template <typename T>
 std::ostream &operator<<(std::ostream &ostr, const Matrix4x4<T> &m)
 {
     for(int i = 0; i < 16; i++)
-        ostr << ((float*)m.data)[i] << " ";
+    {
+        if(i && i % 4 == 0)
+            std::printf("\n");
+        std::printf("%+2.3f\t", ((float *)m.data)[i]);
+    }
 
     return ostr;
 }

@@ -24,10 +24,9 @@ namespace OpenMouleEngine
         std::cout << " (" << glGetString(GL_VENDOR) << ")" << std::endl;
 
         // OpenGL initialisation
-        projection.makeOrtho(0, 1, 0, 1, -1, 1);
-        projection.makePerspective(70, 1, 0.1, 1000);
-        modelview.lookAt(vec3(1, 1, 1));
-        
+        projection.makePerspective(75, 4/3.f, 0.1, 1000);
+        modelview.lookAt(vec3(1.5, 1.5, 1));
+
         // Shaders et mesh
         rm = ResourceManager::getInstance();
         sg = SceneGraph::getInstance();
