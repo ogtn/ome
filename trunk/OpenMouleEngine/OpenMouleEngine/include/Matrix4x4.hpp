@@ -9,6 +9,7 @@
 
 #include "Vector3.hpp"
 #include "Uniform.hpp"
+#include <cstdio>
 
 namespace OpenMouleEngine
 {
