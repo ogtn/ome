@@ -81,7 +81,7 @@ Matrix4x4<T> &Matrix4x4<T>::lookAt(Vector3<T> pos, Vector3<T> target, Vector3<T>
     Vector3<T> forward = target - pos;
     forward.normalize();
     Vector3<T> side = forward * up.normalize();
-    Vector3<T> newUP = side * forward;
+    Vector3<T> newUP = side.normalize() * forward;
 
     data[0][0] = side.x;
     data[0][1] = side.y;
@@ -94,7 +94,7 @@ Matrix4x4<T> &Matrix4x4<T>::lookAt(Vector3<T> pos, Vector3<T> target, Vector3<T>
     data[2][0] = -forward.x;
     data[2][1] = -forward.y;
     data[2][2] = -forward.z;
-    data[2][3] = -2.345;
+    data[2][3] = forward.dot(pos);  // wtf?
 
     return *this;
 }
@@ -188,7 +188,7 @@ const Matrix4x4<GLfloat> &Matrix4x4<GLfloat>::load(bool transpose) const
 template <typename T>
 void Matrix4x4<T>::send(GLint location)
 {
-    glUniformMatrix4fv(location, 1, GL_FALSE, (GLfloat *)data);
+    glUniformMatrix4fv(location, 1, GL_TRUE, (GLfloat *)data);
 }
 
 

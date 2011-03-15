@@ -36,6 +36,10 @@ namespace OpenMouleEngine
 
         Vector3 operator*(Vector3<T> v);
 
+        T dot(Vector3<T> v);
+
+        T length();
+
         void send(GLint location);
         
         friend std::ostream &operator<< <> (std::ostream &ostr, const Vector3 &v);

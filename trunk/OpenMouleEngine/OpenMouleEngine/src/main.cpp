@@ -64,7 +64,7 @@ int main(void)
     rm->add(new ObjLoader(), "obj");
 
     // creating a mesh
-    Mesh *mesh = rm->getMesh("data/obj/chamfer.obj");
+    Mesh *mesh = rm->getMesh("data/obj/2plans.obj");
     ShaderProgram shader("", "");
     shader.link();
     mesh->setShader(&shader);
@@ -72,27 +72,6 @@ int main(void)
 
     // main loop
     bool running = true;
-
-    // putain de merde pourquoi ça ne marche pas ???
-    GLfloat m[16];
-
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluPerspective(75, 4/3.f, 0.1, 1000);
-    glGetFloatv(GL_PROJECTION_MATRIX, m);
-    cout << "gluPerspective():" << endl << mat4(m) << endl;
-    cout << "makePerspective():" << endl << engine->getProjection().transpose() << endl;
-
-    //engine->getProjection() = mat4(m);
-
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    gluLookAt(50, 50, 15, 0, 0, 0, 0, 0, 1);
-    glGetFloatv(GL_MODELVIEW_MATRIX, m);  
-    cout << "gluLookAt():" << endl << mat4(m) << endl;
-    cout << "lookAt():" << endl << engine->getModelView().transpose() << endl;
-
-    engine->getModelView() = mat4(m);
 
     while(running)
     {
