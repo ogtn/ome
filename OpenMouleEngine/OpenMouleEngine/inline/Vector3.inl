@@ -19,7 +19,7 @@ Vector3<T>::~Vector3()
 template <typename T>
 Vector3<T> &Vector3<T>::normalize()
 {
-    T norm = sqrt(x * x + y * y + z * z);
+    T norm = length();
     
     if(norm != 0)
     {
@@ -29,6 +29,13 @@ Vector3<T> &Vector3<T>::normalize()
     }
     
     return *this;
+}
+
+
+template <typename T>
+T Vector3<T>::length()
+{
+    return sqrt(x * x + y * y + z * z);
 }
 
 
@@ -46,6 +53,13 @@ Vector3<T> Vector3<T>::operator*(Vector3<T> v)
         (y * v.z - z * v.y),
         (z * v.x - x * v.z),
         (x * v.y - y * v.x));
+}
+
+
+template <typename T>
+T Vector3<T>::dot(Vector3<T> v)
+{
+    return x * v.x + y * v.y + z * v.z;
 }
 
 
