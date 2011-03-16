@@ -7,7 +7,7 @@
 #ifndef HPP_ENGINE
 #define HPP_ENGINE
 
-#include "Matrix4x4.hpp"
+#include "Camera.hpp"
 #include "SceneGraph.hpp"
 #include "ResourceManager.hpp"
 #include <vector>
@@ -26,12 +26,10 @@ namespace OpenMouleEngine
         
         void clearColorBuffer();
 
-        mat4 &getProjection();
-
-        mat4 &getModelView();
+        Camera *getCamera();
 
     private:
-        mat4 projection, modelview;
+        Camera *camera;
         Mesh *mesh;
         ResourceManager *rm;
         SceneGraph *sg;

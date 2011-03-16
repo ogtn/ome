@@ -35,8 +35,7 @@ namespace OpenMouleEngine
         shader->bind();
 
         // uniforms
-        shader->sendUniform("projection", Engine::getInstance()->getProjection());
-        shader->sendUniform("modelview", Engine::getInstance()->getModelView());
+        Engine::getInstance()->getCamera()->send();
         shader->sendUniform("prout", c);
 
         // buffer

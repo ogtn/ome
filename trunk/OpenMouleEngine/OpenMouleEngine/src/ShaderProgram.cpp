@@ -102,6 +102,8 @@ namespace OpenMouleEngine
         }
 
         data.send(uniformLocation[name]);
+        int i = glGetUniformLocation(1, "modelview");
+        i = glGetUniformLocation(1, "projection");
 
         return *this;
     }

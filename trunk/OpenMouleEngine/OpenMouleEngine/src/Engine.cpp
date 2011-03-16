@@ -23,10 +23,9 @@ namespace OpenMouleEngine
         std::cout << "Hardware: " << glGetString(GL_RENDERER);
         std::cout << " (" << glGetString(GL_VENDOR) << ")" << std::endl;
 
-        // OpenGL initialisation
-        projection.makePerspective(75, 4/3.f, 0.1, 1000);
-        modelview.lookAt(vec3(1.5, 1.5, 1));
-
+        // camera
+        camera = new CameraPerspective(75, 4/3.f, 0.1, 1000);
+        
         // Shaders et mesh
         rm = ResourceManager::getInstance();
         sg = SceneGraph::getInstance();
@@ -50,14 +49,8 @@ namespace OpenMouleEngine
     }
 
 
-    mat4 &Engine::getProjection()
+    Camera *Engine::getCamera()
     {
-        return projection;
-    }
-
-
-    mat4 &Engine::getModelView()
-    {
-        return modelview;
+        return camera;
     }
 } // namespace
