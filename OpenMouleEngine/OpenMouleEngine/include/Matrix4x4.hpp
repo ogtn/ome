@@ -54,7 +54,7 @@ namespace OpenMouleEngine
         
         friend std::ostream &operator<< <> (std::ostream &ostr, const Matrix4x4<T> &m);
     
-    private:
+    public:
         T data[4][4];
     };
     

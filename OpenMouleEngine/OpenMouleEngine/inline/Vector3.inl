@@ -4,8 +4,10 @@
 ////////////////////////////////////////////////////////////////////////
 
 template <typename T>
-Vector3<T>::Vector3(T x, T y, T z)
-: x(x), y(y), z(z)
+Vector3<T>::Vector3(T x, T y, T z):
+    x(x),
+    y(y),
+    z(z)
 {
 }
 
@@ -63,13 +65,6 @@ T Vector3<T>::dot(Vector3<T> v)
 }
 
 
-template <typename GLfloat>
-void Vector3<GLfloat>::send(GLint location)
-{
-    glUniform3f(location, x, y, z);
-}
-
-
 template <typename T>
 std::ostream &operator<<(std::ostream &ostr, const Vector3<T> &v)
 {
@@ -84,3 +79,16 @@ std::istream &operator>>(std::istream &istr, Vector3<T> &v)
 
     return istr;
 }
+
+
+
+
+
+
+/*
+template <typename GLfloat>
+void Vector3<GLfloat>::send(GLint location)
+{
+    glUniform3f(location, x, y, z);
+}
+*/
