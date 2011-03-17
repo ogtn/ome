@@ -86,7 +86,7 @@ namespace OpenMouleEngine
     }
 
 
-    ShaderProgram &ShaderProgram::sendUniform(std::string name, Uniform &data)
+    GLint ShaderProgram::getUniformLocation(std::string name)
     {
         if(uniformLocation.find(name) == uniformLocation.end())
         {
@@ -95,17 +95,13 @@ namespace OpenMouleEngine
             if(location == -1)
             {
                 std::cout << "Error: aucune variable uniforme " + name + " dans le shader." << std::endl;
-                std::getchar();
+                return -1;
             }
 
             uniformLocation[name] = location;
         }
 
-        data.send(uniformLocation[name]);
-        int i = glGetUniformLocation(1, "modelview");
-        i = glGetUniformLocation(1, "projection");
-
-        return *this;
+        return uniformLocation[name];
     }
 
 

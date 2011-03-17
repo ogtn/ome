@@ -7,7 +7,6 @@
 #ifndef HPP_SHADERPROGRAM
 #define HPP_SHADERPROGRAM
 
-#include "Uniform.hpp"
 #include "Shader.hpp"
 #include "Vector3.hpp"
 #include <GL/glew.h>
@@ -31,7 +30,10 @@ namespace OpenMouleEngine
 
         ShaderProgram &unbind();
 
-        ShaderProgram &sendUniform(std::string name, Uniform &data);
+        template <typename T>
+        void sendUniform(std::string name, T &data);
+
+        GLint getUniformLocation(std::string name);
 
         bool isLinked();
 
@@ -42,9 +44,12 @@ namespace OpenMouleEngine
         bool linked;
 
         // uniform location cache
-        typedef std::map<std::string, GLuint>  LocationMap;
+        typedef std::map<std::string, GLint>  LocationMap;
         LocationMap uniformLocation;
     };
+
+#include "ShaderProgram.inl"
+
 } // namespace
 
 #endif // HPP_SHADERPROGRAM

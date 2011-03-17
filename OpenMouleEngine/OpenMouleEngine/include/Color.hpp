@@ -8,18 +8,21 @@
 #define HPP_COLOR
 
 #include <GL/glew.h>
-#include "Uniform.hpp"
+#include <string>
 
 namespace OpenMouleEngine
 {
-    class Color: public Uniform
+    // forward declaration
+    class ShaderProgram;
+
+    class Color
     {
     public:
         Color(float r = 1, float g = 1, float b = 1, float a = 1);
         Color(unsigned int c);
         ~Color();
 
-        void send(GLint location);
+        void sendAsUniform(ShaderProgram &program, std::string name);
 
         union
         {

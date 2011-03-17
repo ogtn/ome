@@ -64,7 +64,7 @@ int main(void)
     rm->add(new ObjLoader(), "obj");
 
     // creating a mesh
-    Mesh *mesh = rm->getMesh("data/obj/3cubes.obj");
+    Mesh *mesh = rm->getMesh("data/obj/2plans.obj");
     ShaderProgram shader("", "");
     shader.link();
     mesh->setShader(&shader);
