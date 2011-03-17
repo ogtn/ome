@@ -13,37 +13,15 @@
 #endif
 #include <iostream>
 #include <GL/glew.h>
-#include "Uniform.hpp"
 
 namespace OpenMouleEngine
 {
     // forward declaration, to avoid warning about the friend
+    class ShaderProgram;
     template <typename T> class Vector3;
     typedef Vector3<GLfloat> vec3;
     template <typename T> std::ostream &operator<<(std::ostream &ostr, const Vector3<T> &v);
     template <typename T> std::istream &operator>>(std::istream &istr, Vector3<T> &v);
-
-
-
-    template <typename T>
-    class UniformVector3: public Uniform
-    {
-    public:
-        UniformVector3(Vector3<T> &vec): v(vec)
-        {
-        }
-
-        void send(GLint location)
-        {
-            glUniform3f(location, v.x, v.y, v.z);
-        }
-
-    private:
-        Vector3<T> v;
-    };
-
-
-
 
     template <typename T>
     class Vector3
@@ -62,16 +40,13 @@ namespace OpenMouleEngine
         T dot(Vector3<T> v);
 
         T length();
+
+        void sendAsUniform(ShaderProgram &program, std::string name);
         
         friend std::ostream &operator<< <> (std::ostream &ostr, const Vector3 &v);
 
         friend std::istream &operator>> <> (std::istream &istr, Vector3 &v);
-
-        operator UniformVector3<T>() const
-        {
-            return UniformVector3<T>(*this);
-        }
-                
+               
         T x, y, z;
     };
    

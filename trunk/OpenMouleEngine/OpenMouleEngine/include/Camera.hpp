@@ -11,6 +11,9 @@
 
 namespace OpenMouleEngine
 {
+    // forward declaration
+    class ShaderProgram;
+
     class Camera
     {
     public:
@@ -20,16 +23,7 @@ namespace OpenMouleEngine
 
         virtual void updateMatrices() = 0;
 
-        void send()
-        {
-            if(!ready)
-            {
-                ready = true;
-                updateMatrices();
-            }
-            glUniformMatrix4fv(0, 1, GL_TRUE, (GLfloat *)projection.data);
-            glUniformMatrix4fv(1, 1, GL_TRUE, (GLfloat *)modelview.data);
-        }
+        void sendAsUniform(ShaderProgram &program, std::string name);
 
     protected:
         mat4 projection;

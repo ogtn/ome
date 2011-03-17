@@ -4,6 +4,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 #include "Camera.hpp"
+#include "ShaderProgram.hpp"
 
 namespace OpenMouleEngine
 {
@@ -42,6 +43,19 @@ namespace OpenMouleEngine
 
         projection.data[2][2] = 2 / (far - near);
         projection.data[2][3] = -(far + near) / (far - near);
+    }
+
+
+    void Camera::sendAsUniform(ShaderProgram &program, std::string name)
+    {
+        if(!ready)
+        {
+            ready = true;
+            updateMatrices();
+        }
+
+        glUniformMatrix4fv(program.getUniformLocation("projection"), 1, GL_TRUE, (GLfloat *)projection.data);
+        glUniformMatrix4fv(program.getUniformLocation("modelview"), 1, GL_TRUE, (GLfloat *)modelview.data);
     }
 
 
@@ -115,5 +129,4 @@ namespace OpenMouleEngine
         modelview.data[2][2] = -forward.z;
         modelview.data[2][3] = forward.dot(pos);  // wtf? nothing about that in the OpenGL manpages...
     }
-
 } // namespace

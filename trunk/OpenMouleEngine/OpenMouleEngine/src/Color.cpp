@@ -4,6 +4,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 #include "Color.hpp"
+#include "ShaderProgram.hpp"
 
 namespace OpenMouleEngine
 {
@@ -29,8 +30,8 @@ namespace OpenMouleEngine
     }
 
 
-    void Color::send(GLint location)
+    void Color::sendAsUniform(ShaderProgram &program, std::string name)
     {
-        glUniform4fv(location, 1, vec);
+        glUniform4fv(program.getUniformLocation(name), 1, vec);
     }
 } // namespace

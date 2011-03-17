@@ -89,6 +89,9 @@
     <None Include="inline\Singleton.inl">
       <Filter>inline</Filter>
     </None>
+    <None Include="inline\ShaderProgram.inl">
+      <Filter>inline</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Engine.hpp">
@@ -104,9 +107,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\OpenMouleEngine.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Uniform.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Resource.hpp">

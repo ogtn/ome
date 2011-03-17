@@ -80,15 +80,8 @@ std::istream &operator>>(std::istream &istr, Vector3<T> &v)
     return istr;
 }
 
-
-
-
-
-
-/*
-template <typename GLfloat>
-void Vector3<GLfloat>::send(GLint location)
+template <typename T>
+void Vector3<T>::sendAsUniform(ShaderProgram &program, std::string name)
 {
-    glUniform3f(location, x, y, z);
+    glUniform3f(program.getUniformLocation(name), 1, x, y, z);
 }
-*/

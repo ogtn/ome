@@ -35,8 +35,8 @@ namespace OpenMouleEngine
         shader->bind();
 
         // uniforms
-        Engine::getInstance()->getCamera()->send();
         shader->sendUniform("prout", c);
+        shader->sendUniform("camera", *Engine::getInstance()->getCamera());
 
         // buffer
         glBindBuffer(GL_ARRAY_BUFFER, vbo);

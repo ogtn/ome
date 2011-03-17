@@ -8,7 +8,6 @@
 #define HPP_MATRIX4X4
 
 #include "Vector3.hpp"
-#include "Uniform.hpp"
 #include <cstdio>
 
 namespace OpenMouleEngine
@@ -19,7 +18,7 @@ namespace OpenMouleEngine
     template <typename T> std::ostream &operator<<(std::ostream &ostr, const Matrix4x4<T> &m);
         
     template <typename T>
-    class Matrix4x4: public Uniform
+    class Matrix4x4
     {
     public:
         Matrix4x4();
