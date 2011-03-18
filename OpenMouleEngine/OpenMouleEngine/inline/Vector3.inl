@@ -59,6 +59,20 @@ Vector3<T> Vector3<T>::operator*(Vector3<T> v)
 
 
 template <typename T>
+Vector3<T> operator*(Vector3<T> v, T t)
+{
+    return Vector3<T>(t * v.x, t * v.y, t * v.z);
+}
+
+
+template <typename T>
+Vector3<T> operator*(T t, Vector3<T> v)
+{
+    return v * t;
+}
+
+
+template <typename T>
 T Vector3<T>::dot(Vector3<T> v)
 {
     return x * v.x + y * v.y + z * v.z;

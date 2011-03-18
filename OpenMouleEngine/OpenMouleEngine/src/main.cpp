@@ -27,7 +27,7 @@ void makeWindow()
     //glfwOpenWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
     // Open an OpenGL window
-    if (!glfwOpenWindow(500, 500, 8, 8, 8, 8, 24, 0, GLFW_WINDOW))
+    if (!glfwOpenWindow(640, 480, 8, 8, 8, 8, 24, 0, GLFW_WINDOW))
     {
         cout << "Error: glfwOpenWindow() failed" << endl;
         glfwTerminate();
@@ -60,23 +60,41 @@ int main(void)
     // setting loaders
     rm->add(new DefaultVertexShader(), "vert");
     rm->add(new DefaultFragmentShader(), "frag");
-    rm->add(new DefaultMesh(), "mesh");
     rm->add(new ObjLoader(), "obj");
 
     // creating a mesh
-    Mesh *mesh = rm->getMesh("data/obj/2plans.obj");
+    Mesh *mesh = rm->getMesh("data/obj/chamfer.obj");
     ShaderProgram shader("", "");
     shader.link();
     mesh->setShader(&shader);
     sg->add(*mesh);
+    CameraPerspective *cam = dynamic_cast<CameraPerspective *>(engine->getCamera());
 
     // main loop
     bool running = true;
+    float theta = 0;
+    float phi = M_PI / 4;
+    glfwSetMouseWheel(-10);
 
     while(running)
     {
         // events
         running = !glfwGetKey(GLFW_KEY_ESC) && glfwGetWindowParam(GLFW_OPENED);
+        
+        if(glfwGetKey(GLFW_KEY_UP))
+            phi += 0.02f;
+        else if(glfwGetKey(GLFW_KEY_DOWN))
+            phi -= 0.02f;
+        if(glfwGetKey(GLFW_KEY_LEFT))
+            theta -= 0.02f;
+        else if(glfwGetKey(GLFW_KEY_RIGHT))
+            theta += 0.02f;
+
+        cam->lookAt(vec3(
+            cos(phi) * cos(theta),              // x
+            cos(phi) * sin(theta),              // y
+            sin(phi))                           // z
+            * (-glfwGetMouseWheel() / 20.f));   // zoom
         
         // display
         engine->clearColorBuffer();
