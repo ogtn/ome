@@ -24,7 +24,7 @@ namespace OpenMouleEngine
         std::cout << " (" << glGetString(GL_VENDOR) << ")" << std::endl;
 
         // camera
-        camera = new CameraPerspective(75, 4/3.f, 0.1f, 1000);
+        camera = new CameraPerspective(70, 4/3.f, 0.1f, 1000);
         
         // Shaders et mesh
         rm = ResourceManager::getInstance();

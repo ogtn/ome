@@ -22,6 +22,8 @@ namespace OpenMouleEngine
     typedef Vector3<GLfloat> vec3;
     template <typename T> std::ostream &operator<<(std::ostream &ostr, const Vector3<T> &v);
     template <typename T> std::istream &operator>>(std::istream &istr, Vector3<T> &v);
+    template <typename T> Vector3<T> operator*(Vector3<T> v, T t);
+    template <typename T> Vector3<T> operator*(T t, Vector3<T> v);
 
     template <typename T>
     class Vector3

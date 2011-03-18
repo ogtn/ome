@@ -44,7 +44,7 @@ namespace OpenMouleEngine
         glEnableVertexAttribArray(0);
 
         // render
-        glDrawArrays(GL_TRIANGLES, 0, verticesPositions.size());
+        glDrawArrays(GL_LINE_LOOP, 0, verticesPositions.size());
 
         // buffer
         glDisableVertexAttribArray(0);
