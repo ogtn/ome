@@ -42,6 +42,14 @@ T Vector3<T>::length()
 
 
 template <typename T>
+Vector3<T> Vector3<T>::operator+(Vector3<T> v)
+{
+    return Vector3<T>(x + v.x, y + v.y, z + v.z);
+}
+
+
+
+template <typename T>
 Vector3<T> Vector3<T>::operator-(Vector3<T> v)
 {
     return Vector3<T>(x - v.x, y - v.y, z - v.z);
@@ -69,6 +77,13 @@ template <typename T>
 Vector3<T> operator*(T t, Vector3<T> v)
 {
     return v * t;
+}
+
+
+template <typename T>
+Vector3<T> Vector3<T>::operator/(T t)
+{
+    return Vector3<T>(x / t, y / t, z / t);
 }
 
 

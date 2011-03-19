@@ -7,6 +7,8 @@
 #ifndef HPP_ENGINE
 #define HPP_ENGINE
 
+
+#include "Light.hpp"
 #include "Camera.hpp"
 #include "SceneGraph.hpp"
 #include "ResourceManager.hpp"
@@ -26,6 +28,8 @@ namespace OpenMouleEngine
         
         void clearColorBuffer();
 
+        void clearDepthBuffer();
+
         Camera *getCamera();
 
     private:
@@ -33,6 +37,7 @@ namespace OpenMouleEngine
         Mesh *mesh;
         ResourceManager *rm;
         SceneGraph *sg;
+        Light *light;
 
         friend class Singleton<Engine>;
     };

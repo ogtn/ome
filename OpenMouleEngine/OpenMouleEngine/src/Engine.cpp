@@ -14,7 +14,7 @@ namespace OpenMouleEngine
         GLenum err = glewInit();
 
         if(err != GLEW_OK)
-            std::cout << "Error: glewInit() failed: " << glewGetErrorString(err) << std::endl;
+            std::cerr << "Error: glewInit() failed: " << glewGetErrorString(err) << std::endl;
         
         std::cout << "Status: Using GLEW " << glewGetString(GLEW_VERSION) << std::endl;
 
@@ -29,6 +29,15 @@ namespace OpenMouleEngine
         // Shaders et mesh
         rm = ResourceManager::getInstance();
         sg = SceneGraph::getInstance();
+
+        // OpenGL initialisation
+        //glEnable(GL_BGR_EXT);
+        //glEnable(GL_TEXTURE_2D);
+        //glEnable(GL_ALPHA_TEST);
+        glEnable(GL_DEPTH_TEST);
+        //glEnable(GL_BLEND);
+        //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        //glAlphaFunc(GL_GREATER, 0.1);
     }
 
     
@@ -46,6 +55,12 @@ namespace OpenMouleEngine
     void Engine::clearColorBuffer()
     {
         glClear(GL_COLOR_BUFFER_BIT);
+    }
+
+
+    void Engine::clearDepthBuffer()
+    {
+        glClear(GL_DEPTH_BUFFER_BIT);
     }
 
 

@@ -18,7 +18,7 @@ ResourceLoader<T>::~ResourceLoader()
 template <typename T>
 T *ResourceLoader<T>::loadFromFile(std::string fileName)
 {
-    std::cout << "loadFromFile() not implemented for " + fileName << std::endl;
+    std::cerr << "loadFromFile() not implemented for " + fileName << std::endl;
     return NULL;
 }
 
@@ -26,6 +26,6 @@ T *ResourceLoader<T>::loadFromFile(std::string fileName)
 template <typename T>
 T *ResourceLoader<T>::loadFromRAM(void *ptr)
 {
-    std::cout << "loadFromRAM() not implemented for " << ptr << std::endl;
+    std::cerr << "loadFromRAM() not implemented for " << ptr << std::endl;
     return NULL;
 }

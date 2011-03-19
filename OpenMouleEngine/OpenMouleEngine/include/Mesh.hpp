@@ -19,17 +19,24 @@ namespace OpenMouleEngine
     class Mesh: public Resource, public SceneNode
     {
     public:
-        Mesh(std::string name, std::vector<vec3> pos);
+        Mesh(std::string name, std::vector<vec3> pos, std::vector<vec3> norm);
 
         ~Mesh();
+
+        virtual void sendUniforms() const;
 
         void render() const;
     
         void setShader(ShaderProgram *s);
 
+        void centerPivot();
+
     private:
         GLuint vbo;
+        GLint positionOffset;
+        GLint normalOffset;
         std::vector<vec3> verticesPositions;
+        std::vector<vec3> verticesNormals;
         ShaderProgram *shader;
     };
 } // namespace

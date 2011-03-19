@@ -27,7 +27,7 @@ void makeWindow()
     //glfwOpenWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
     // Open an OpenGL window
-    if (!glfwOpenWindow(640, 480, 8, 8, 8, 8, 24, 0, GLFW_WINDOW))
+    if (!glfwOpenWindow(640, 480, 8, 8, 8, 8, 32, 0, GLFW_WINDOW))
     {
         cout << "Error: glfwOpenWindow() failed" << endl;
         glfwTerminate();
@@ -37,7 +37,7 @@ void makeWindow()
     glfwSetWindowTitle("OpenMouleEngine");
 }
 
-
+/*
 #pragma comment(lib, "glu32.lib")
 void errorCheck()
 {
@@ -47,7 +47,7 @@ void errorCheck()
     else
         cout << "Jusqu'ici, tout va bien..." << endl;
 }
-
+*/
 
 int main(void)
 {
@@ -63,8 +63,8 @@ int main(void)
     rm->add(new ObjLoader(), "obj");
 
     // creating a mesh
-    Mesh *mesh = rm->getMesh("data/obj/chamfer.obj");
-    ShaderProgram shader("", "");
+    Mesh *mesh = rm->getMesh("data/obj/blop.obj");
+    ShaderProgram shader("data/shaders/basic.vert", "data/shaders/basic.frag");
     shader.link();
     mesh->setShader(&shader);
     sg->add(*mesh);
@@ -72,15 +72,17 @@ int main(void)
 
     // main loop
     bool running = true;
+    bool centered = false;
     float theta = 0;
     float phi = M_PI / 4;
     glfwSetMouseWheel(-10);
 
     while(running)
     {
-        // events
+        // check for exit
         running = !glfwGetKey(GLFW_KEY_ESC) && glfwGetWindowParam(GLFW_OPENED);
         
+        // angles update
         if(glfwGetKey(GLFW_KEY_UP))
             phi += 0.02f;
         else if(glfwGetKey(GLFW_KEY_DOWN))
@@ -90,6 +92,21 @@ int main(void)
         else if(glfwGetKey(GLFW_KEY_RIGHT))
             theta += 0.02f;
 
+        if(!centered && glfwGetKey(GLFW_KEY_SPACE))
+            mesh->centerPivot();
+
+        // avoid camera being upside down
+        if(phi > (M_PI / 2.f))
+            phi = M_PI / 2.f;
+
+        if(phi < (-M_PI / 2.f))
+            phi = -M_PI / 2.f;
+
+        // avoid negative zoom
+        if(glfwGetMouseWheel() >= 0)
+            glfwSetMouseWheel(-1);
+
+        // camera update
         cam->lookAt(vec3(
             cos(phi) * cos(theta),              // x
             cos(phi) * sin(theta),              // y
@@ -98,6 +115,7 @@ int main(void)
         
         // display
         engine->clearColorBuffer();
+        engine->clearDepthBuffer();
         engine->render();
         glfwSwapBuffers();
         glfwSleep(0.016);

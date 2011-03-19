@@ -41,10 +41,10 @@ namespace OpenMouleEngine
 
         if(status == GL_FALSE)
         {
-            std::cout << "Echec de la compilation du fragment shader:" << std::endl;
-            //std::cout << code << std::endl;
+            std::cerr << "Echec de la compilation du fragment shader:" << std::endl;
+            //std::cerr << code << std::endl;
             glGetShaderInfoLog(id, 512, &size, log);
-            std::cout << log << std::endl;
+            std::cerr << log << std::endl;
         }
         else
             compiled = true;
