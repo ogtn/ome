@@ -22,7 +22,7 @@ namespace OpenMouleEngine
 
     Mesh *ObjLoader::loadFromFile(std::string fileName)
     {
-        std::ifstream file(fileName);
+        std::ifstream file(fileName.c_str());
 
         if(!file)
         {

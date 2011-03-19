@@ -7,6 +7,8 @@
 #ifndef HPP_SINGLETON
 #define HPP_SINGLETON
 
+#include <cstdlib>
+
 namespace OpenMouleEngine
 {
     template <typename T>

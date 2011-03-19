@@ -12,8 +12,9 @@ namespace OpenMouleEngine
 {
     Mesh::Mesh(std::string name, std::vector<vec3> pos, std::vector<vec3> norm)
         : Resource(name),
-        shader(NULL),
-        verticesPositions(pos), verticesNormals(norm)
+        verticesPositions(pos),
+        verticesNormals(norm),
+        shader(NULL)
     {
         glGenBuffers(1, &vbo);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -75,10 +76,12 @@ namespace OpenMouleEngine
 
     void Mesh::centerPivot()
     {
+        unsigned int i;
+        
         vec3 posMin(verticesPositions[0]);
         vec3 posMax(verticesPositions[0]);
 
-        for(int i = 0; i < verticesPositions.size(); i++)
+        for(i = 0; i < verticesPositions.size(); i++)
         {
             posMin.x = MIN(posMin.x, verticesPositions[i].x);
             posMin.y = MIN(posMin.y, verticesPositions[i].y);
@@ -91,7 +94,7 @@ namespace OpenMouleEngine
 
         vec3 diff(vec3() - (posMax + posMin) / 2.f);
 
-        for(int i = 0; i < verticesPositions.size(); i++)
+        for(i = 0; i < verticesPositions.size(); i++)
             verticesPositions[i] = verticesPositions[i] + diff;
 
         glBufferSubData(GL_ARRAY_BUFFER, positionOffset, sizeof(vec3) * verticesPositions.size(), &verticesPositions[0]);

@@ -35,7 +35,7 @@ namespace OpenMouleEngine
     {
         Shader *loadFromFile(std::string fileName)
         {
-            std::ifstream file(fileName);
+            std::ifstream file(fileName.c_str());
             std::string vertCode;
             std::string line;
 
@@ -59,7 +59,7 @@ namespace OpenMouleEngine
     {
         Shader *loadFromFile(std::string fileName)
         {
-            std::ifstream file(fileName);
+            std::ifstream file(fileName.c_str());
             std::string fragCode;
             std::string line;
 

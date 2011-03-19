@@ -61,13 +61,13 @@ namespace OpenMouleEngine
 
     CameraPerspective::CameraPerspective(GLfloat fov, GLfloat ratio, GLfloat near, GLfloat far, vec3 pos, vec3 target, vec3 up)
         : Camera(),
+        pos(pos),
+        target(target),
+        up(up),
         fov(fov),
         ratio(ratio),
         near(near),
-        far(far),
-        pos(pos),
-        target(target),
-        up(up)
+        far(far)
     {
     }
 

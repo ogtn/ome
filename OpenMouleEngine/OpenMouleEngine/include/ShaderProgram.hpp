@@ -8,7 +8,6 @@
 #define HPP_SHADERPROGRAM
 
 #include "Shader.hpp"
-#include "Vector3.hpp"
 #include <GL/glew.h>
 #include <string>
 #include <map>

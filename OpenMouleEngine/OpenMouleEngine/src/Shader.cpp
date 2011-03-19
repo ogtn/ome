@@ -8,8 +8,8 @@
 
 namespace OpenMouleEngine
 {
-    Shader::Shader(std::string name, GLenum type, std::string code): 
-    Resource(name),
+    Shader::Shader(std::string name, GLenum type, std::string code)
+    : Resource(name),
     type(type),
     code(code),
     compiled(false)
@@ -41,8 +41,11 @@ namespace OpenMouleEngine
 
         if(status == GL_FALSE)
         {
-            std::cerr << "Echec de la compilation du fragment shader:" << std::endl;
-            //std::cerr << code << std::endl;
+            if(type == GL_FRAGMENT_SHADER)
+                std::cerr << "Echec de la compilation du fragment shader:" << std::endl;
+            else if(type == GL_VERTEX_SHADER)
+                std::cerr << "Echec de la compilation du vertex shader:" << std::endl;
+                
             glGetShaderInfoLog(id, 512, &size, log);
             std::cerr << log << std::endl;
         }

@@ -20,6 +20,7 @@
 #define MIN(x,y) ((x)<(y)?(x):(y))
 #endif
 
+#include "ShaderProgram.hpp"
 #include <iostream>
 #include <GL/glew.h>
 
