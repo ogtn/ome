@@ -11,6 +11,15 @@
 #ifndef M_PI
 #define M_PI 3.141592653589793238462643
 #endif
+
+#ifndef MAX
+#define MAX(x,y) ((x)>(y)?(x):(y))
+#endif
+
+#ifndef MIN
+#define MIN(x,y) ((x)<(y)?(x):(y))
+#endif
+
 #include <iostream>
 #include <GL/glew.h>
 
@@ -32,28 +41,32 @@ namespace OpenMouleEngine
         Vector3(T x = 0, T y = 0, T z = 0);
 
         ~Vector3();
-        
+
         Vector3 &normalize();
+
+        Vector3 operator+(Vector3<T> v);
 
         Vector3 operator-(Vector3<T> v);
 
         Vector3 operator*(Vector3<T> v);
+
+        Vector3 operator/(T t);
 
         T dot(Vector3<T> v);
 
         T length();
 
         void sendAsUniform(ShaderProgram &program, std::string name);
-        
+
         friend std::ostream &operator<< <> (std::ostream &ostr, const Vector3 &v);
 
         friend std::istream &operator>> <> (std::istream &istr, Vector3 &v);
-               
+
         T x, y, z;
     };
-   
-    #include "Vector3.inl"
-    
+
+#include "Vector3.inl"
+
 } // namespace
 
 #endif // HPP_VECTOR3

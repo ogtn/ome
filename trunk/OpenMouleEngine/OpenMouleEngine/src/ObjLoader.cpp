@@ -26,13 +26,15 @@ namespace OpenMouleEngine
 
         if(!file)
         {
-            std::cout << "erreur d'ouverture de " + fileName << std::endl;
+            std::cerr << "erreur d'ouverture de " + fileName << std::endl;
             return NULL;
         }
 
         std::string line;
         std::vector<vec3> positions;
         std::vector<vec3> tmp_positions;
+        std::vector<vec3> normals;
+        std::vector<vec3> tmp_normals;
 
         while(std::getline(file, line))
         {
@@ -50,16 +52,23 @@ namespace OpenMouleEngine
                 line_stream >> v;
                 tmp_positions.push_back(v);
             }
+            // normal vector
+            else if(line.find("vn ") == 0)
+            {
+                line_stream.ignore(2);
+                line_stream >> v;
+                tmp_normals.push_back(v);
+            }
             // face
             else if(line.find("f ") == 0)
             {
                 int offset;
                 int nb = std::count(line.begin(), line.end(), '/') / 2;
 
-                // only triangles are valid
+                // only triangles are considered as valid
                 if(nb != 3)
                 {
-                    std::cout << "Erreur dans le chargement de " + fileName << std::endl;
+                    std::cerr << "Erreur dans le chargement de " + fileName << std::endl;
                     return NULL;
                 }
 
@@ -79,17 +88,16 @@ namespace OpenMouleEngine
 
                     // normals
                     line_stream >> offset;
+                    offset--;
+                    normals.push_back(tmp_normals[offset]);
                     line_stream.ignore();
                 }
             }
         }
 
-        //positions.push_back(vec3(0.1f, 0.1f));
-        //positions.push_back(vec3(0.9f, 0.9f));
-        //positions.push_back(vec3(0.9f, 0.1f));
+        Mesh *res = new Mesh(fileName, positions, normals);
+        //res->centerPivot();
 
-        vec3 v = positions[0];
-
-        return new Mesh(fileName, positions);
+        return res;
     }
 } // namespace

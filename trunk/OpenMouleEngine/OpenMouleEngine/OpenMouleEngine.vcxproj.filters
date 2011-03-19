@@ -13,11 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="inline">
-      <UniqueIdentifier>{8ba8f3b7-29ad-41a5-b1f2-d336d82d63ca}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Test">
       <UniqueIdentifier>{5b79dad7-ba3d-49cd-bfb4-74961de7377f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inline Files">
+      <UniqueIdentifier>{8ba8f3b7-29ad-41a5-b1f2-d336d82d63ca}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -63,13 +63,16 @@
     <ClCompile Include="src\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Light.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="inline\Matrix4x4.inl">
-      <Filter>inline</Filter>
+      <Filter>Inline Files</Filter>
     </None>
     <None Include="inline\Vector3.inl">
-      <Filter>inline</Filter>
+      <Filter>Inline Files</Filter>
     </None>
     <None Include="licence.txt">
       <Filter>Resource Files</Filter>
@@ -81,16 +84,22 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="inline\ResourceLoader.inl">
-      <Filter>inline</Filter>
+      <Filter>Inline Files</Filter>
     </None>
     <None Include="inline\ResourceManager.inl">
-      <Filter>inline</Filter>
+      <Filter>Inline Files</Filter>
     </None>
     <None Include="inline\Singleton.inl">
-      <Filter>inline</Filter>
+      <Filter>Inline Files</Filter>
     </None>
     <None Include="inline\ShaderProgram.inl">
-      <Filter>inline</Filter>
+      <Filter>Inline Files</Filter>
+    </None>
+    <None Include="data\shaders\basic.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="data\shaders\basic.vert">
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +155,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Camera.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Light.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

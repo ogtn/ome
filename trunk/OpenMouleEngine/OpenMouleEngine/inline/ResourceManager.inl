@@ -16,7 +16,7 @@ T *ResourceManager::get(const std::string &name)
 
         if(loaders.find(extension) == loaders.end())
         {
-            std::cout << "Loader introuvable" << std::endl;
+            std::cerr << "Loader introuvable" << std::endl;
             return NULL;
         }
 
