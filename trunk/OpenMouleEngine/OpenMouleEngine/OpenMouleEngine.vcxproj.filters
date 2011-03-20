@@ -66,9 +66,6 @@
     <ClCompile Include="src\Light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="inline\ResourceSaver.inl">
-      <Filter>Inline Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\ShaderLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -106,6 +103,9 @@
     </None>
     <None Include="data\shaders\basic.vert">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="inline\ResourceSaver.inl">
+      <Filter>Inline Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

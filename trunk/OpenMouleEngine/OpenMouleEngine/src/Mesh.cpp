@@ -99,4 +99,16 @@ namespace OpenMouleEngine
 
         glBufferSubData(GL_ARRAY_BUFFER, positionOffset, sizeof(vec3) * verticesPositions.size(), &verticesPositions[0]);
     }
+
+
+    const std::vector<vec3> &Mesh::getPositions() const
+    {
+        return verticesPositions;
+    }
+    
+    
+    const std::vector<vec3> &Mesh::getNormals() const
+    {
+        return verticesNormals;
+    }
 } // namespace

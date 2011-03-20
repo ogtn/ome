@@ -28,6 +28,7 @@
 #include "Engine.hpp"
 #include "ShaderLoader.hpp"
 #include "ObjLoader.hpp"
+#include "ResourceSaver.hpp"
 
 namespace OpenMouleEngine
 {
