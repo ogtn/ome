@@ -8,7 +8,7 @@ template <typename T>
 T *ResourceManager::get(const std::string &name)
 {
     T *res; // deux qui la tiennent....
-    
+
     if(resources.find(name) == resources.end())
     {
         std::string::size_type pos = name.find_last_of('.');
@@ -47,8 +47,17 @@ void ResourceManager::add(ResourceSaver<T> *saver, const std::string &extensions
 
 
 template <typename T>
-void saveAs(T &resource, std::string fileName)
+void ResourceManager::saveAs(T &resource, std::string fileName)
 {
+    std::string::size_type pos = fileName.find_last_of('.');
+    std::string extension = fileName.substr(pos + 1);
+
+    if(loaders.find(extension) == loaders.end())
+    {
+        std::cerr << "Saver introuvable" << std::endl;
+        return;
+    }
+
     ResourceSaver<T> *saver = reinterpret_cast<ResourceSaver<T> *>(savers[extension]);
-    saver->saveAs(fileName, T);
+    saver->saveAs(fileName, resource);
 }
