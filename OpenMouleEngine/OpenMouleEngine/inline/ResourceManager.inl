@@ -37,15 +37,21 @@ void ResourceManager::add(ResourceLoader<T> *loader, const std::string &extensio
     loaders[extensions] = reinterpret_cast<ResourceLoader<Resource> *>(loader);
 }
 
-
+/*
 template <typename T>
 void ResourceManager::add(ResourceSaver<T> *saver, const std::string &extensions)
 {
     // no need of templates here, polymorphism should be fine 
     savers[extensions] = reinterpret_cast<ResourceSaver<Resource> *>(savers);
 }
+*/
 
+void ResourceManager::add(ResourceSaver *saver, const std::string &extensions)
+{
+    savers[extensions] = saver;
+}
 
+/*
 template <typename T>
 void ResourceManager::saveAs(T &resource, std::string fileName)
 {
@@ -60,4 +66,19 @@ void ResourceManager::saveAs(T &resource, std::string fileName)
 
     ResourceSaver<T> *saver = reinterpret_cast<ResourceSaver<T> *>(savers[extension]);
     saver->saveAs(fileName, resource);
+}
+*/
+
+void ResourceManager::saveAs(Resource &resource, std::string fileName)
+{
+    std::string::size_type pos = fileName.find_last_of('.');
+    std::string extension = fileName.substr(pos + 1);
+
+    if(loaders.find(extension) == loaders.end())
+    {
+        std::cerr << "Saver introuvable" << std::endl;
+        return;
+    }
+
+    savers[extension]->saveAs(fileName, resource);
 }

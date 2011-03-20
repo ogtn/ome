@@ -20,16 +20,16 @@ namespace OpenMouleEngine
     {
     public:
         Mesh(std::string name, std::vector<vec3> pos, std::vector<vec3> norm);
-
         ~Mesh();
 
         virtual void sendUniforms() const;
-
-        void render() const;
-    
+        void render() const;    
         void setShader(ShaderProgram *s);
-
         void centerPivot();
+
+        // getters
+        const std::vector<vec3> &getPositions() const;
+        const std::vector<vec3> &getNormals() const;
 
     private:
         GLuint vbo;
