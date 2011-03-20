@@ -35,6 +35,8 @@ namespace OpenMouleEngine
         std::vector<vec3> tmp_positions;
         std::vector<vec3> normals;
         std::vector<vec3> tmp_normals;
+        //std::vector<vec2> textureCoordinates;
+        //std::vector<vec2> tmp_textureCoordinates;
 
         while(std::getline(file, line))
         {

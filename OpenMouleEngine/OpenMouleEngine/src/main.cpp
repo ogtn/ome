@@ -58,12 +58,20 @@ int main(void)
     SceneGraph *sg = SceneGraph::getInstance();
 
     // setting loaders
-    rm->add(new DefaultVertexShader(), "vert");
-    rm->add(new DefaultFragmentShader(), "frag");
+    rm->add(new VertexShaderLoader(), "vert");
+    rm->add(new FragmentShaderLoader(), "frag");
     rm->add(new ObjLoader(), "obj");
 
     // creating a mesh
-    Mesh *mesh = rm->getMesh("data/obj/blop.obj");
+    Mesh *mesh;
+
+    for(int i = 0; i < 3; i++)
+    {
+        double t = glfwGetTime();
+        mesh = rm->getMesh("data/obj/blop.obj");
+        cout << "Temps de chargement du mesh: " << glfwGetTime() - t << " secondes." << endl;
+    }
+
     ShaderProgram shader("data/shaders/basic.vert", "data/shaders/basic.frag");
     shader.link();
     mesh->setShader(&shader);
@@ -96,11 +104,11 @@ int main(void)
             mesh->centerPivot();
 
         // avoid camera being upside down
-        if(phi > (M_PI / 2.f))
-            phi = M_PI / 2.f;
+        if(phi > (M_PI / 2.f - 0.01f))
+            phi = M_PI / 2.f - 0.01f;
 
-        if(phi < (-M_PI / 2.f))
-            phi = -M_PI / 2.f;
+        if(phi < (-M_PI / 2.f + 0.01f))
+            phi = -M_PI / 2.f + 0.01f;
 
         // avoid negative zoom
         if(glfwGetMouseWheel() >= 0)

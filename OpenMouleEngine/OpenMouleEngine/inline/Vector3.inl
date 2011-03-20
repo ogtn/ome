@@ -104,13 +104,11 @@ std::ostream &operator<<(std::ostream &ostr, const Vector3<T> &v)
 template <typename T>
 std::istream &operator>>(std::istream &istr, Vector3<T> &v)
 {
-    istr >> v.x >> v.y >> v.z;
-
-    return istr;
+    return istr >> v.x >> v.y >> v.z;
 }
 
 template <typename T>
 void Vector3<T>::sendAsUniform(ShaderProgram &program, std::string name)
 {
-    glUniform3f(program.getUniformLocation(name), 1, x, y, z);
+    glUniform3fv(program.getUniformLocation(name), 1, tab);
 }

@@ -66,6 +66,12 @@
     <ClCompile Include="src\Light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="inline\ResourceSaver.inl">
+      <Filter>Inline Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ShaderLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="inline\Matrix4x4.inl">
@@ -158,6 +164,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Light.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ResourceSaver.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ShaderLoader.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

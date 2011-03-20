@@ -1,29 +1,28 @@
 ////////////////////////////////////////////////////////////////////////
-// ResourceLoader.hpp
+// ResourceSaver.hpp
 // Copyright (C) 2011  Olivier Guittonneau openmengine@gmail.com
 ////////////////////////////////////////////////////////////////////////
 
 #pragma once
-#ifndef HPP_RESOURCELOADER
-#define HPP_RESOURCELOADER
+#ifndef HPP_RESOURCESAVER
+#define HPP_RESOURCESAVER
 
 #include <string>
 
 namespace OpenMouleEngine
 {
     template <typename T>
-    class ResourceLoader
+    class ResourceSaver
     {
     public:
-        ResourceLoader();
-        virtual ~ResourceLoader() = 0;
+        ResourceSaver();
+        virtual ~ResourceSaver() = 0;
 
-        virtual T *loadFromFile(std::string fileName);
-        virtual T *loadFromRAM(void *ptr);
+        virtual void saveAs(std::string fileName, T &resource);
     };
 
-#include "ResourceLoader.inl"
+#include "ResourceSaver.inl"
 
 } // namespace
 
-#endif // HPP_RESOURCELOADER
+#endif // HPP_RESOURCESAVER

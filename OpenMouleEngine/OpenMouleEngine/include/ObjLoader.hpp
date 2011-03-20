@@ -8,6 +8,7 @@
 #define HPP_OBJLOADER
 
 #include "ResourceLoader.hpp"
+#include "Mesh.hpp"
 
 namespace OpenMouleEngine
 {
