@@ -7,7 +7,7 @@
 template <typename T>
 T *ResourceManager::get(const std::string &name)
 {
-    T *res;
+    T *res; // deux qui la tiennent....
     
     if(resources.find(name) == resources.end())
     {
@@ -35,4 +35,20 @@ template <typename T>
 void ResourceManager::add(ResourceLoader<T> *loader, const std::string &extensions)
 {
     loaders[extensions] = reinterpret_cast<ResourceLoader<Resource> *>(loader);
+}
+
+
+template <typename T>
+void ResourceManager::add(ResourceSaver<T> *saver, const std::string &extensions)
+{
+    // no need of templates here, polymorphism should be fine 
+    savers[extensions] = reinterpret_cast<ResourceSaver<Resource> *>(savers);
+}
+
+
+template <typename T>
+void saveAs(T &resource, std::string fileName)
+{
+    ResourceSaver<T> *saver = reinterpret_cast<ResourceSaver<T> *>(savers[extension]);
+    saver->saveAs(fileName, T);
 }

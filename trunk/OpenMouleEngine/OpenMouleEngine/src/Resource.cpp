@@ -4,6 +4,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 #include "Resource.hpp"
+#include "ResourceManager.hpp"
 
 namespace OpenMouleEngine
 {
@@ -14,5 +15,11 @@ namespace OpenMouleEngine
 
     Resource::~Resource()
     {
+    }
+
+
+    void Resource::saveAs(std::string fileName)
+    {
+        ResourceManager::getInstance()->saveAs(*this, fileName);
     }
 } // namespace

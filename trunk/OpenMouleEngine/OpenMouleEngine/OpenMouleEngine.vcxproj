@@ -124,6 +124,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="inline\ResourceSaver.inl" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Color.cpp" />
     <ClCompile Include="src\Engine.cpp" />
@@ -138,6 +139,7 @@
     <ClCompile Include="src\SceneGraph.cpp" />
     <ClCompile Include="src\SceneNode.cpp" />
     <ClCompile Include="src\Shader.cpp" />
+    <ClCompile Include="src\ShaderLoader.cpp" />
     <ClCompile Include="src\ShaderProgram.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -167,9 +169,11 @@
     <ClInclude Include="include\Resource.hpp" />
     <ClInclude Include="include\ResourceLoader.hpp" />
     <ClInclude Include="include\ResourceManager.hpp" />
+    <ClInclude Include="include\ResourceSaver.hpp" />
     <ClInclude Include="include\SceneGraph.hpp" />
     <ClInclude Include="include\SceneNode.hpp" />
     <ClInclude Include="include\Shader.hpp" />
+    <ClInclude Include="include\ShaderLoader.hpp" />
     <ClInclude Include="include\ShaderProgram.hpp" />
     <ClInclude Include="include\Singleton.hpp" />
     <ClInclude Include="include\Vector3.hpp" />

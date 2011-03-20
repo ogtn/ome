@@ -186,9 +186,9 @@ const Matrix4x4<GLfloat> &Matrix4x4<GLfloat>::load(bool transpose) const
 
 
 template <typename T>
-void Matrix4x4<T>::send(GLint location)
+void Matrix4x4<T>::sendAsUniform(ShaderProgram &program, std::string name) const
 {
-    glUniformMatrix4fv(location, 1, GL_TRUE, (GLfloat *)data);
+    glUniformMatrix4fv(program.getUniformLocation(name), 1, GL_TRUE, tab);
 }
 
 
