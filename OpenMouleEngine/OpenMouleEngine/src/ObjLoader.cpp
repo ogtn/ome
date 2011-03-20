@@ -97,9 +97,6 @@ namespace OpenMouleEngine
             }
         }
 
-        Mesh *res = new Mesh(fileName, positions, normals);
-        //res->centerPivot();
-
-        return res;
+        return new Mesh(fileName, positions, normals);
     }
 } // namespace

@@ -61,19 +61,23 @@ int main(void)
     rm->add(new VertexShaderLoader(), "vert");
     rm->add(new FragmentShaderLoader(), "frag");
     rm->add(new ObjLoader(), "obj");
+    rm->add(new MeshLoader(), "msh");
+
+    // setting savers
     rm->add(new MeshSaver(), "msh");
 
     // creating a mesh
     Mesh *mesh;
 
-    for(int i = 0; i < 3; i++)
-    {
-        double t = glfwGetTime();
-        mesh = rm->getMesh("data/obj/blop.obj");
-        cout << "Temps de chargement du mesh: " << glfwGetTime() - t << " secondes." << endl;
-    }
+    double t = glfwGetTime();
+    mesh = rm->getMesh("data/obj/blop.obj");
+    cout << "Temps de chargement du .obj: " << glfwGetTime() - t << " secondes." << endl;
 
-    mesh->saveAs("data/blop.msh");
+    mesh->saveAs("blop.msh");
+
+    t = glfwGetTime();
+    mesh = rm->getMesh("blop.msh");
+    cout << "Temps de chargement du .msh: " << glfwGetTime() - t << " secondes." << endl;
 
     ShaderProgram shader("data/shaders/basic.vert", "data/shaders/basic.frag");
     shader.link();

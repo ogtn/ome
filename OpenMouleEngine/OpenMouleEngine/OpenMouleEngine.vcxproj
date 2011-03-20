@@ -150,7 +150,6 @@
     <None Include="inline\Matrix4x4.inl" />
     <None Include="inline\ResourceLoader.inl" />
     <None Include="inline\ResourceManager.inl" />
-    <None Include="inline\ResourceSaver.inl" />
     <None Include="inline\ShaderProgram.inl" />
     <None Include="inline\Singleton.inl" />
     <None Include="inline\Vector3.inl" />
