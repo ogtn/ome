@@ -11,27 +11,17 @@
 #include <fstream>
 
 namespace OpenMouleEngine
-{/*
-    template <typename T>
-    class ResourceSaver
-    {
-    public:
-        ResourceSaver();
-        virtual ~ResourceSaver() = 0;
-
-        virtual void saveAs(std::string fileName, T &resource);
-    };
-
-#include "ResourceSaver.inl"
-    */
-
+{
     class ResourceSaver
     {
     public:
         ResourceSaver() {}
-        virtual ~ResourceSaver() = 0;
+        virtual ~ResourceSaver() = 0 {};
 
-        virtual void saveAs(std::string fileName, Resource &resource);
+        virtual void saveAs(std::string fileName, Resource &resource) 
+        {
+            resource;
+        };
     };
 
     class MeshSaver: public ResourceSaver
@@ -40,8 +30,10 @@ namespace OpenMouleEngine
         MeshSaver() {}
         ~MeshSaver() {}
 
-        void saveAs(std::string fileName, Mesh &mesh)
+        void saveAs(std::string fileName, Resource &resource)
         {
+            const Mesh &mesh = (const Mesh &)resource;
+
             std::ofstream file(fileName.c_str(), std::ios::out | std::ios::trunc);
 
             if(!file)
@@ -50,17 +42,17 @@ namespace OpenMouleEngine
                 return;
             }
 
-            const std::vector<vec3> positions = mesh.getPositions();
-            file << positions.size();
+            std::vector<vec3>::size_type size;
 
-            for(int i = 0; i < positions.size(); i++)
-                file << positions[i];
+            const std::vector<vec3> positions = mesh.getPositions();
+            size = positions.size();
+            file.write((char*)&size, sizeof(std::vector<vec3>::size_type));
+            file.write((char*)&positions[0], positions.size() * sizeof(vec3));
 
             const std::vector<vec3> normals = mesh.getNormals();
-            file << normals.size();
-
-            for(int i = 0; i < normals.size(); i++)
-                file << normals[i];
+            size = normals.size();
+            file.write((char*)&size, sizeof(std::vector<vec3>::size_type));
+            file.write((char*)&normals[0], normals.size() * sizeof(vec3));
         }
     };
 

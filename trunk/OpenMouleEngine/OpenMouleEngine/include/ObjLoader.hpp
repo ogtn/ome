@@ -9,6 +9,7 @@
 
 #include "ResourceLoader.hpp"
 #include "Mesh.hpp"
+#include <fstream>
 
 namespace OpenMouleEngine
 {
@@ -20,8 +21,38 @@ namespace OpenMouleEngine
         ~ObjLoader();
 
         Mesh *loadFromFile(std::string fileName);
+    };
 
-    private:
+
+    class MeshLoader: public ResourceLoader<Mesh>
+    {
+    public:
+        MeshLoader() {}
+
+        ~MeshLoader() {}
+
+        Mesh *loadFromFile(std::string fileName)
+        {
+            std::ifstream file(fileName.c_str());
+
+            if(!file)
+            {
+                std::cerr << "erreur d'ouverture de " + fileName << std::endl;
+                return NULL;
+            }
+
+            std::vector<vec3>::size_type size;
+
+            file.read((char*)&size, sizeof(std::vector<vec3>::size_type));
+            std::vector<vec3> positions(size);
+            file.read((char*)&positions[0], size * sizeof(vec3));
+
+            file.read((char*)&size, sizeof(std::vector<vec3>::size_type));
+            std::vector<vec3> normals(size);
+            file.read((char*)&normals[0], size * sizeof(vec3));
+
+            return new Mesh(fileName, positions, normals);
+        }
     };
 } // namespace
 

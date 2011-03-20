@@ -104,9 +104,6 @@
     <None Include="data\shaders\basic.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="inline\ResourceSaver.inl">
-      <Filter>Inline Files</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Engine.hpp">
