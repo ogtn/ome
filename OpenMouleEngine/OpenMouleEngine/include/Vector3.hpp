@@ -7,22 +7,7 @@
 #ifndef HPP_VECTOR3
 #define HPP_VECTOR3
 
-#include <cmath>
-#ifndef M_PI
-#define M_PI 3.141592653589793238462643
-#endif
-
-#ifndef MAX
-#define MAX(x,y) ((x)>(y)?(x):(y))
-#endif
-
-#ifndef MIN
-#define MIN(x,y) ((x)<(y)?(x):(y))
-#endif
-
-#include "ShaderProgram.hpp"
-#include <iostream>
-#include <GL/glew.h>
+#include "Vector2.hpp"
 
 namespace OpenMouleEngine
 {
