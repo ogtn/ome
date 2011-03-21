@@ -10,9 +10,10 @@
 
 namespace OpenMouleEngine
 {
-    Mesh::Mesh(std::string name, std::vector<vec3> pos, std::vector<vec3> norm)
+    Mesh::Mesh(std::string name, std::vector<vec3> pos, std::vector<vec2> coord, std::vector<vec3> norm)
         : Resource(name),
         verticesPositions(pos),
+        verticesTextureCoordinates(coord),
         verticesNormals(norm),
         shader(NULL)
     {
@@ -20,10 +21,12 @@ namespace OpenMouleEngine
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
         positionOffset = 0;
-        normalOffset = sizeof(vec3) * verticesPositions.size();
+        coordinatesOffset = positionOffset + verticesPositions.size() * sizeof(vec3);
+        normalOffset = coordinatesOffset + verticesTextureCoordinates.size() * sizeof(vec2);
 
         glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * (verticesPositions.size() + verticesNormals.size()), NULL, GL_STATIC_DRAW);
         glBufferSubData(GL_ARRAY_BUFFER, positionOffset, sizeof(vec3) * verticesPositions.size(), &verticesPositions[0]);
+        glBufferSubData(GL_ARRAY_BUFFER, coordinatesOffset, sizeof(vec2) * verticesTextureCoordinates.size(), &verticesTextureCoordinates[0]);
         glBufferSubData(GL_ARRAY_BUFFER, normalOffset, sizeof(vec3) * verticesNormals.size(), &verticesNormals[0]);
     }
 
@@ -53,13 +56,16 @@ namespace OpenMouleEngine
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(positionOffset));
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_TRUE, 0, BUFFER_OFFSET(normalOffset));
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_TRUE, 0, BUFFER_OFFSET(coordinatesOffset));
         glEnableVertexAttribArray(1);
+        glVertexAttribPointer(2, 3, GL_FLOAT, GL_TRUE, 0, BUFFER_OFFSET(normalOffset));
+        glEnableVertexAttribArray(2);
 
         // render
         glDrawArrays(GL_TRIANGLES, 0, verticesPositions.size());
 
         // buffer
+        glDisableVertexAttribArray(2);
         glDisableVertexAttribArray(1);
         glDisableVertexAttribArray(0);
 
@@ -74,7 +80,7 @@ namespace OpenMouleEngine
     }
 
 
-    void Mesh::centerPivot()
+    void Mesh::centerPivot(bool centerX, bool centerY, bool centerZ)
     {
         unsigned int i;
         
@@ -94,6 +100,15 @@ namespace OpenMouleEngine
 
         vec3 diff(vec3() - (posMax + posMin) / 2.f);
 
+        if(!centerX)
+            diff.x = 0;
+
+        if(!centerY)
+            diff.y = 0;
+
+        if(!centerZ)
+            diff.z = 0;
+
         for(i = 0; i < verticesPositions.size(); i++)
             verticesPositions[i] = verticesPositions[i] + diff;
 
@@ -106,6 +121,12 @@ namespace OpenMouleEngine
         return verticesPositions;
     }
     
+
+    const std::vector<vec2> &Mesh::getTextureCoordinates() const
+    {
+        return verticesTextureCoordinates;
+    }
+
     
     const std::vector<vec3> &Mesh::getNormals() const
     {

@@ -152,6 +152,7 @@
     <None Include="inline\ResourceManager.inl" />
     <None Include="inline\ShaderProgram.inl" />
     <None Include="inline\Singleton.inl" />
+    <None Include="inline\Vector2.inl" />
     <None Include="inline\Vector3.inl" />
     <None Include="licence.txt" />
   </ItemGroup>
@@ -176,6 +177,7 @@
     <ClInclude Include="include\ShaderLoader.hpp" />
     <ClInclude Include="include\ShaderProgram.hpp" />
     <ClInclude Include="include\Singleton.hpp" />
+    <ClInclude Include="include\Vector2.hpp" />
     <ClInclude Include="include\Vector3.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

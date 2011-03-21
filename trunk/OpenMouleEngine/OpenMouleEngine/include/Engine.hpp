@@ -20,16 +20,12 @@ namespace OpenMouleEngine
     {
     private:
         Engine();
-        
         ~Engine();
         
     public:
         void render();
-        
         void clearColorBuffer();
-
         void clearDepthBuffer();
-
         Camera *getCamera();
 
     private:

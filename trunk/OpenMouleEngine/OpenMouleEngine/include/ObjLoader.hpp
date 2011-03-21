@@ -33,7 +33,7 @@ namespace OpenMouleEngine
 
         Mesh *loadFromFile(std::string fileName)
         {
-            std::ifstream file(fileName.c_str());
+            std::ifstream file(fileName.c_str(), std::ifstream::binary);
 
             if(!file)
             {
@@ -43,15 +43,22 @@ namespace OpenMouleEngine
 
             std::vector<vec3>::size_type size;
 
+            // positions
             file.read((char*)&size, sizeof(std::vector<vec3>::size_type));
             std::vector<vec3> positions(size);
             file.read((char*)&positions[0], size * sizeof(vec3));
 
+            // texture coordinates
+            file.read((char*)&size, sizeof(std::vector<vec2>::size_type));
+            std::vector<vec2> coordinates(size);
+            file.read((char*)&coordinates[0], size * sizeof(vec2));
+
+            // normals
             file.read((char*)&size, sizeof(std::vector<vec3>::size_type));
             std::vector<vec3> normals(size);
             file.read((char*)&normals[0], size * sizeof(vec3));
 
-            return new Mesh(fileName, positions, normals);
+            return new Mesh(fileName, positions, coordinates, normals);
         }
     };
 } // namespace

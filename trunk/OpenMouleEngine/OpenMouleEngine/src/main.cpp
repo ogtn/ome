@@ -68,15 +68,18 @@ int main(void)
 
     // creating a mesh
     Mesh *mesh;
-
-    double t = glfwGetTime();
-    mesh = rm->getMesh("data/obj/blop.obj");
-    cout << "Temps de chargement du .obj: " << glfwGetTime() - t << " secondes." << endl;
-
-    mesh->saveAs("blop.msh");
+    double t;
 
     t = glfwGetTime();
-    mesh = rm->getMesh("blop.msh");
+    mesh = rm->getMesh("data/obj/dragon.obj");
+    cout << "Temps de chargement du .obj: " << glfwGetTime() - t << " secondes." << endl;
+
+    mesh->centerPivot();
+    mesh->saveAs("test.msh");
+
+    t = glfwGetTime();
+    mesh = 
+        rm->getMesh("test.msh");
     cout << "Temps de chargement du .msh: " << glfwGetTime() - t << " secondes." << endl;
 
     ShaderProgram shader("data/shaders/basic.vert", "data/shaders/basic.frag");
@@ -90,7 +93,7 @@ int main(void)
     bool centered = false;
     float theta = 0;
     float phi = M_PI / 4;
-    glfwSetMouseWheel(-10);
+    glfwSetMouseWheel(-1000);
 
     while(running)
     {
@@ -132,6 +135,7 @@ int main(void)
         engine->clearColorBuffer();
         engine->clearDepthBuffer();
         engine->render();
+
         glfwSwapBuffers();
         glfwSleep(0.016);
     }
