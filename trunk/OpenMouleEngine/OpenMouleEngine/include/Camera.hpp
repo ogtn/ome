@@ -8,6 +8,7 @@
 #define HPP_CAMERA
 
 #include "Matrix4x4.hpp"
+#include <string>
 
 namespace OpenMouleEngine
 {

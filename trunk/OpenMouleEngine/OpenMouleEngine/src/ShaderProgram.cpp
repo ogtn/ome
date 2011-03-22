@@ -88,7 +88,7 @@ namespace OpenMouleEngine
 
     GLint ShaderProgram::getUniformLocation(std::string name)
     {
-        if(uniformLocation.find(name) == uniformLocation.end())
+        if(locations.find(name) == locations.end())
         {
             GLint location = glGetUniformLocation(program, name.c_str());
 
@@ -98,10 +98,29 @@ namespace OpenMouleEngine
                 return -1;
             }
 
-            uniformLocation[name] = location;
+            locations[name] = location;
         }
 
-        return uniformLocation[name];
+        return locations[name];
+    }
+
+
+    GLint ShaderProgram::getAttribLocation(std::string name)
+    {
+        if(locations.find(name) == locations.end())
+        {
+            GLint location = glGetAttribLocation(program, name.c_str());
+
+            if(location == -1)
+            {
+                std::cerr << "Error: aucun attribut de vertex " + name + " dans le shader." << std::endl;
+                return -1;
+            }
+
+            locations[name] = location;
+        }
+
+        return locations[name];
     }
 
 
