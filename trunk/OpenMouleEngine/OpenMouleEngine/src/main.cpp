@@ -37,7 +37,6 @@ void makeWindow()
     glfwSetWindowTitle("OpenMouleEngine");
 }
 
-/*
 #pragma comment(lib, "glu32.lib")
 void errorCheck()
 {
@@ -47,7 +46,7 @@ void errorCheck()
     else
         cout << "Jusqu'ici, tout va bien..." << endl;
 }
-*/
+
 
 int main(void)
 {
@@ -62,6 +61,7 @@ int main(void)
     rm->add(new FragmentShaderLoader(), "frag");
     rm->add(new ObjLoader(), "obj");
     rm->add(new MeshLoader(), "msh");
+    rm->add(new DevILLoader(), "png");
 
     // setting savers
     rm->add(new MeshSaver(), "msh");
@@ -71,7 +71,7 @@ int main(void)
     double t;
 
     t = glfwGetTime();
-    mesh = rm->getMesh("data/obj/dragon.obj");
+    mesh = rm->getMesh("data/obj/smooth.obj");
     cout << "Temps de chargement du .obj: " << glfwGetTime() - t << " secondes." << endl;
 
     mesh->centerPivot();
@@ -86,15 +86,19 @@ int main(void)
     shader.link();
     mesh->setShader(&shader);
     sg->add(*mesh);
-    CameraPerspective *cam = dynamic_cast<CameraPerspective *>(engine->getCamera());
 
+    Texture *texture = rm->getTexture("data/textures/grass.png");
+    mesh->setTexture(texture);
+
+    CameraPerspective *cam = dynamic_cast<CameraPerspective *>(engine->getCamera());
+ 
     // main loop
     bool running = true;
     bool centered = false;
     float theta = 0;
     float phi = M_PI / 4;
-    glfwSetMouseWheel(-1000);
-
+    glfwSetMouseWheel(-10000);
+    
     while(running)
     {
         // check for exit

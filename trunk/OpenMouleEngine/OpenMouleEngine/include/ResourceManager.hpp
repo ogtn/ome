@@ -11,6 +11,7 @@
 #include <string>
 #include "Mesh.hpp"
 #include "Shader.hpp"
+#include "Texture.hpp"
 #include "Singleton.hpp"
 #include "ResourceSaver.hpp"
 #include "ResourceLoader.hpp"
@@ -32,6 +33,7 @@ namespace OpenMouleEngine
 
         Mesh *getMesh(const std::string &name);
         Shader *getShader(const std::string &name);
+        Texture *getTexture(const std::string &name);
 
         void add(ResourceSaver *saver, const std::string &extensions);
         void saveAs(Resource &resource, std::string fileName);

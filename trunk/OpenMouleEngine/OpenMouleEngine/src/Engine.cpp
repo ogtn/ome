@@ -31,10 +31,14 @@ namespace OpenMouleEngine
         sg = SceneGraph::getInstance();
 
         // OpenGL initialisation
-        //glEnable(GL_BGR_EXT);
-        //glEnable(GL_TEXTURE_2D);
-        //glEnable(GL_ALPHA_TEST);
         glEnable(GL_DEPTH_TEST);
+        //glEnable(GL_BLEND);
+        //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        //glEnable(GL_ALPHA_TEST);
+
+        //glEnable(GL_TEXTURE_2D);
+        //glEnable(GL_BGR_EXT);
+        //glEnable(GL_ALPHA_TEST);
         //glEnable(GL_BLEND);
         //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         //glAlphaFunc(GL_GREATER, 0.1);

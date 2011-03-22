@@ -10,36 +10,66 @@
 
 namespace OpenMouleEngine
 {
-    Mesh::Mesh(std::string name, std::vector<vec3> pos, std::vector<vec2> coord, std::vector<vec3> norm)
+    Mesh::Mesh(std::string &name, std::vector<vec3> *pos, std::vector<vec3> *norm, std::vector<vec2> *coord)
         : Resource(name),
-        verticesPositions(pos),
-        verticesTextureCoordinates(coord),
-        verticesNormals(norm),
-        shader(NULL)
+        pPositions(pos),
+        pNormals(norm),
+        pCoordinates(coord), 
+        shader(NULL),
+        texture(NULL)
     {
         glGenBuffers(1, &vbo);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-        positionOffset = 0;
-        coordinatesOffset = positionOffset + verticesPositions.size() * sizeof(vec3);
-        normalOffset = coordinatesOffset + verticesTextureCoordinates.size() * sizeof(vec2);
+        GLsizeiptr size = 0;
 
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * (verticesPositions.size() + verticesNormals.size()), NULL, GL_STATIC_DRAW);
-        glBufferSubData(GL_ARRAY_BUFFER, positionOffset, sizeof(vec3) * verticesPositions.size(), &verticesPositions[0]);
-        glBufferSubData(GL_ARRAY_BUFFER, coordinatesOffset, sizeof(vec2) * verticesTextureCoordinates.size(), &verticesTextureCoordinates[0]);
-        glBufferSubData(GL_ARRAY_BUFFER, normalOffset, sizeof(vec3) * verticesNormals.size(), &verticesNormals[0]);
+        // positions
+        positions = *pPositions;
+        positionsOffset = 0;
+        size += positions.size() * sizeof(vec3);
+
+        // normals
+        if(pNormals)
+        {
+            normals = *pNormals;
+            normalsOffset = size;
+            size += normals.size() * sizeof(vec3);
+        }
+
+        // texture coordinates
+        if(pCoordinates)
+        {
+            coordinates = *pCoordinates;
+            coordinatesOffset = size;
+            size += coordinates.size() * sizeof(vec2);
+        }
+
+        // memory allocation
+        glBufferData(GL_ARRAY_BUFFER, size, NULL, GL_STATIC_DRAW);
+
+        // buffer initialisation
+        glBufferSubData(GL_ARRAY_BUFFER, positionsOffset, sizeof(vec3) * positions.size(), &positions[0]);
+
+        if(pNormals)
+            glBufferSubData(GL_ARRAY_BUFFER, normalsOffset, sizeof(vec3) * normals.size(), &normals[0]);
+
+        if(pCoordinates)
+            glBufferSubData(GL_ARRAY_BUFFER, coordinatesOffset, sizeof(vec2) * coordinates.size(), &coordinates[0]);
     }
 
 
     Mesh::~Mesh()
     {
+        delete pPositions;
+        delete pNormals;
+        delete pCoordinates;
         glDeleteBuffers(1, &vbo);
     }
 
 
     void Mesh::sendUniforms() const
     {
-        //shader->sendUniform("myLight", Color(.212f, .54f, .81f));
+        shader->sendUniform("texture0", *texture);
         shader->sendUniform("camera", *Engine::getInstance()->getCamera());
     }
 
@@ -52,17 +82,21 @@ namespace OpenMouleEngine
         // uniforms
         sendUniforms();
 
+        // textures
+        glActiveTexture(GL_TEXTURE0 + 0);
+        texture->bind();
+
         // buffers
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(positionOffset));
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(positionsOffset));
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_TRUE, 0, BUFFER_OFFSET(coordinatesOffset));
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_TRUE, 0, BUFFER_OFFSET(normalsOffset));
         glEnableVertexAttribArray(1);
-        glVertexAttribPointer(2, 3, GL_FLOAT, GL_TRUE, 0, BUFFER_OFFSET(normalOffset));
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_TRUE, 0, BUFFER_OFFSET(coordinatesOffset));
         glEnableVertexAttribArray(2);
 
         // render
-        glDrawArrays(GL_TRIANGLES, 0, verticesPositions.size());
+        glDrawArrays(GL_TRIANGLES, 0, positions.size());
 
         // buffer
         glDisableVertexAttribArray(2);
@@ -80,22 +114,28 @@ namespace OpenMouleEngine
     }
 
 
+    void Mesh::setTexture(Texture *t)
+    {
+        texture = t;
+    }
+
+
     void Mesh::centerPivot(bool centerX, bool centerY, bool centerZ)
     {
         unsigned int i;
         
-        vec3 posMin(verticesPositions[0]);
-        vec3 posMax(verticesPositions[0]);
+        vec3 posMin(positions[0]);
+        vec3 posMax(positions[0]);
 
-        for(i = 0; i < verticesPositions.size(); i++)
+        for(i = 0; i < positions.size(); i++)
         {
-            posMin.x = MIN(posMin.x, verticesPositions[i].x);
-            posMin.y = MIN(posMin.y, verticesPositions[i].y);
-            posMin.z = MIN(posMin.z, verticesPositions[i].z);
+            posMin.x = MIN(posMin.x, positions[i].x);
+            posMin.y = MIN(posMin.y, positions[i].y);
+            posMin.z = MIN(posMin.z, positions[i].z);
 
-            posMax.x = MAX(posMax.x, verticesPositions[i].x);
-            posMax.y = MAX(posMax.y, verticesPositions[i].y);
-            posMax.z = MAX(posMax.z, verticesPositions[i].z);
+            posMax.x = MAX(posMax.x, positions[i].x);
+            posMax.y = MAX(posMax.y, positions[i].y);
+            posMax.z = MAX(posMax.z, positions[i].z);
         }
 
         vec3 diff(vec3() - (posMax + posMin) / 2.f);
@@ -109,27 +149,27 @@ namespace OpenMouleEngine
         if(!centerZ)
             diff.z = 0;
 
-        for(i = 0; i < verticesPositions.size(); i++)
-            verticesPositions[i] = verticesPositions[i] + diff;
+        for(i = 0; i < positions.size(); i++)
+            positions[i] = positions[i] + diff;
 
-        glBufferSubData(GL_ARRAY_BUFFER, positionOffset, sizeof(vec3) * verticesPositions.size(), &verticesPositions[0]);
+        glBufferSubData(GL_ARRAY_BUFFER, positionsOffset, sizeof(vec3) * positions.size(), &positions[0]);
     }
 
 
     const std::vector<vec3> &Mesh::getPositions() const
     {
-        return verticesPositions;
+        return positions;
     }
     
+
+    const std::vector<vec3> &Mesh::getNormals() const
+    {
+        return normals;
+    }
+
 
     const std::vector<vec2> &Mesh::getTextureCoordinates() const
     {
-        return verticesTextureCoordinates;
-    }
-
-    
-    const std::vector<vec3> &Mesh::getNormals() const
-    {
-        return verticesNormals;
+        return coordinates;
     }
 } // namespace
