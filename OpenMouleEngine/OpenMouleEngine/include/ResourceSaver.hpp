@@ -32,7 +32,7 @@ namespace OpenMouleEngine
 
         void saveAs(std::string fileName, Resource &resource)
         {
-            const Mesh &mesh = (const Mesh &)resource;
+            /*const Mesh &mesh = (const Mesh &)resource;
 
             std::ofstream file(fileName.c_str(), std::ofstream::binary | std::ios::out | std::ios::trunc);
 
@@ -60,7 +60,7 @@ namespace OpenMouleEngine
             const std::vector<vec3> normals = mesh.getNormals();
             size = normals.size();
             file.write((char*)&size, sizeof(std::vector<vec3>::size_type));
-            file.write((char*)&normals[0], normals.size() * sizeof(vec3));
+            file.write((char*)&normals[0], normals.size() * sizeof(vec3));*/
         }
     };
 

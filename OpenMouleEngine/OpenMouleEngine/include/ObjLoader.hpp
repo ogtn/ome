@@ -31,7 +31,7 @@ namespace OpenMouleEngine
 
         ~MeshLoader() {}
 
-        Mesh *loadFromFile(std::string fileName)
+        /*Mesh *loadFromFile(std::string fileName)
         {
             std::ifstream file(fileName.c_str(), std::ifstream::binary);
 
@@ -59,7 +59,7 @@ namespace OpenMouleEngine
             file.read((char*)&(*coordinates)[0], size * sizeof(vec2));
             
             return new Mesh(fileName, positions, normals, coordinates);
-        }
+        }*/
     };
 } // namespace
 

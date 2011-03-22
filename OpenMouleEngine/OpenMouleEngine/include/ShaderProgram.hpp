@@ -34,6 +34,8 @@ namespace OpenMouleEngine
 
         GLint getUniformLocation(std::string name);
 
+        GLint getAttribLocation(std::string name);
+
         bool isLinked();
 
     private:
@@ -42,9 +44,9 @@ namespace OpenMouleEngine
         Shader *fragmentShader;
         bool linked;
 
-        // uniform location cache
+        // uniform and attrib location cache
         typedef std::map<std::string, GLint>  LocationMap;
-        LocationMap uniformLocation;
+        LocationMap locations;
     };
 
 #include "ShaderProgram.inl"

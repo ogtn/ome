@@ -78,7 +78,7 @@ int main(void)
     mesh->saveAs("test.msh");
 
     t = glfwGetTime();
-    mesh = 
+    //mesh = 
         rm->getMesh("test.msh");
     cout << "Temps de chargement du .msh: " << glfwGetTime() - t << " secondes." << endl;
 
