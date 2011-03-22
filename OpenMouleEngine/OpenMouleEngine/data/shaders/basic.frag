@@ -1,17 +1,18 @@
-#version 140
+#version 330
 
-struct Light
-{
-	vec4 color;
-};
+uniform sampler2D texture0;
 
-uniform Light myLight;
-uniform vec4 prout;
+in vec3 norm;
+in vec2 coord;
 
-in vec3 color;
 out vec4 outColor;
 
 void main()
 {
-	outColor = vec4(color, 1);
+	if(gl_FragCoord.x < 240)
+		outColor = vec4(norm, 1);
+	else if(gl_FragCoord.x < 480)
+		outColor = vec4(coord, 0, 1);
+	else
+		outColor = texture(texture0, coord.st);
 }

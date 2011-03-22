@@ -45,20 +45,20 @@ namespace OpenMouleEngine
 
             // positions
             file.read((char*)&size, sizeof(std::vector<vec3>::size_type));
-            std::vector<vec3> positions(size);
-            file.read((char*)&positions[0], size * sizeof(vec3));
-
-            // texture coordinates
-            file.read((char*)&size, sizeof(std::vector<vec2>::size_type));
-            std::vector<vec2> coordinates(size);
-            file.read((char*)&coordinates[0], size * sizeof(vec2));
+            std::vector<vec3> *positions = new std::vector<vec3>(size);
+            file.read((char*)&(*positions)[0], size * sizeof(vec3));
 
             // normals
             file.read((char*)&size, sizeof(std::vector<vec3>::size_type));
-            std::vector<vec3> normals(size);
-            file.read((char*)&normals[0], size * sizeof(vec3));
+            std::vector<vec3> *normals = new std::vector<vec3>(size);
+            file.read((char*)&(*normals)[0], size * sizeof(vec3));
 
-            return new Mesh(fileName, positions, coordinates, normals);
+            // texture coordinates
+            file.read((char*)&size, sizeof(std::vector<vec2>::size_type));
+            std::vector<vec2> *coordinates = new std::vector<vec2>(size);
+            file.read((char*)&(*coordinates)[0], size * sizeof(vec2));
+            
+            return new Mesh(fileName, positions, normals, coordinates);
         }
     };
 } // namespace

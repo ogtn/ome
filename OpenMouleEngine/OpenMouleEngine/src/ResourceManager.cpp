@@ -28,6 +28,11 @@ namespace OpenMouleEngine
         return get<Shader>(name);
     }
 
+    Texture *ResourceManager::getTexture(const std::string &name)
+    {
+        return get<Texture>(name);
+    }
+
     void ResourceManager::add(ResourceSaver *saver, const std::string &extensions)
     {
         savers[extensions] = saver;
