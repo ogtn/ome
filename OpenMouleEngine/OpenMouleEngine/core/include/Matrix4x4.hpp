@@ -8,7 +8,7 @@
 #define HPP_MATRIX4X4
 
 #include "Vector3.hpp"
-//#include <cstdio>
+#include <cstdio>
 
 namespace OpenMouleEngine
 {

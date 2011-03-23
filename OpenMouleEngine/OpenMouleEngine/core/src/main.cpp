@@ -27,7 +27,7 @@ void makeWindow()
     //glfwOpenWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
     // Open an OpenGL window
-    if (!glfwOpenWindow(640, 480, 8, 8, 8, 8, 32, 0, GLFW_WINDOW))
+    if (!glfwOpenWindow(640, 480, 8, 8, 8, 8, 0, 0, GLFW_WINDOW))
     {
         cout << "Error: glfwOpenWindow() failed" << endl;
         glfwTerminate();
