@@ -28,17 +28,17 @@ namespace OpenMouleEngine
         template <typename T>
         void add(ResourceLoader<T> *loader, const std::string &extensions);
 
-        template <typename T>
-        T *get(const std::string &name);
+        void add(ResourceSaver *saver, const std::string &extensions);
+        void saveAs(Resource &resource, const std::string &fileName);
 
         Mesh *getMesh(const std::string &name);
         Shader *getShader(const std::string &name);
         Texture *getTexture(const std::string &name);
 
-        void add(ResourceSaver *saver, const std::string &extensions);
-        void saveAs(Resource &resource, std::string fileName);
-
     private:
+         template <typename T>
+        T *get(const std::string &name);
+
         typedef std::map<std::string, Resource *> ResourceMap;
         typedef std::map<std::string, ResourceLoader<Resource> *> LoaderMap;
         typedef std::map<std::string, ResourceSaver *> SaverMap;

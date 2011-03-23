@@ -14,10 +14,10 @@ namespace OpenMouleEngine
     class Resource
     {
     public:
-        Resource(std::string name);
+        Resource(const std::string &name);
         ~Resource();
 
-        void saveAs(std::string name);
+        void saveAs(const std::string &name);
 
     private:
         FileName name;

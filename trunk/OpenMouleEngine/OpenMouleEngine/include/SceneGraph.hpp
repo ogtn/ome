@@ -16,12 +16,10 @@ namespace OpenMouleEngine
     {
     private:
         SceneGraph();
-
         ~SceneGraph();
 
     public:
         void add(SceneNode &node);
-
         void renderAll();
 
     private:

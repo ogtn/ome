@@ -30,7 +30,7 @@ namespace OpenMouleEngine
     }
 
 
-    void Color::sendAsUniform(ShaderProgram &program, std::string name)
+    void Color::sendAsUniform(ShaderProgram &program, const std::string &name)
     {
         glUniform4fv(program.getUniformLocation(name), 1, vec);
     }

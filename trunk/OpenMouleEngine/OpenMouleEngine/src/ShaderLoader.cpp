@@ -19,7 +19,7 @@ namespace OpenMouleEngine
     }
 
 
-    Shader *VertexShaderLoader::loadFromFile(std::string fileName)
+    Shader *VertexShaderLoader::loadFromFile(const std::string &fileName)
     {
         return new Shader(fileName, GL_VERTEX_SHADER, getShaderCode(fileName));
     }
@@ -35,13 +35,13 @@ namespace OpenMouleEngine
     }
 
 
-    Shader *FragmentShaderLoader::loadFromFile(std::string fileName)
+    Shader *FragmentShaderLoader::loadFromFile(const std::string &fileName)
     {
         return new Shader(fileName, GL_FRAGMENT_SHADER, getShaderCode(fileName));
     }
 
 
-    std::string getShaderCode(std::string &fileName)
+    std::string getShaderCode(const std::string &fileName)
     {
         std::ifstream file(fileName.c_str());
         std::string code;

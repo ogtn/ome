@@ -18,7 +18,7 @@ namespace OpenMouleEngine
         VertexShaderLoader();
         ~VertexShaderLoader();
 
-        Shader *loadFromFile(std::string fileName);
+        Shader *loadFromFile(const std::string &fileName);
     };
 
 
@@ -28,10 +28,10 @@ namespace OpenMouleEngine
         FragmentShaderLoader();
         ~FragmentShaderLoader();
 
-        Shader *loadFromFile(std::string fileName);
+        Shader *loadFromFile(const std::string &fileName);
     };
 
-    std::string getShaderCode(std::string &fileName);
+    std::string getShaderCode(const std::string &fileName);
 
 } // namespace
 

@@ -38,7 +38,7 @@ namespace OpenMouleEngine
     }
 
 
-    ShaderProgram &ShaderProgram::link()
+    void ShaderProgram::link()
     {
         GLint status;
         GLsizei size;
@@ -65,28 +65,22 @@ namespace OpenMouleEngine
             glGetProgramInfoLog(program, 512, &size, log);
             std::cerr << log << std::endl;
         }
-
-        return *this;
     }
 
 
-    ShaderProgram &ShaderProgram::bind()
+    void ShaderProgram::bind()
     {
         glUseProgram(program);
-
-        return *this;
     }
 
 
-    ShaderProgram &ShaderProgram::unbind()
+    void ShaderProgram::unbind()
     {
         glUseProgram(0);
-
-        return *this;
     }
 
 
-    GLint ShaderProgram::getUniformLocation(std::string name)
+    GLint ShaderProgram::getUniformLocation(const std::string &name)
     {
         if(locations.find(name) == locations.end())
         {
@@ -105,7 +99,7 @@ namespace OpenMouleEngine
     }
 
 
-    GLint ShaderProgram::getAttribLocation(std::string name)
+    GLint ShaderProgram::getAttribLocation(const std::string &name)
     {
         if(locations.find(name) == locations.end())
         {

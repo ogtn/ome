@@ -19,7 +19,7 @@ namespace OpenMouleEngine
         ResourceLoader();
         virtual ~ResourceLoader() = 0;
 
-        virtual T *loadFromFile(std::string fileName);
+        virtual T *loadFromFile(const std::string &fileName);
         virtual T *loadFromRAM(void *ptr);
     };
 

@@ -8,7 +8,7 @@
 #define HPP_MATRIX4X4
 
 #include "Vector3.hpp"
-#include <cstdio>
+//#include <cstdio>
 
 namespace OpenMouleEngine
 {
@@ -31,7 +31,7 @@ namespace OpenMouleEngine
         const Matrix4x4 &load(bool transpose = true) const;
         const Matrix4x4 operator*(const Matrix4x4 &m) const;
         const Vector3<T> operator*(const Vector3<T> &v) const;
-        void sendAsUniform(ShaderProgram &program, std::string name) const;
+        void sendAsUniform(ShaderProgram &program, const std::string &name) const;
     
         union
         {

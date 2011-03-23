@@ -20,7 +20,7 @@ namespace OpenMouleEngine
     }
 
 
-    Mesh *ObjLoader::loadFromFile(std::string fileName)
+    Mesh *ObjLoader::loadFromFile(const std::string &fileName)
     {
         std::ifstream file(fileName.c_str());
 
@@ -33,10 +33,10 @@ namespace OpenMouleEngine
         std::string line;
         std::vector<vec3> *positions = new std::vector<vec3>();
         std::vector<vec3> tmp_positions;
-        //std::vector<vec3> normals;
-        //std::vector<vec3> tmp_normals;
-        //std::vector<vec2> textureCoordinates;
-        //std::vector<vec2> tmp_textureCoordinates;
+        std::vector<vec3> *normals = new std::vector<vec3>();
+        std::vector<vec3> tmp_normals;
+        std::vector<vec2> *coordinates = new std::vector<vec2>();
+        std::vector<vec2> tmp_coordinates;
 
         while(std::getline(file, line))
         {
@@ -56,7 +56,7 @@ namespace OpenMouleEngine
                 tmp_positions.push_back(v3);
             }
             // normal vector
-            /*else if(line.find("vn ") == 0)
+            else if(line.find("vn ") == 0)
             {
                 line_stream.ignore(2);
                 line_stream >> v3;
@@ -67,8 +67,8 @@ namespace OpenMouleEngine
             {
                 line_stream.ignore(2);
                 line_stream >> v2;
-                tmp_textureCoordinates.push_back(v2);
-            }*/
+                tmp_coordinates.push_back(v2);
+            }
             // face
             else if(line.find("f ") == 0)
             {
@@ -93,19 +93,22 @@ namespace OpenMouleEngine
 
                     // textures
                     line_stream >> offset;
-                    //textureCoordinates.push_back(tmp_textureCoordinates[offset - 1]);
+                    coordinates->push_back(tmp_coordinates[offset - 1]);
                     line_stream.ignore();
 
                     // normals
                     line_stream >> offset;
-                    //normals.push_back(tmp_normals[offset - 1]);
+                    normals->push_back(tmp_normals[offset - 1]);
                     line_stream.ignore();
                 }
             }
         }
 
-        IVertexArray *va = new VertexArray<vec3>("a_Vertex", positions);
-
-        return new Mesh(fileName, va);
+        std::vector<IVertexArray *> vertexArrays;
+        vertexArrays.push_back(new VertexArray<vec3, 3, GL_FLOAT>("a_Vertex", positions));
+        vertexArrays.push_back(new VertexArray<vec3, 3, GL_FLOAT>("a_Normal", normals));
+        vertexArrays.push_back(new VertexArray<vec2, 2, GL_FLOAT>("a_Coord0", coordinates));
+        
+        return new Mesh(fileName, vertexArrays);
     }
 } // namespace

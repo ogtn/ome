@@ -15,15 +15,11 @@ namespace OpenMouleEngine
     {
     public:
         Renderable();
-
         virtual ~Renderable();
         
-        virtual void render() const = 0;
-        
-        void translate(const Vector3<float> &v);
-        
-        void scale(const Vector3<float> &v);
-        
+        virtual void render() const = 0;        
+        void translate(const Vector3<float> &v);       
+        void scale(const Vector3<float> &v);      
         void rotate(const Vector3<float> &v, float theta);
         
     private:

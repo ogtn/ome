@@ -37,6 +37,7 @@ void makeWindow()
     glfwSetWindowTitle("OpenMouleEngine");
 }
 
+
 #pragma comment(lib, "glu32.lib")
 void errorCheck()
 {
@@ -61,7 +62,7 @@ int main(void)
     rm->add(new FragmentShaderLoader(), "frag");
     rm->add(new ObjLoader(), "obj");
     rm->add(new MeshLoader(), "msh");
-    rm->add(new DevILLoader(), "png");
+    rm->add(new DevILLoader(), "jpg");
 
     // setting savers
     rm->add(new MeshSaver(), "msh");
@@ -71,7 +72,7 @@ int main(void)
     double t;
 
     t = glfwGetTime();
-    mesh = rm->getMesh("data/obj/smooth.obj");
+    mesh = rm->getMesh("data/obj/dragon.obj");
     cout << "Temps de chargement du .obj: " << glfwGetTime() - t << " secondes." << endl;
 
     mesh->centerPivot();
@@ -79,15 +80,15 @@ int main(void)
 
     t = glfwGetTime();
     //mesh = 
-        rm->getMesh("test.msh");
-    cout << "Temps de chargement du .msh: " << glfwGetTime() - t << " secondes." << endl;
+    //    rm->getMesh("test.msh");
+    //cout << "Temps de chargement du .msh: " << glfwGetTime() - t << " secondes." << endl;
 
     ShaderProgram shader("data/shaders/basic.vert", "data/shaders/basic.frag");
     shader.link();
     mesh->setShader(&shader);
     sg->add(*mesh);
 
-    Texture *texture = rm->getTexture("data/textures/grass.png");
+    Texture *texture = rm->getTexture("data/textures/tiles.jpg");
     mesh->setTexture(texture);
 
     CameraPerspective *cam = dynamic_cast<CameraPerspective *>(engine->getCamera());
@@ -97,7 +98,7 @@ int main(void)
     bool centered = false;
     float theta = 0;
     float phi = M_PI / 4;
-    glfwSetMouseWheel(-10000);
+    glfwSetMouseWheel(-500);
     
     while(running)
     {

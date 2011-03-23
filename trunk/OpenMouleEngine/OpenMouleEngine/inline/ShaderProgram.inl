@@ -4,7 +4,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 template <typename T>
-void ShaderProgram::sendUniform(std::string name, T &data)
+void ShaderProgram::sendUniform(const std::string &name, T &data)
 {
     data.sendAsUniform(*this, name);
 }

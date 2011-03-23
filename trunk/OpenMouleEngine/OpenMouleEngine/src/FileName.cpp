@@ -18,7 +18,7 @@ namespace OpenMouleEngine
     }
 
 
-    std::string FileName::baseName() const
+    const std::string FileName::baseName() const
     {
         std::string::size_type pos = name.find_last_of("/\\") + 1;
 
@@ -26,7 +26,7 @@ namespace OpenMouleEngine
     }
 
 
-    std::string FileName::path() const
+    const std::string FileName::path() const
     {
         int pos = name.find_last_of("/\\") + 1;
 
@@ -34,7 +34,7 @@ namespace OpenMouleEngine
     }
 
 
-    std::string FileName::extension() const
+    const std::string FileName::extension() const
     {
         int pos = name.find_last_of(".") + 1;
 

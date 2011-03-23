@@ -16,12 +16,10 @@ namespace OpenMouleEngine
     {
     protected:
         Singleton();
-
         ~Singleton();
 
     public:
-        static T *getInstance();
-        
+        static T *getInstance();        
         static void kill();
 
     private:

@@ -2,18 +2,19 @@
 
 uniform sampler2D texture0;
 
-//in vec3 norm;
-//in vec2 coord;
+in vec3 norm;
+in vec2 coord0;
 
 out vec4 outColor;
 
 void main()
 {
-	/*if(gl_FragCoord.x < 240)
-		outColor = vec4(norm, 1);
-	else if(gl_FragCoord.x < 480)
-		outColor = vec4(coord, 0, 1);
+	if(gl_FragCoord.x < 213)
+		outColor.rgb = norm;
+	else if(gl_FragCoord.x < 426)
+		outColor = texture(texture0, coord0);
 	else
-		outColor = texture(texture0, coord.st);*/
-	outColor = vec4(1, 1, 1, 1);
+		outColor.rg = coord0;
+
+	outColor.a = 1;
 }
