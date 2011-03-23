@@ -16,7 +16,7 @@ ResourceLoader<T>::~ResourceLoader()
 
 
 template <typename T>
-T *ResourceLoader<T>::loadFromFile(std::string fileName)
+T *ResourceLoader<T>::loadFromFile(const std::string &fileName)
 {
     std::cerr << "loadFromFile() not implemented for " + fileName << std::endl;
     return NULL;

@@ -22,7 +22,7 @@ namespace OpenMouleEngine
     }
 
 
-    Texture *DevILLoader::loadFromFile(std::string fileName)
+    Texture *DevILLoader::loadFromFile(const std::string &fileName)
     {
         GLuint id;
         ILuint il_id;
@@ -46,6 +46,7 @@ namespace OpenMouleEngine
 
         Vector2<int> size(ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT));
         GLenum format = ilGetInteger(IL_IMAGE_FORMAT);
+        format = GL_RGBA;
 
         glGenTextures(1, &id);
         glBindTexture(GL_TEXTURE_2D, id);

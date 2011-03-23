@@ -7,7 +7,7 @@
 
 namespace OpenMouleEngine
 {
-    Texture::Texture(std::string &name, GLuint id, GLenum type)
+    Texture::Texture(const std::string &name, GLuint id, GLenum type)
         : Resource(name),
         id(id),
         type(type)
@@ -28,7 +28,7 @@ namespace OpenMouleEngine
     }
 
 
-    void Texture::sendAsUniform(ShaderProgram &program, std::string name)
+    void Texture::sendAsUniform(ShaderProgram &program, const std::string &name)
     {
         glUniform1i(program.getUniformLocation(name), 0);
     }

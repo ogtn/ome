@@ -22,7 +22,7 @@ namespace OpenMouleEngine
         Color(unsigned int c);
         ~Color();
 
-        void sendAsUniform(ShaderProgram &program, std::string name);
+        void sendAsUniform(ShaderProgram &program, const std::string &name);
 
         union
         {

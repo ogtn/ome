@@ -108,7 +108,7 @@ std::istream &operator>>(std::istream &istr, Vector3<T> &v)
 }
 
 template <typename T>
-void Vector3<T>::sendAsUniform(ShaderProgram &program, std::string name)
+void Vector3<T>::sendAsUniform(ShaderProgram &program, const std::string &name)
 {
     glUniform3fv(program.getUniformLocation(name), 1, tab);
 }

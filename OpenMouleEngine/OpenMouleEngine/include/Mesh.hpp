@@ -20,26 +20,25 @@ namespace OpenMouleEngine
     class IVertexArray
     {
     public:
-        IVertexArray(std::string &name): name(name) {}
+        IVertexArray(const std::string &name): name(name) {}
         virtual ~IVertexArray() {};
 
         virtual GLint size() const = 0;
-        virtual GLint elementSize() const = 0;
         virtual GLint bytes() const = 0;
-        virtual const char *data() const = 0;
         virtual void updateVBO(GLintptr offset) const = 0;
         virtual void enable(ShaderProgram &shader, GLintptr offset) const = 0;
+        virtual void disable(ShaderProgram &shader) const = 0;
 
     protected:
         std::string name;
     };
 
 
-    template <typename T>
+    template <typename T, GLint nbElement, GLenum type>
     class VertexArray: public IVertexArray
     {
     public:
-        VertexArray(std::string name, std::vector<T> *vertices)
+        VertexArray(const std::string &name, std::vector<T> *vertices)
             : IVertexArray(name),
             vertices(vertices)
         {
@@ -55,19 +54,9 @@ namespace OpenMouleEngine
             return vertices->size();
         }
 
-        GLint elementSize() const
-        {
-            return sizeof(T);
-        }
-
         GLint bytes() const
         {
             return vertices->size() * sizeof(T);
-        }
-
-        const char *data() const
-        {
-            return (char *) &(*vertices)[0];
         }
 
         void updateVBO(GLintptr offset) const
@@ -79,8 +68,13 @@ namespace OpenMouleEngine
         {
             GLint location = shader.getAttribLocation(name);
 
-            glVertexAttribPointer(location, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(offset));
+            glVertexAttribPointer(location, nbElement, type, GL_FALSE, 0, BUFFER_OFFSET(offset));
             glEnableVertexAttribArray(location);
+        }
+
+        void disable(ShaderProgram &shader) const
+        {
+            glDisableVertexAttribArray(shader.getAttribLocation(name));
         }
 
     private:
@@ -91,7 +85,7 @@ namespace OpenMouleEngine
     class Mesh: public Resource, public SceneNode
     {
     public:
-        Mesh(std::string &name, IVertexArray *va);
+        Mesh(const std::string &name, std::vector<IVertexArray *> &vertexArrays);
         ~Mesh();
 
         virtual void sendUniforms() const;
@@ -100,22 +94,14 @@ namespace OpenMouleEngine
         void setTexture(Texture *t);
         void centerPivot(bool centerX = true, bool centerY = true, bool centerZ = true);
 
-        // getters, needed to save mesh to file
-        //const std::vector<vec3> &getPositions() const;
-        //const std::vector<vec3> &getNormals() const;
-        //const std::vector<vec2> &getTextureCoordinates() const;
-
     private:
         GLuint vbo;
 
-        // offsets in VBO
-        GLint positionsOffset;
-        GLint coordinatesOffset;
-        GLint normalsOffset;
+        // buffers and associated offsets
+        std::vector<IVertexArray *>vertexArrays;
+        std::vector<GLsizeiptr> offsets;
 
-        // buffers
-        IVertexArray *va;
-
+        // temporary
         ShaderProgram *shader;
         Texture *texture;
     };

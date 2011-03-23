@@ -8,66 +8,48 @@
 
 namespace OpenMouleEngine
 {
-    Mesh::Mesh(std::string &name, IVertexArray *va)
+    Mesh::Mesh(const std::string &name, std::vector<IVertexArray *> &vertexArrays)
         : Resource(name),
-        va(va),
+        vertexArrays(vertexArrays),
         shader(NULL),
         texture(NULL)
     {
+        // creating VBO
         glGenBuffers(1, &vbo);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-        GLsizeiptr size = va->bytes();
+        // compute offsets of each vertex array
+        GLsizeiptr size = 0;
 
-        // positions
-        //positions = *pPositions;
-        positionsOffset = 0;
-        //size += positions.size() * sizeof(vec3);
+        for(unsigned int i = 0; i < vertexArrays.size(); i++)
+        {
+            offsets.push_back(size);
+            size += vertexArrays[i]->bytes();
+        }
 
-        // normals
-        //if(pNormals)
-        //{
-        //    normals = *pNormals;
-        //    normalsOffset = size;
-        //    size += normals.size() * sizeof(vec3);
-        //}
-
-        // texture coordinates
-        //if(pCoordinates)
-        //{
-        //    coordinates = *pCoordinates;
-        //    coordinatesOffset = size;
-        //    size += coordinates.size() * sizeof(vec2);
-        //}
-
-        // memory allocation
+        // allocate memory for the VBO
         glBufferData(GL_ARRAY_BUFFER, size, NULL, GL_STATIC_DRAW);
 
-        // buffer initialisation
-        va->updateVBO(0);
-        
-        //glBufferSubData(GL_ARRAY_BUFFER, positionsOffset, va->bytes(), va->data());
-
-        /*if(pNormals)
-            glBufferSubData(GL_ARRAY_BUFFER, normalsOffset, sizeof(vec3) * normals.size(), &normals[0]);
-
-        if(pCoordinates)
-            glBufferSubData(GL_ARRAY_BUFFER, coordinatesOffset, sizeof(vec2) * coordinates.size(), &coordinates[0]);*/
-
-        va;
+        // vertex arrays initialisation
+        for(unsigned int i = 0; i < vertexArrays.size(); i++)
+            vertexArrays[i]->updateVBO(offsets[i]);
     }
 
 
     Mesh::~Mesh()
     {
-        delete va;
+        // destroy the VBO
         glDeleteBuffers(1, &vbo);
+
+        // free the vertex arrays
+        for(unsigned int i = 0; i < vertexArrays.size(); i++)
+            delete vertexArrays[i];
     }
 
 
     void Mesh::sendUniforms() const
     {
-        //shader->sendUniform("texture0", *texture);
+        shader->sendUniform("texture0", *texture);
         shader->sendUniform("camera", *Engine::getInstance()->getCamera());
     }
 
@@ -87,21 +69,15 @@ namespace OpenMouleEngine
         // buffers
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-        va->enable(*shader, positionsOffset);
-        //glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(positionsOffset));
-        //glEnableVertexAttribArray(0);
-        //glVertexAttribPointer(1, 3, GL_FLOAT, GL_TRUE, 0, BUFFER_OFFSET(normalsOffset));
-        //glEnableVertexAttribArray(1);
-        //glVertexAttribPointer(2, 2, GL_FLOAT, GL_TRUE, 0, BUFFER_OFFSET(coordinatesOffset));
-        //glEnableVertexAttribArray(2);
+        for(unsigned int i = 0; i < vertexArrays.size(); i++)
+            vertexArrays[i]->enable(*shader, offsets[i]);
 
         // render
-        glDrawArrays(GL_TRIANGLES, 0, va->size());
+        glDrawArrays(GL_TRIANGLES, 0, vertexArrays[0]->size());
 
         // buffer
-        //glDisableVertexAttribArray(2);
-        //glDisableVertexAttribArray(1);
-        glDisableVertexAttribArray(0);
+        for(unsigned int i = 0; i < vertexArrays.size(); i++)
+            vertexArrays[i]->disable(*shader);
 
         // shader
         shader->unbind();

@@ -12,14 +12,6 @@
 #define M_PI 3.141592653589793238462643
 #endif
 
-#ifndef MAX
-#define MAX(x,y) ((x)>(y)?(x):(y))
-#endif
-
-#ifndef MIN
-#define MIN(x,y) ((x)<(y)?(x):(y))
-#endif
-
 #include "ShaderProgram.hpp"
 #include <iostream>
 #include <GL/glew.h>
@@ -33,7 +25,7 @@ namespace OpenMouleEngine
         Vector2(T x = 0, T y = 0);
         ~Vector2();
 
-        void sendAsUniform(ShaderProgram &program, std::string name);
+        void sendAsUniform(ShaderProgram &program, const std::string &name);
 
         union
         {

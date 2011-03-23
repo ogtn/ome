@@ -26,7 +26,7 @@ namespace OpenMouleEngine
         T dot(Vector3<T> v);
         T length();
 
-        void sendAsUniform(ShaderProgram &program, std::string name);
+        void sendAsUniform(ShaderProgram &program, const std::string &name);
 
         union
         {

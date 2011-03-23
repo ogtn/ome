@@ -18,7 +18,7 @@ namespace OpenMouleEngine
     }
 
 
-    void Light::sendAsUniform(ShaderProgram &program, std::string name)
+    void Light::sendAsUniform(ShaderProgram &program, const std::string &name)
     {
         color.sendAsUniform(program, name + ".color");
     }

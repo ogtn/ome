@@ -39,7 +39,7 @@ namespace OpenMouleEngine
     }
 
 
-    void ResourceManager::saveAs(Resource &resource, std::string fileName)
+    void ResourceManager::saveAs(Resource &resource, const std::string &fileName)
     {
         std::string::size_type pos = fileName.find_last_of('.');
         std::string extension = fileName.substr(pos + 1);

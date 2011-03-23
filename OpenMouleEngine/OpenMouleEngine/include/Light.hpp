@@ -16,10 +16,9 @@ namespace OpenMouleEngine
     {
     public:
         Light(Color color = Color());
-
         ~Light();
 
-        virtual void sendAsUniform(ShaderProgram &program, std::string name);
+        virtual void sendAsUniform(ShaderProgram &program, const std::string &name);
 
     private:
         Color color;

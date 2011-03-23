@@ -18,24 +18,18 @@ namespace OpenMouleEngine
     {
     public:
         ShaderProgram(Shader *vertexShader, Shader *fragmentShader);
-
         ShaderProgram(const std::string &vertFile, const std::string &fragFile);
-
         ~ShaderProgram();
 
-        ShaderProgram &link();
-
-        ShaderProgram &bind();
-
-        ShaderProgram &unbind();
+        void link();
+        void bind();
+        void unbind();
 
         template <typename T>
-        void sendUniform(std::string name, T &data);
+        void sendUniform(const std::string &name, T &data);
 
-        GLint getUniformLocation(std::string name);
-
-        GLint getAttribLocation(std::string name);
-
+        GLint getUniformLocation(const std::string &name);
+        GLint getAttribLocation(const std::string &name);
         bool isLinked();
 
     private:

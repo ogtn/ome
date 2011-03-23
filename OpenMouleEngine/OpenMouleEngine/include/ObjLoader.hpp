@@ -17,10 +17,9 @@ namespace OpenMouleEngine
     {
     public:
         ObjLoader();
-
         ~ObjLoader();
 
-        Mesh *loadFromFile(std::string fileName);
+        Mesh *loadFromFile(const std::string &fileName);
     };
 
 
@@ -28,7 +27,6 @@ namespace OpenMouleEngine
     {
     public:
         MeshLoader() {}
-
         ~MeshLoader() {}
 
         /*Mesh *loadFromFile(std::string fileName)

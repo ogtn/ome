@@ -16,11 +16,11 @@ namespace OpenMouleEngine
     class Texture: public Resource
     {
     public:
-        Texture(std::string &name, GLuint id, GLenum type);
+        Texture(const std::string &name, GLuint id, GLenum type);
         virtual ~Texture() = 0;
 
         void bind();
-        void sendAsUniform(ShaderProgram &program, std::string name);
+        void sendAsUniform(ShaderProgram &program, const std::string &name);
 
     private:
         GLuint id;

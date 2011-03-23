@@ -8,7 +8,8 @@
 
 namespace OpenMouleEngine
 {
-    Resource::Resource(std::string name): name(name)
+    Resource::Resource(const std::string &name)
+        : name(name)
     {
     }
 
@@ -18,7 +19,7 @@ namespace OpenMouleEngine
     }
 
 
-    void Resource::saveAs(std::string fileName)
+    void Resource::saveAs(const std::string &fileName)
     {
         ResourceManager::getInstance()->saveAs(*this, fileName);
     }

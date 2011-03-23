@@ -8,7 +8,7 @@
 
 namespace OpenMouleEngine
 {
-    Shader::Shader(std::string name, GLenum type, std::string code)
+    Shader::Shader(const std::string &name, GLenum type, const std::string &code)
     : Resource(name),
     type(type),
     code(code),
@@ -24,7 +24,7 @@ namespace OpenMouleEngine
     }
 
 
-    Shader &Shader::compile()
+    void Shader::compile()
     {
         GLint status;
         GLsizei size;
@@ -51,24 +51,18 @@ namespace OpenMouleEngine
         }
         else
             compiled = true;
-
-        return *this;
     }
 
 
-    Shader &Shader::attach(GLuint programId)
+    void Shader::attach(GLuint programId)
     {
         glAttachShader(programId, id);
-
-        return *this;
     }
 
 
-    Shader &Shader::detach(GLuint programId)
+    void Shader::detach(GLuint programId)
     {
         glDetachShader(programId, id);
-
-        return *this;
     }
 
 

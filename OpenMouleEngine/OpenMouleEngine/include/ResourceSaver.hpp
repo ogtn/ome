@@ -16,12 +16,9 @@ namespace OpenMouleEngine
     {
     public:
         ResourceSaver() {}
-        virtual ~ResourceSaver() = 0 {};
+        virtual ~ResourceSaver() {};
 
-        virtual void saveAs(std::string fileName, Resource &resource) 
-        {
-            resource;
-        };
+        virtual void saveAs(const std::string &fileName, Resource &resource) = 0;
     };
 
     class MeshSaver: public ResourceSaver
@@ -30,7 +27,7 @@ namespace OpenMouleEngine
         MeshSaver() {}
         ~MeshSaver() {}
 
-        void saveAs(std::string fileName, Resource &resource)
+        void saveAs(const std::string &fileName, Resource &resource)
         {
             /*const Mesh &mesh = (const Mesh &)resource;
 

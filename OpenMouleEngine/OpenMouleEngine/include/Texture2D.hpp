@@ -15,7 +15,7 @@ namespace OpenMouleEngine
     class Texture2D: public Texture
     {
     public:
-        Texture2D(std::string &name, GLuint id, Vector2<GLint> size, GLenum format, GLvoid *pixels);
+        Texture2D(const std::string &name, GLuint id, Vector2<GLint> size, GLenum format, GLvoid *pixels);
         virtual ~Texture2D();
 
     private:

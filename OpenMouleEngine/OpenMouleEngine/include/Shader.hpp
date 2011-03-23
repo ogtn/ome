@@ -16,16 +16,12 @@ namespace OpenMouleEngine
     class Shader: public Resource
     {
     public:
-        Shader(std::string name, GLenum type, std::string code);
-
+        Shader(const std::string &name, GLenum type, const std::string &code);
         ~Shader();
 
-        Shader &compile();
-
-        Shader &attach(GLuint programId);
-
-        Shader &detach(GLuint programId);
-
+        void compile();
+        void attach(GLuint programId);
+        void detach(GLuint programId);
         bool isCompiled();
 
     private:

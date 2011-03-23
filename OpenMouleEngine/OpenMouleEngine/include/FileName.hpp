@@ -15,14 +15,11 @@ namespace OpenMouleEngine
     {
     public:
         FileName(const std::string &name);
-
         ~FileName();
 
-        std::string baseName() const;
-
-        std::string path() const;
-
-        std::string extension() const;
+        const std::string baseName() const;
+        const std::string path() const;
+        const std::string extension() const;
 
     private:
         std::string name;

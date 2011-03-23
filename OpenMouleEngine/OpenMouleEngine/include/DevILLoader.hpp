@@ -18,7 +18,7 @@ namespace OpenMouleEngine
         DevILLoader();
         ~DevILLoader();
 
-        Texture *loadFromFile(std::string fileName);
+        Texture *loadFromFile(const std::string &fileName);
     };
 } // namespace
 

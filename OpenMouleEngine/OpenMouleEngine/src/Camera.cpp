@@ -46,7 +46,7 @@ namespace OpenMouleEngine
     }
 
 
-    void Camera::sendAsUniform(ShaderProgram &program, std::string name)
+    void Camera::sendAsUniform(ShaderProgram &program, const std::string &name)
     {
         if(!ready)
         {
