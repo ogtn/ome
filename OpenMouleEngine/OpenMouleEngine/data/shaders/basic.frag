@@ -1,7 +1,15 @@
 #version 330
 
-uniform sampler2D texture0;
-uniform sampler2D texture1;
+struct Material
+{
+	vec3 ambiantColor;
+	sampler2D diffuseTexture;
+	vec3 specularColor;
+	vec3 emissiveColor;
+	float shininess;
+};
+
+uniform Material mat;
 
 in vec2 coord0;
 in vec3 color;
@@ -9,10 +17,7 @@ in vec3 color;
 out vec4 outColor;
 
 void main()
-{
-	vec3 color0 = texture(texture0, coord0).rgb;
-	vec3 color1 = texture(texture1, coord0).rgb;
-	
-	outColor.rgb = mix(color0, color1, 0.0015625 * gl_FragCoord.x) * color;
+{	
+	outColor.rgb = texture(mat.diffuseTexture, coord0).rgb * color;
 	outColor.a = 1;
 }

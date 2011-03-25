@@ -34,6 +34,27 @@ namespace OpenMouleEngine
             GLfloat vec[4];
         };
     };
+
+
+    class Color3
+    {
+    public:
+        Color3(float r = 1, float g = 1, float b = 1);
+        Color3(unsigned int c);
+        ~Color3();
+
+        void sendAsUniform(ShaderProgram &program, const std::string &name) const;
+
+        union
+        {
+            struct
+            {
+                GLfloat r, g, b;
+            };
+
+            GLfloat vec[3];
+        };
+    };
 } // namespace
 
 #endif // HPP_COLOR

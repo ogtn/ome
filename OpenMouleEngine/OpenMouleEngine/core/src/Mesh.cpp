@@ -12,7 +12,7 @@ namespace OpenMouleEngine
         : Resource(name),
         vertexArrays(vertexArrays),
         shader(NULL),
-        textures()
+        material()
     {
         // creating VBO
         glGenBuffers(1, &vbo);
@@ -55,9 +55,7 @@ namespace OpenMouleEngine
 
         shader->sendUniform("mdlPosition", pos);
         shader->sendUniform("camera", *Engine::getInstance()->getCamera());
-
-        shader->sendUniform("texture0", *textures[0]);
-        shader->sendUniform("texture1", *textures[1], 1);
+        shader->sendUniform("mat", *material);
     }
 
 
@@ -68,12 +66,6 @@ namespace OpenMouleEngine
 
         // uniforms
         sendUniforms();
-
-        // textures
-        glActiveTexture(GL_TEXTURE0);
-        textures[0]->bind();
-        glActiveTexture(GL_TEXTURE1);
-        textures[1]->bind();
 
         // buffers
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -99,15 +91,9 @@ namespace OpenMouleEngine
     }
 
 
-    void Mesh::setTexture(Texture *t)
+    void Mesh::setMaterial(Material *mat)
     {
-        textures.push_back(t);
-    }
-
-
-    void Mesh::setTexture(const std::string &name)
-    {
-        setTexture(ResourceManager::getInstance()->getTexture(name));
+        material = mat;
     }
 
 

@@ -13,18 +13,20 @@ namespace OpenMouleEngine
         id(id),
         type(type)
     {
+        glBindTexture(type, id);
     }
 
 
     Texture::~Texture()
     {
-        bind();
+        glBindTexture(type, id);
         glDeleteTextures(1, &id);
     }
 
 
-    void Texture::bind()
+    void Texture::bind(int textureUnit)
     {
+        glActiveTexture(GL_TEXTURE0 + textureUnit);
         glBindTexture(type, id);
     }
 

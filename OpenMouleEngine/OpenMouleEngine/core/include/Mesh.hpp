@@ -11,6 +11,7 @@
 #include "Renderable.hpp"
 #include "SceneNode.hpp"
 #include "Texture2D.hpp"
+#include "Material.hpp"
 #include "Color.hpp"
 #include <vector>
 
@@ -104,8 +105,7 @@ namespace OpenMouleEngine
         virtual void sendUniforms() const;
         void render() const;    
         void setShader(ShaderProgram *s);
-        void setTexture(Texture *t);
-        void setTexture(const std::string &name);
+        void setMaterial(Material *mat);
         const std::vector<IVertexArray *> &getArrays() const;
         
     private:
@@ -117,7 +117,7 @@ namespace OpenMouleEngine
 
         // temporary
         ShaderProgram *shader;
-        std::vector<Texture *> textures;
+        Material *material;
     };
 } // namespace
 

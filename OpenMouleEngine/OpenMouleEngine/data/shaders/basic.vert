@@ -1,8 +1,18 @@
 #version 330
 
+struct Material
+{
+	vec3 ambiantColor;
+	sampler2D diffuseTexture;
+	vec3 specularColor;
+	vec3 emissiveColor;
+	float shininess;
+};
+
 uniform mat4 projection;
 uniform mat4 modelview;
 uniform vec3 mdlPosition;
+uniform Material mat;
 
 in vec3 a_Vertex;
 in vec3 a_Normal;
@@ -12,10 +22,11 @@ out vec3 norm;
 out vec2 coord0;
 out vec3 color;
 
+// temporary
+vec3 lightPos = vec3(0, 0, 1);
+
 void main()
 {
-	vec3 lightPos = vec3(0, 0, 1);
-
 	vec3 newPosition = a_Vertex + mdlPosition;
 
 	// standard vertex transformation
@@ -32,12 +43,12 @@ void main()
 	float lightAngle = max(dot(normal, lightPos), 0);
 
 	// ambiant component
-	color = vec3(0.1, 0.1, 0.1);
+	color = mat.ambiantColor;
 
 	if(lightAngle > 0)
 	{
 		// diffuse component
-		color += vec3(1, 1, 1) * lightAngle;
+		//color += vec3(1, 1, 1) * lightAngle;
 
 		// eye position in eye space
 		vec3 eyePosition = -pos.xyz;
@@ -49,7 +60,7 @@ void main()
 		float halfAngle = max(dot(normal, halfVector), 0);
 
 		// specular component
-		color += vec3(1, 1, 1) * pow(halfAngle, 60);
+		color += mat.specularColor * pow(halfAngle, mat.shininess);
 	}
 
 	norm = normal;
