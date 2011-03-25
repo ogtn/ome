@@ -81,7 +81,7 @@ namespace OpenMouleEngine
     }
 
 
-    void ShaderProgram::sendUniform(const std::string &name, Texture &data, GLint texUnit)
+    void ShaderProgram::sendUniform(const std::string &name, const Texture &data, GLint texUnit)
     {
         data.sendAsUniform(*this, name, texUnit);
     }

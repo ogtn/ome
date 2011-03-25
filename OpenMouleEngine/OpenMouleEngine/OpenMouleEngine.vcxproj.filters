@@ -84,6 +84,9 @@
     <ClCompile Include="loaders\src\MD2Loader.cpp">
       <Filter>Loaders</Filter>
     </ClCompile>
+    <ClCompile Include="core\src\Material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="licence.txt">
@@ -201,6 +204,9 @@
     </ClInclude>
     <ClInclude Include="loaders\include\MD2Loader.hpp">
       <Filter>Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="core\include\Material.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

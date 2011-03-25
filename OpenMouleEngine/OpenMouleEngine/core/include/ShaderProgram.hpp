@@ -28,7 +28,7 @@ namespace OpenMouleEngine
 
         template <typename T>
         void sendUniform(const std::string &name, T &data);
-        void sendUniform(const std::string &name, Texture &data, GLint texUnit);
+        void sendUniform(const std::string &name, const Texture &data, GLint texUnit);
 
         GLint getUniformLocation(const std::string &name);
         GLint getAttribLocation(const std::string &name);
