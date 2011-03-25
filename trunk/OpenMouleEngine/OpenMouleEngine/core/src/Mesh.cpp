@@ -14,11 +14,6 @@ namespace OpenMouleEngine
         shader(NULL),
         textures()
     {
-        // textures
-        GLint maxTex;
-        glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &maxTex);
-        //textures.resize(maxTex, NULL);
-
         // creating VBO
         glGenBuffers(1, &vbo);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);

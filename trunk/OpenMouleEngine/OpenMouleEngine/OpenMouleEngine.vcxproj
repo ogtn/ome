@@ -126,6 +126,7 @@
   <ItemGroup>
     <ClCompile Include="core\src\Camera.cpp" />
     <ClCompile Include="core\src\Color.cpp" />
+    <ClCompile Include="core\src\Material.cpp" />
     <ClCompile Include="loaders\src\DevILLoader.cpp" />
     <ClCompile Include="core\src\Engine.cpp" />
     <ClCompile Include="core\src\FileName.cpp" />
@@ -162,6 +163,7 @@
   <ItemGroup>
     <ClInclude Include="core\include\Camera.hpp" />
     <ClInclude Include="core\include\Color.hpp" />
+    <ClInclude Include="core\include\Material.hpp" />
     <ClInclude Include="loaders\include\DevILLoader.hpp" />
     <ClInclude Include="core\include\Engine.hpp" />
     <ClInclude Include="core\include\FileName.hpp" />

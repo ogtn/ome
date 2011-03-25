@@ -23,6 +23,10 @@ namespace OpenMouleEngine
         std::cout << "Hardware: " << glGetString(GL_RENDERER);
         std::cout << " (" << glGetString(GL_VENDOR) << ")" << std::endl;
 
+        GLint maxTex;
+        glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &maxTex);
+        std::cout << "Maximum texture units: " << maxTex << std::endl;
+
         // camera
         camera = new CameraPerspective(70, 4/3.f, 0.1f, 1000);
         
@@ -36,11 +40,7 @@ namespace OpenMouleEngine
         //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         //glEnable(GL_ALPHA_TEST);
 
-        //glEnable(GL_TEXTURE_2D);
         //glEnable(GL_BGR_EXT);
-        //glEnable(GL_ALPHA_TEST);
-        //glEnable(GL_BLEND);
-        //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         //glAlphaFunc(GL_GREATER, 0.1);
     }
 
