@@ -11,9 +11,10 @@ namespace OpenMouleEngine
         : Texture(name, id, GL_TEXTURE_2D),
         size(size)
     {
-        bind();
+        // sending pixels to OpenGL
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.x, size.y, 0, format, GL_UNSIGNED_BYTE, pixels);
 
+        // setting minifying and magnifying filters
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     }

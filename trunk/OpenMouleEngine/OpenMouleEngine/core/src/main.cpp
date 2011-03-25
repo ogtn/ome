@@ -88,8 +88,12 @@ int main(void)
     mesh->setShader(&shader);
     sg->add(*mesh);
 
-    mesh->setTexture("data/textures/ground061.jpg");
-    mesh->setTexture("data/textures/tiles.jpg");
+    Material material("noname");
+    material.setDiffuse(rm->getTexture("data/textures/tiles.jpg"));
+    mesh->setMaterial(&material);
+
+    //mesh->setTexture("data/textures/ground061.jpg");
+    //mesh->setTexture("data/textures/tiles.jpg");
 
     CameraPerspective *cam = dynamic_cast<CameraPerspective *>(engine->getCamera());
 

@@ -34,4 +34,30 @@ namespace OpenMouleEngine
     {
         glUniform4fv(program.getUniformLocation(name), 1, vec);
     }
+
+
+    Color3::Color3(float r, float g, float b)
+        : r(r),
+        g(g),
+        b(b)
+    {
+    }
+
+    Color3::Color3(unsigned int c)
+        : r((c & 0xFF000000) / 255.f),
+        g((c & 0x00FF0000) / 255.f),
+        b((c & 0x0000FF00) / 255.f)
+    {
+    }
+
+
+    Color3::~Color3()
+    {
+    }
+
+
+    void Color3::sendAsUniform(ShaderProgram &program, const std::string &name) const
+    {
+        glUniform3fv(program.getUniformLocation(name), 1, vec);
+    }
 } // namespace
