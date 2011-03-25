@@ -62,7 +62,8 @@ int main(void)
     rm->add(new FragmentShaderLoader(), "frag");
     rm->add(new ObjLoader(), "obj");
     rm->add(new MeshLoader(), "msh");
-    rm->add(new DevILLoader(), "jpg");
+    rm->add(new MD2Loader(), "md2");
+    rm->add(DevILLoader::getInstance(), "jpg");
 
     // setting savers
     rm->add(new MeshSaver(), "msh");
@@ -72,13 +73,12 @@ int main(void)
     double t;
 
     t = glfwGetTime();
-    mesh = rm->getMesh("data/obj/dragon.obj");
+    mesh = rm->getMesh("data/obj/smooth.obj");
     cout << "Temps de chargement du .obj: " << glfwGetTime() - t << " secondes." << endl;
 
-    mesh->centerPivot();
-    mesh->saveAs("test.msh");
+    //mesh->saveAs("test.msh");
 
-    t = glfwGetTime();
+    //t = glfwGetTime();
     //mesh = 
     //    rm->getMesh("test.msh");
     //cout << "Temps de chargement du .msh: " << glfwGetTime() - t << " secondes." << endl;
@@ -88,23 +88,25 @@ int main(void)
     mesh->setShader(&shader);
     sg->add(*mesh);
 
-    Texture *texture = rm->getTexture("data/textures/tiles.jpg");
-    mesh->setTexture(texture);
+    mesh->setTexture("data/textures/ground061.jpg");
+    mesh->setTexture("data/textures/tiles.jpg");
 
     CameraPerspective *cam = dynamic_cast<CameraPerspective *>(engine->getCamera());
- 
+
     // main loop
     bool running = true;
-    bool centered = false;
     float theta = 0;
     float phi = M_PI / 4;
-    glfwSetMouseWheel(-500);
-    
+    glfwSetMouseWheel(-8000);
+
+    t = glfwGetTime();
+    int frames = 0;
+
     while(running)
     {
         // check for exit
         running = !glfwGetKey(GLFW_KEY_ESC) && glfwGetWindowParam(GLFW_OPENED);
-        
+
         // angles update
         if(glfwGetKey(GLFW_KEY_UP))
             phi += 0.02f;
@@ -115,8 +117,8 @@ int main(void)
         else if(glfwGetKey(GLFW_KEY_RIGHT))
             theta += 0.02f;
 
-        if(!centered && glfwGetKey(GLFW_KEY_SPACE))
-            mesh->centerPivot();
+        if(glfwGetKey(GLFW_KEY_SPACE))
+            mesh->translate(vec3(0, 0, 1));
 
         // avoid camera being upside down
         if(phi > (M_PI / 2.f - 0.01f))
@@ -135,7 +137,7 @@ int main(void)
             cos(phi) * sin(theta),              // y
             sin(phi))                           // z
             * (-glfwGetMouseWheel() / 20.f));   // zoom
-        
+
         // display
         engine->clearColorBuffer();
         engine->clearDepthBuffer();
@@ -143,8 +145,10 @@ int main(void)
 
         glfwSwapBuffers();
         glfwSleep(0.016);
+        frames++;
     }
 
+    cout << frames << " frames in " << glfwGetTime() - t << " seconds: " << frames / (glfwGetTime() - t) << " fps" << endl;
     glfwTerminate();
 
     return EXIT_SUCCESS;

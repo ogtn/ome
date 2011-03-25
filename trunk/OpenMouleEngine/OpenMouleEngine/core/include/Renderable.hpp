@@ -18,15 +18,19 @@ namespace OpenMouleEngine
         virtual ~Renderable();
         
         virtual void render() const = 0;        
-        void translate(const Vector3<float> &v);       
-        void scale(const Vector3<float> &v);      
-        void rotate(const Vector3<float> &v, float theta);
+        void translate(const vec3 &v);       
+        void scale(const vec3 &v);      
+        void rotate(const vec3 &v, float theta);
         
+        // getters
+        const vec3 &getPosition() const;
+        const vec3 &getScaling() const;
+        const vec3 &getRotation() const;
+
     private:
-        Matrix4x4<float> modelView;
-        Vector3<float> position;
-        Vector3<float> scaling;
-        Vector3<float> rotation;
+        vec3 position;
+        vec3 scaling;
+        vec3 rotation;
     };
 } // namespace
 

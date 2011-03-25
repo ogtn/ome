@@ -30,6 +30,7 @@
 #include "ObjLoader.hpp"
 #include "DevILLoader.hpp"
 #include "ResourceSaver.hpp"
+#include "MD2Loader.hpp"
 
 namespace OpenMouleEngine
 {

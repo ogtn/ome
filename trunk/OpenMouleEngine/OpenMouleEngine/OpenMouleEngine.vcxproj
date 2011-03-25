@@ -51,7 +51,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(MSBuildProjectDirectory)\inline;$(MSBuildProjectDirectory)\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildProjectDirectory)\core\inline;$(MSBuildProjectDirectory)\loaders\include;$(MSBuildProjectDirectory)\core\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug64|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -59,7 +59,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(MSBuildProjectDirectory)\inline;$(MSBuildProjectDirectory)\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildProjectDirectory)\core\inline;$(MSBuildProjectDirectory)\loaders\include;$(MSBuildProjectDirectory)\core\include;$(IncludePath)</IncludePath>
     <IgnoreImportLibrary>false</IgnoreImportLibrary>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -101,7 +101,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
-      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -124,66 +124,68 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Camera.cpp" />
-    <ClCompile Include="src\Color.cpp" />
-    <ClCompile Include="src\DevILLoader.cpp" />
-    <ClCompile Include="src\Engine.cpp" />
-    <ClCompile Include="src\FileName.cpp" />
-    <ClCompile Include="src\Light.cpp" />
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Mesh.cpp" />
-    <ClCompile Include="src\ObjLoader.cpp" />
-    <ClCompile Include="src\Renderable.cpp" />
-    <ClCompile Include="src\Resource.cpp" />
-    <ClCompile Include="src\ResourceManager.cpp" />
-    <ClCompile Include="src\SceneGraph.cpp" />
-    <ClCompile Include="src\SceneNode.cpp" />
-    <ClCompile Include="src\Shader.cpp" />
-    <ClCompile Include="src\ShaderLoader.cpp" />
-    <ClCompile Include="src\ShaderProgram.cpp" />
-    <ClCompile Include="src\Texture.cpp" />
-    <ClCompile Include="src\Texture2D.cpp" />
+    <ClCompile Include="core\src\Camera.cpp" />
+    <ClCompile Include="core\src\Color.cpp" />
+    <ClCompile Include="loaders\src\DevILLoader.cpp" />
+    <ClCompile Include="core\src\Engine.cpp" />
+    <ClCompile Include="core\src\FileName.cpp" />
+    <ClCompile Include="core\src\Light.cpp" />
+    <ClCompile Include="core\src\main.cpp" />
+    <ClCompile Include="core\src\Mesh.cpp" />
+    <ClCompile Include="loaders\src\MD2Loader.cpp" />
+    <ClCompile Include="loaders\src\ObjLoader.cpp" />
+    <ClCompile Include="core\src\Renderable.cpp" />
+    <ClCompile Include="core\src\Resource.cpp" />
+    <ClCompile Include="core\src\ResourceManager.cpp" />
+    <ClCompile Include="core\src\SceneGraph.cpp" />
+    <ClCompile Include="core\src\SceneNode.cpp" />
+    <ClCompile Include="core\src\Shader.cpp" />
+    <ClCompile Include="core\src\ShaderLoader.cpp" />
+    <ClCompile Include="core\src\ShaderProgram.cpp" />
+    <ClCompile Include="core\src\Texture.cpp" />
+    <ClCompile Include="core\src\Texture2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.template" />
     <None Include="data\shaders\basic.frag" />
     <None Include="data\shaders\basic.vert" />
     <None Include="hpp.template" />
-    <None Include="inline\Matrix4x4.inl" />
-    <None Include="inline\ResourceLoader.inl" />
-    <None Include="inline\ResourceManager.inl" />
-    <None Include="inline\ShaderProgram.inl" />
-    <None Include="inline\Singleton.inl" />
-    <None Include="inline\Vector2.inl" />
-    <None Include="inline\Vector3.inl" />
+    <None Include="core\inline\Matrix4x4.inl" />
+    <None Include="core\inline\ResourceLoader.inl" />
+    <None Include="core\inline\ResourceManager.inl" />
+    <None Include="core\inline\ShaderProgram.inl" />
+    <None Include="core\inline\Singleton.inl" />
+    <None Include="core\inline\Vector2.inl" />
+    <None Include="core\inline\Vector3.inl" />
     <None Include="licence.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Camera.hpp" />
-    <ClInclude Include="include\Color.hpp" />
-    <ClInclude Include="include\DevILLoader.hpp" />
-    <ClInclude Include="include\Engine.hpp" />
-    <ClInclude Include="include\FileName.hpp" />
-    <ClInclude Include="include\Light.hpp" />
-    <ClInclude Include="include\Matrix4x4.hpp" />
-    <ClInclude Include="include\Mesh.hpp" />
-    <ClInclude Include="include\ObjLoader.hpp" />
-    <ClInclude Include="include\OpenMouleEngine.hpp" />
-    <ClInclude Include="include\Renderable.hpp" />
-    <ClInclude Include="include\Resource.hpp" />
-    <ClInclude Include="include\ResourceLoader.hpp" />
-    <ClInclude Include="include\ResourceManager.hpp" />
-    <ClInclude Include="include\ResourceSaver.hpp" />
-    <ClInclude Include="include\SceneGraph.hpp" />
-    <ClInclude Include="include\SceneNode.hpp" />
-    <ClInclude Include="include\Shader.hpp" />
-    <ClInclude Include="include\ShaderLoader.hpp" />
-    <ClInclude Include="include\ShaderProgram.hpp" />
-    <ClInclude Include="include\Singleton.hpp" />
-    <ClInclude Include="include\Texture.hpp" />
-    <ClInclude Include="include\Texture2D.hpp" />
-    <ClInclude Include="include\Vector2.hpp" />
-    <ClInclude Include="include\Vector3.hpp" />
+    <ClInclude Include="core\include\Camera.hpp" />
+    <ClInclude Include="core\include\Color.hpp" />
+    <ClInclude Include="loaders\include\DevILLoader.hpp" />
+    <ClInclude Include="core\include\Engine.hpp" />
+    <ClInclude Include="core\include\FileName.hpp" />
+    <ClInclude Include="core\include\Light.hpp" />
+    <ClInclude Include="core\include\Matrix4x4.hpp" />
+    <ClInclude Include="core\include\Mesh.hpp" />
+    <ClInclude Include="loaders\include\MD2Loader.hpp" />
+    <ClInclude Include="loaders\include\ObjLoader.hpp" />
+    <ClInclude Include="core\include\OpenMouleEngine.hpp" />
+    <ClInclude Include="core\include\Renderable.hpp" />
+    <ClInclude Include="core\include\Resource.hpp" />
+    <ClInclude Include="core\include\ResourceLoader.hpp" />
+    <ClInclude Include="core\include\ResourceManager.hpp" />
+    <ClInclude Include="core\include\ResourceSaver.hpp" />
+    <ClInclude Include="core\include\SceneGraph.hpp" />
+    <ClInclude Include="core\include\SceneNode.hpp" />
+    <ClInclude Include="core\include\Shader.hpp" />
+    <ClInclude Include="core\include\ShaderLoader.hpp" />
+    <ClInclude Include="core\include\ShaderProgram.hpp" />
+    <ClInclude Include="core\include\Singleton.hpp" />
+    <ClInclude Include="core\include\Texture.hpp" />
+    <ClInclude Include="core\include\Texture2D.hpp" />
+    <ClInclude Include="core\include\Vector2.hpp" />
+    <ClInclude Include="core\include\Vector3.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

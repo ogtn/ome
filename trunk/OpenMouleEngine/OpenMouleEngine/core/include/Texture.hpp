@@ -8,11 +8,12 @@
 #define HPP_TEXTURE
 
 #include "Resource.hpp"
-#include "ShaderProgram.hpp"
 #include <GL/glew.h>
 
 namespace OpenMouleEngine
 {
+    class ShaderProgram;
+
     class Texture: public Resource
     {
     public:
@@ -20,7 +21,7 @@ namespace OpenMouleEngine
         virtual ~Texture() = 0;
 
         void bind();
-        void sendAsUniform(ShaderProgram &program, const std::string &name);
+        void sendAsUniform(ShaderProgram &program, const std::string &name, GLint texUnit = 0);
 
     private:
         GLuint id;

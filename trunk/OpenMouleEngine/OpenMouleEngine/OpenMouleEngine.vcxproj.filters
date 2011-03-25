@@ -1,14 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -16,76 +8,84 @@
     <Filter Include="Test">
       <UniqueIdentifier>{5b79dad7-ba3d-49cd-bfb4-74961de7377f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
     <Filter Include="Inline Files">
       <UniqueIdentifier>{8ba8f3b7-29ad-41a5-b1f2-d336d82d63ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Loaders">
+      <UniqueIdentifier>{3c002aa2-8e7a-48a9-a5d8-a0c2a1149749}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Engine.cpp">
+    <ClCompile Include="core\src\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderable.cpp">
+    <ClCompile Include="core\src\Color.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Resource.cpp">
+    <ClCompile Include="core\src\Engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ResourceManager.cpp">
+    <ClCompile Include="core\src\FileName.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Mesh.cpp">
+    <ClCompile Include="core\src\Light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ShaderProgram.cpp">
+    <ClCompile Include="core\src\Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Shader.cpp">
+    <ClCompile Include="core\src\Renderable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\main.cpp">
+    <ClCompile Include="core\src\Resource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\src\ResourceManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\src\SceneGraph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\src\SceneNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\src\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\src\ShaderLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\src\ShaderProgram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\src\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\src\Texture2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\src\main.cpp">
       <Filter>Test</Filter>
     </ClCompile>
-    <ClCompile Include="src\FileName.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="loaders\src\ObjLoader.cpp">
+      <Filter>Loaders</Filter>
     </ClCompile>
-    <ClCompile Include="src\SceneGraph.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="loaders\src\DevILLoader.cpp">
+      <Filter>Loaders</Filter>
     </ClCompile>
-    <ClCompile Include="src\SceneNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Color.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ObjLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Light.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ShaderLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DevILLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Texture2D.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="loaders\src\MD2Loader.cpp">
+      <Filter>Loaders</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="inline\Matrix4x4.inl">
-      <Filter>Inline Files</Filter>
-    </None>
-    <None Include="inline\Vector3.inl">
-      <Filter>Inline Files</Filter>
-    </None>
     <None Include="licence.txt">
       <Filter>Resource Files</Filter>
     </None>
@@ -95,103 +95,112 @@
     <None Include="hpp.template">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="inline\ResourceLoader.inl">
-      <Filter>Inline Files</Filter>
-    </None>
-    <None Include="inline\ResourceManager.inl">
-      <Filter>Inline Files</Filter>
-    </None>
-    <None Include="inline\Singleton.inl">
-      <Filter>Inline Files</Filter>
-    </None>
-    <None Include="inline\ShaderProgram.inl">
-      <Filter>Inline Files</Filter>
-    </None>
     <None Include="data\shaders\basic.frag">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="data\shaders\basic.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="inline\Vector2.inl">
+    <None Include="core\inline\Matrix4x4.inl">
+      <Filter>Inline Files</Filter>
+    </None>
+    <None Include="core\inline\ResourceLoader.inl">
+      <Filter>Inline Files</Filter>
+    </None>
+    <None Include="core\inline\ResourceManager.inl">
+      <Filter>Inline Files</Filter>
+    </None>
+    <None Include="core\inline\ShaderProgram.inl">
+      <Filter>Inline Files</Filter>
+    </None>
+    <None Include="core\inline\Singleton.inl">
+      <Filter>Inline Files</Filter>
+    </None>
+    <None Include="core\inline\Vector2.inl">
+      <Filter>Inline Files</Filter>
+    </None>
+    <None Include="core\inline\Vector3.inl">
       <Filter>Inline Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Engine.hpp">
+    <ClInclude Include="core\include\Camera.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Matrix4x4.hpp">
+    <ClInclude Include="core\include\Color.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Renderable.hpp">
+    <ClInclude Include="core\include\Engine.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Vector3.hpp">
+    <ClInclude Include="core\include\FileName.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\OpenMouleEngine.hpp">
+    <ClInclude Include="core\include\Light.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Resource.hpp">
+    <ClInclude Include="core\include\Matrix4x4.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\ResourceLoader.hpp">
+    <ClInclude Include="core\include\Mesh.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\ResourceManager.hpp">
+    <ClInclude Include="core\include\OpenMouleEngine.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Mesh.hpp">
+    <ClInclude Include="core\include\Renderable.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\ShaderProgram.hpp">
+    <ClInclude Include="core\include\Resource.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Shader.hpp">
+    <ClInclude Include="core\include\ResourceLoader.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\FileName.hpp">
+    <ClInclude Include="core\include\ResourceManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Singleton.hpp">
+    <ClInclude Include="core\include\ResourceSaver.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SceneGraph.hpp">
+    <ClInclude Include="core\include\SceneGraph.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SceneNode.hpp">
+    <ClInclude Include="core\include\SceneNode.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Color.hpp">
+    <ClInclude Include="core\include\Shader.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\ObjLoader.hpp">
+    <ClInclude Include="core\include\ShaderLoader.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Camera.hpp">
+    <ClInclude Include="core\include\ShaderProgram.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Light.hpp">
+    <ClInclude Include="core\include\Singleton.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\ResourceSaver.hpp">
+    <ClInclude Include="core\include\Texture.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\ShaderLoader.hpp">
+    <ClInclude Include="core\include\Texture2D.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Vector2.hpp">
+    <ClInclude Include="core\include\Vector2.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\DevILLoader.hpp">
+    <ClInclude Include="core\include\Vector3.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Texture.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="loaders\include\ObjLoader.hpp">
+      <Filter>Loaders</Filter>
     </ClInclude>
-    <ClInclude Include="include\Texture2D.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="loaders\include\DevILLoader.hpp">
+      <Filter>Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="loaders\include\MD2Loader.hpp">
+      <Filter>Loaders</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

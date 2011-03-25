@@ -30,7 +30,7 @@ namespace OpenMouleEngine
 
         void saveAs(const std::string &fileName, Resource &resource)
         {
-            /*const Mesh &mesh = (const Mesh &)resource;
+            const Mesh &mesh = (const Mesh &)resource;
 
             std::ofstream file(fileName.c_str(), std::ofstream::binary | std::ios::out | std::ios::trunc);
 
@@ -40,25 +40,15 @@ namespace OpenMouleEngine
                 return;
             }
 
-            std::vector<vec3>::size_type size;
+            unsigned int size;
+            const std::vector<IVertexArray *> &arrays = mesh.getArrays();
 
-            // positions
-            const std::vector<vec3> positions = mesh.getPositions();
-            size = positions.size();
-            file.write((char*)&size, sizeof(std::vector<vec3>::size_type));
-            file.write((char*)&positions[0], positions.size() * sizeof(vec3));
-
-            // texture coordinates
-            const std::vector<vec2> textureCoordinates = mesh.getTextureCoordinates();
-            size = textureCoordinates.size();
-            file.write((char*)&size, sizeof(std::vector<vec3>::size_type));
-            file.write((char*)&textureCoordinates[0], textureCoordinates.size() * sizeof(vec2));
-
-            // normals
-            const std::vector<vec3> normals = mesh.getNormals();
-            size = normals.size();
-            file.write((char*)&size, sizeof(std::vector<vec3>::size_type));
-            file.write((char*)&normals[0], normals.size() * sizeof(vec3));*/
+            for(unsigned int i = 0; i < arrays.size(); i++)
+            {
+                size = arrays[i]->bytes();
+                file.write((char *)&size, sizeof(size));
+                file.write(arrays[i]->data(), size);
+            }
         }
     };
 

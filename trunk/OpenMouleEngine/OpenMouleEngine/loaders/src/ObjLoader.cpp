@@ -104,6 +104,28 @@ namespace OpenMouleEngine
             }
         }
 
+        // center mesh on (0,0,0)
+        std::vector<vec3> &pos = *positions;
+        vec3 posMin(pos[0]);
+        vec3 posMax(pos[0]);
+
+        for(unsigned int i = 0; i < pos.size(); i++)
+        {
+            posMin.x = std::min(posMin.x, pos[i].x);
+            posMin.y = std::min(posMin.y, pos[i].y);
+            posMin.z = std::min(posMin.z, pos[i].z);
+
+            posMax.x = std::max(posMax.x, pos[i].x);
+            posMax.y = std::max(posMax.y, pos[i].y);
+            posMax.z = std::max(posMax.z, pos[i].z);
+        }
+
+        vec3 diff(vec3() - (posMax + posMin) / 2.f);
+
+        for(unsigned int i = 0; i < pos.size(); i++)
+            pos[i] = pos[i] + diff;
+
+        // gather all arrays
         std::vector<IVertexArray *> vertexArrays;
         vertexArrays.push_back(new VertexArray<vec3, 3, GL_FLOAT>("a_Vertex", positions));
         vertexArrays.push_back(new VertexArray<vec3, 3, GL_FLOAT>("a_Normal", normals));
