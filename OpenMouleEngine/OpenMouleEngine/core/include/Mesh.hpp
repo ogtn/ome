@@ -8,6 +8,7 @@
 #define HPP_MESH
 
 #include "ShaderProgram.hpp"
+#include "Renderable.hpp"
 #include "SceneNode.hpp"
 #include "Texture2D.hpp"
 #include "Color.hpp"
@@ -24,9 +25,11 @@ namespace OpenMouleEngine
         virtual ~IVertexArray() {};
 
         virtual GLint size() const = 0;
+        virtual GLint elementSize() const = 0;
         virtual GLint bytes() const = 0;
+        virtual const char *data() const = 0;
         virtual void updateVBO(GLintptr offset) const = 0;
-        virtual void enable(ShaderProgram &shader, GLintptr offset) const = 0;
+        virtual void enable(ShaderProgram &shader, GLintptr offset, GLsizei stride = 0) const = 0;
         virtual void disable(ShaderProgram &shader) const = 0;
 
     protected:
@@ -54,9 +57,19 @@ namespace OpenMouleEngine
             return vertices->size();
         }
 
+        GLint elementSize() const
+        {
+            return sizeof(T);
+        }
+
         GLint bytes() const
         {
             return vertices->size() * sizeof(T);
+        }
+
+        const char *data() const
+        {
+            return (char *)&vertices[0];
         }
 
         void updateVBO(GLintptr offset) const
@@ -64,11 +77,11 @@ namespace OpenMouleEngine
             glBufferSubData(GL_ARRAY_BUFFER, offset, vertices->size() * sizeof(T), (char *) &(*vertices)[0]);
         }
 
-        void enable(ShaderProgram &shader, GLintptr offset) const
+        void enable(ShaderProgram &shader, GLintptr offset, GLsizei stride = 0) const
         {
             GLint location = shader.getAttribLocation(name);
 
-            glVertexAttribPointer(location, nbElement, type, GL_FALSE, 0, BUFFER_OFFSET(offset));
+            glVertexAttribPointer(location, nbElement, type, GL_FALSE, stride, BUFFER_OFFSET(offset));
             glEnableVertexAttribArray(location);
         }
 
@@ -92,18 +105,19 @@ namespace OpenMouleEngine
         void render() const;    
         void setShader(ShaderProgram *s);
         void setTexture(Texture *t);
-        void centerPivot(bool centerX = true, bool centerY = true, bool centerZ = true);
-
+        void setTexture(const std::string &name);
+        const std::vector<IVertexArray *> &getArrays() const;
+        
     private:
         GLuint vbo;
 
         // buffers and associated offsets
-        std::vector<IVertexArray *>vertexArrays;
+        std::vector<IVertexArray *> vertexArrays;
         std::vector<GLsizeiptr> offsets;
 
         // temporary
         ShaderProgram *shader;
-        Texture *texture;
+        std::vector<Texture *> textures;
     };
 } // namespace
 

@@ -8,6 +8,9 @@
 namespace OpenMouleEngine
 {
     Renderable::Renderable()
+        : position(),
+        scaling(),
+        rotation()
     {
     }
 
@@ -15,24 +18,40 @@ namespace OpenMouleEngine
     Renderable::~Renderable()
     {
     }
-    
-    
-    void Renderable::translate(const Vector3<float> &v)
+
+
+    void Renderable::translate(const vec3 &v)
     {
-        modelView.translate(v);
+        position = position + v;
     }
-    
-    
-    void Renderable::scale(const Vector3<float> &v)
+
+
+    void Renderable::scale(const vec3 &v)
     {
-        modelView.scale(v);
+        scaling = scaling + v;
     }
-    
-    
-    void Renderable::rotate(const Vector3<float> &v, float theta)
+
+
+    void Renderable::rotate(const vec3 &v, float theta)
     {
-        modelView.rotate(v, theta);;
+        rotation = rotation + v * theta;
     }
-    
-    
+
+
+    const vec3 &Renderable::getPosition() const
+    {
+        return position;
+    }
+
+
+    const vec3 &Renderable::getScaling() const
+    {
+        return scaling;
+    }
+
+
+    const vec3 &Renderable::getRotation() const
+    {
+        return rotation;
+    }
 } // namespace

@@ -12,18 +12,25 @@ namespace OpenMouleEngine
         : Resource(name),
         vertexArrays(vertexArrays),
         shader(NULL),
-        texture(NULL)
+        textures()
     {
+        // textures
+        GLint maxTex;
+        glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &maxTex);
+        //textures.resize(maxTex, NULL);
+
         // creating VBO
         glGenBuffers(1, &vbo);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
         // compute offsets of each vertex array
         GLsizeiptr size = 0;
+        GLsizei stride = 0;
 
         for(unsigned int i = 0; i < vertexArrays.size(); i++)
         {
             offsets.push_back(size);
+            //stride += vertexArrays[i]->elementSize();
             size += vertexArrays[i]->bytes();
         }
 
@@ -49,8 +56,13 @@ namespace OpenMouleEngine
 
     void Mesh::sendUniforms() const
     {
-        shader->sendUniform("texture0", *texture);
+        vec3 pos = getPosition();
+
+        shader->sendUniform("mdlPosition", pos);
         shader->sendUniform("camera", *Engine::getInstance()->getCamera());
+
+        shader->sendUniform("texture0", *textures[0]);
+        shader->sendUniform("texture1", *textures[1], 1);
     }
 
 
@@ -63,8 +75,10 @@ namespace OpenMouleEngine
         sendUniforms();
 
         // textures
-        glActiveTexture(GL_TEXTURE0 + 0);
-        texture->bind(); 
+        glActiveTexture(GL_TEXTURE0);
+        textures[0]->bind();
+        glActiveTexture(GL_TEXTURE1);
+        textures[1]->bind();
 
         // buffers
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -92,43 +106,19 @@ namespace OpenMouleEngine
 
     void Mesh::setTexture(Texture *t)
     {
-        texture = t;
+        textures.push_back(t);
     }
 
 
-    void Mesh::centerPivot(bool centerX, bool centerY, bool centerZ)
+    void Mesh::setTexture(const std::string &name)
     {
-        //unsigned int i;
-        //
-        //vec3 posMin(positions[0]);
-        //vec3 posMax(positions[0]);
+        setTexture(ResourceManager::getInstance()->getTexture(name));
+    }
 
-        //for(i = 0; i < positions.size(); i++)
-        //{
-        //    posMin.x = MIN(posMin.x, positions[i].x);
-        //    posMin.y = MIN(posMin.y, positions[i].y);
-        //    posMin.z = MIN(posMin.z, positions[i].z);
 
-        //    posMax.x = MAX(posMax.x, positions[i].x);
-        //    posMax.y = MAX(posMax.y, positions[i].y);
-        //    posMax.z = MAX(posMax.z, positions[i].z);
-        //}
-
-        //vec3 diff(vec3() - (posMax + posMin) / 2.f);
-
-        //if(!centerX)
-        //    diff.x = 0;
-
-        //if(!centerY)
-        //    diff.y = 0;
-
-        //if(!centerZ)
-        //    diff.z = 0;
-
-        //for(i = 0; i < positions.size(); i++)
-        //    positions[i] = positions[i] + diff;
-
-        //glBufferSubData(GL_ARRAY_BUFFER, positionsOffset, sizeof(vec3) * positions.size(), &positions[0]);
+    const std::vector<IVertexArray *> &Mesh::getArrays() const
+    {
+        return vertexArrays;
     }
 
 
@@ -136,7 +126,7 @@ namespace OpenMouleEngine
     //{
     //    return positions;
     //}
-    //
+
 
     //const std::vector<vec3> &Mesh::getNormals() const
     //{

@@ -4,6 +4,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 #include "Texture.hpp"
+#include "ShaderProgram.hpp"
 
 namespace OpenMouleEngine
 {
@@ -28,8 +29,8 @@ namespace OpenMouleEngine
     }
 
 
-    void Texture::sendAsUniform(ShaderProgram &program, const std::string &name)
+    void Texture::sendAsUniform(ShaderProgram &program, const std::string &name, GLint texUnit)
     {
-        glUniform1i(program.getUniformLocation(name), 0);
+        glUniform1i(program.getUniformLocation(name), texUnit);
     }
 } // namespace

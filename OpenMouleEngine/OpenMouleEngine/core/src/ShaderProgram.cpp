@@ -81,6 +81,12 @@ namespace OpenMouleEngine
     }
 
 
+    void ShaderProgram::sendUniform(const std::string &name, Texture &data, GLint texUnit)
+    {
+        data.sendAsUniform(*this, name, texUnit);
+    }
+
+
     GLint ShaderProgram::getUniformLocation(const std::string &name)
     {
         if(locations.find(name) == locations.end())
