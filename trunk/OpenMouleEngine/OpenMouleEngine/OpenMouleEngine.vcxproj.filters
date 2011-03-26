@@ -87,6 +87,9 @@
     <ClCompile Include="core\src\Material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="core\src\MeshData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="licence.txt">
@@ -206,6 +209,9 @@
       <Filter>Loaders</Filter>
     </ClInclude>
     <ClInclude Include="core\include\Material.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\include\MeshData.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

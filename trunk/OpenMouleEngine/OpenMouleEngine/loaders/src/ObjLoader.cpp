@@ -20,7 +20,7 @@ namespace OpenMouleEngine
     }
 
 
-    Mesh *ObjLoader::loadFromFile(const std::string &fileName)
+    MeshData *ObjLoader::loadFromFile(const std::string &fileName)
     {
         std::ifstream file(fileName.c_str());
 
@@ -131,6 +131,6 @@ namespace OpenMouleEngine
         vertexArrays.push_back(new VertexArray<vec3, 3, GL_FLOAT>("a_Normal", normals));
         vertexArrays.push_back(new VertexArray<vec2, 2, GL_FLOAT>("a_Coord0", coordinates));
         
-        return new Mesh(fileName, vertexArrays);
+        return new MeshData(fileName, vertexArrays);
     }
 } // namespace

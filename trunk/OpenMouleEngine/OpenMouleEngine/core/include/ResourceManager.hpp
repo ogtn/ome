@@ -31,6 +31,7 @@ namespace OpenMouleEngine
         void add(ResourceSaver *saver, const std::string &extensions);
         void saveAs(Resource &resource, const std::string &fileName);
 
+        MeshData *getMeshData(const std::string &name);
         Mesh *getMesh(const std::string &name);
         Shader *getShader(const std::string &name);
         Texture *getTexture(const std::string &name);

@@ -17,9 +17,15 @@ namespace OpenMouleEngine
     }
 
 
+    MeshData *ResourceManager::getMeshData(const std::string &name)
+    {
+        return get<MeshData>(name);
+    }
+
+
     Mesh *ResourceManager::getMesh(const std::string &name)
     {
-        return get<Mesh>(name);
+        return get<MeshData>(name)->getMesh();
     }
 
 
@@ -28,10 +34,12 @@ namespace OpenMouleEngine
         return get<Shader>(name);
     }
 
+
     Texture *ResourceManager::getTexture(const std::string &name)
     {
         return get<Texture>(name);
     }
+
 
     void ResourceManager::add(ResourceSaver *saver, const std::string &extensions)
     {

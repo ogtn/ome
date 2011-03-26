@@ -8,9 +8,9 @@
 namespace OpenMouleEngine
 {
     // default colors
-    Color3 Material::defaultAmbiant(0.05F, 0.05F, 0.05F);
-    Color3 Material::defaultDiffuse(0.2F, 0.2F, 0.2F);
-    Color3 Material::defaultSpecular(0.8F, 0.8F, 0.8F);
+    Color3 Material::defaultAmbiant(0.1F, 0.1F, 0.1F);
+    Color3 Material::defaultDiffuse(0.3F, 0.3F, 0.3F);
+    Color3 Material::defaultSpecular(0.9F, 0.9F, 0.9F);
     Color3 Material::defaultEmissive(0.0F, 0.0F, 0.0F);
     GLfloat Material::defaultShininess = 64.0F;
 

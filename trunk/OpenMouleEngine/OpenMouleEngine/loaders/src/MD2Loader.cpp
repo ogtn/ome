@@ -17,9 +17,10 @@ namespace OpenMouleEngine
     {
     }
 
-
+    
     Mesh *MD2Loader::loadFromFile(const std::string &fileName)
     {
+        /*
         std::ifstream file(fileName.c_str(), std::ifstream::binary);
         MD2Header header;
 
@@ -63,5 +64,7 @@ namespace OpenMouleEngine
         vertexArrays.push_back(new VertexArray<vec3, 3, GL_FLOAT>("a_Vertex", positions));
         
         return new Mesh(fileName, vertexArrays);
+        */
+        return NULL;
     }
 } // namespace
