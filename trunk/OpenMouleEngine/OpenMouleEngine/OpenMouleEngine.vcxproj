@@ -151,6 +151,8 @@
     <None Include="cpp.template" />
     <None Include="data\shaders\basic.frag" />
     <None Include="data\shaders\basic.vert" />
+    <None Include="data\shaders\grid.frag" />
+    <None Include="data\shaders\grid.vert" />
     <None Include="hpp.template" />
     <None Include="core\inline\Matrix4x4.inl" />
     <None Include="core\inline\ResourceLoader.inl" />

@@ -145,13 +145,29 @@ Matrix4x4<T> &Matrix4x4<T>::rotate(const Vector3<T> &axis, T theta)
     
     m.data[1][0] = v.x * v.y * (1 - ct) + v.z * st;
     m.data[1][1] = v.y * v.y * (1 - ct) + ct;
-    m.data[1][2] = v.y * v.z * (1 - ct) + v.x * st;
+    m.data[1][2] = v.y * v.z * (1 - ct) - v.x * st;
     
     m.data[2][0] = v.x * v.z * (1 - ct) - v.y * st;
     m.data[2][1] = v.y * v.z * (1 - ct) + v.x * st;
     m.data[2][2] = v.z * v.z * (1 - ct) + ct;
     
     return *this = *this * m;
+}
+
+
+template <typename T>       
+Matrix4x4<T> &Matrix4x4<T>::rotate(const Vector3<T> &angle)
+{
+    // awful, but temporary...
+    Matrix4x4<T> mx(*this);
+    Matrix4x4<T> my(*this);
+    Matrix4x4<T> mz(*this);
+
+    mx.rotate(Vector3<T>(1, 0, 0), angle.x);
+    my.rotate(Vector3<T>(0, 1, 0), angle.y);
+    mz.rotate(Vector3<T>(0, 0, 1), angle.z);
+
+    return *this = *this * mx * my * mz;
 }
 
 
@@ -205,6 +221,26 @@ const Matrix4x4<T> Matrix4x4<T>::operator*(const Matrix4x4 &m) const
     
             for(int k = 0; k < 4; k++)
                 res.data[i][j] += data[i][k] * m.data[k][j];
+        }
+    }
+        
+    return res;
+}
+
+
+template <typename T>
+Matrix4x4<T> operator*(const Matrix4x4<T> &m1, const Matrix4x4<T> &m2)
+{
+    Matrix4x4<T> res;
+
+    for(int i = 0; i < 4; i++)
+    {
+        for(int j = 0; j < 4; j++)
+        {
+            res.data[i][j] = 0;
+    
+            for(int k = 0; k < 4; k++)
+                res.data[i][j] += m1.data[i][k] * m2.data[k][j];
         }
     }
         

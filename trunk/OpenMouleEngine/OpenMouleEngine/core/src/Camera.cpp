@@ -19,6 +19,30 @@ namespace OpenMouleEngine
     }
 
 
+    const mat4 &Camera::getModelView()
+    {
+        if(!ready)
+        {
+            ready = true;
+            updateMatrices();
+        }
+
+        return modelview;
+    }
+
+
+    const mat4 &Camera::getProjection()
+    {
+        if(!ready)
+        {
+            ready = true;
+            updateMatrices();
+        }
+
+        return projection;
+    }
+
+
     CameraOrtho::CameraOrtho(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat near, GLfloat far)
         : Camera(),
         left(left),
@@ -43,19 +67,6 @@ namespace OpenMouleEngine
 
         projection.data[2][2] = 2 / (far - near);
         projection.data[2][3] = -(far + near) / (far - near);
-    }
-
-
-    void Camera::sendAsUniform(ShaderProgram &program, const std::string &name)
-    {
-        if(!ready)
-        {
-            ready = true;
-            updateMatrices();
-        }
-
-        glUniformMatrix4fv(program.getUniformLocation("projection"), 1, GL_TRUE, (GLfloat *)projection.data);
-        glUniformMatrix4fv(program.getUniformLocation("modelview"), 1, GL_TRUE, (GLfloat *)modelview.data);
     }
 
 
@@ -107,14 +118,13 @@ namespace OpenMouleEngine
         projection.data[3][2] = -1;
         projection.data[3][3] = 0;
 
-
         // modelview
         modelview.makeIdentity();
 
         vec3 forward(target - pos);
         forward.normalize();
-        vec3 side = forward * up.normalize();
-        vec3 newUP = side.normalize() * forward;
+        vec3 side = cross(forward, up.normalize());
+        vec3 newUP = cross(side.normalize(), forward);
 
         modelview.data[0][0] = side.x;
         modelview.data[0][1] = side.y;
@@ -127,6 +137,6 @@ namespace OpenMouleEngine
         modelview.data[2][0] = -forward.x;
         modelview.data[2][1] = -forward.y;
         modelview.data[2][2] = -forward.z;
-        modelview.data[2][3] = forward.dot(pos);  // wtf? nothing about that in the OpenGL manpages...
+        modelview.data[2][3] = dot(forward, pos);  // wtf? nothing about that in the OpenGL manpages...
     }
 } // namespace

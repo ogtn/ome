@@ -59,7 +59,7 @@ namespace OpenMouleEngine
     //}
 
 
-    void MeshData::render(ShaderProgram &shader) const
+    void MeshData::render(ShaderProgram &shader, GLenum mode) const
     {
         // buffers
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -68,7 +68,7 @@ namespace OpenMouleEngine
             vertexArrays[i]->enable(shader, offsets[i]);
 
         // render
-        glDrawArrays(GL_TRIANGLES, 0, vertexArrays[0]->size());
+        glDrawArrays(mode, 0, vertexArrays[0]->size());
 
         // buffer
         for(unsigned int i = 0; i < vertexArrays.size(); i++)

@@ -27,6 +27,7 @@ namespace OpenMouleEngine
         Matrix4x4 &translate(const Vector3<T> &v); 
         Matrix4x4 &scale(const Vector3<T> &v);
         Matrix4x4 &rotate(const Vector3<T> &axis, T theta);
+        Matrix4x4 &rotate(const Vector3<T> &angle);
         Matrix4x4 &transpose();
         const Matrix4x4 &load(bool transpose = true) const;
         const Matrix4x4 operator*(const Matrix4x4 &m) const;
@@ -40,6 +41,7 @@ namespace OpenMouleEngine
         };
     };
 
+    template <typename T> Matrix4x4<T> operator*(const Matrix4x4<T> &m1, const Matrix4x4<T> &m2);
     template <typename T> std::ostream &operator<<(std::ostream &ostr, const Matrix4x4<T> &m);
 
     typedef Matrix4x4<GLfloat> mat4;

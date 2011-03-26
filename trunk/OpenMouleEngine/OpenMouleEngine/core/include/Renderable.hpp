@@ -20,7 +20,7 @@ namespace OpenMouleEngine
         virtual void render() const = 0;        
         void translate(const vec3 &v);       
         void scale(const vec3 &v);      
-        void rotate(const vec3 &v, float theta);
+        void rotate(const vec3 &v);
         
         // getters
         const vec3 &getPosition() const;
