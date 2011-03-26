@@ -69,19 +69,13 @@ int main(void)
     rm->add(new MeshSaver(), "msh");
 
     // creating a mesh
-    Mesh *mesh;
+    Mesh *mesh, *mesh2;
     double t;
 
     t = glfwGetTime();
-    mesh = rm->getMesh("data/obj/smooth.obj");
+    mesh = rm->getMesh("data/obj/chamfer.obj");
+    mesh2 = rm->getMesh("data/obj/dragon.obj");
     cout << "Temps de chargement du .obj: " << glfwGetTime() - t << " secondes." << endl;
-
-    //mesh->saveAs("test.msh");
-
-    //t = glfwGetTime();
-    //mesh = 
-    //    rm->getMesh("test.msh");
-    //cout << "Temps de chargement du .msh: " << glfwGetTime() - t << " secondes." << endl;
 
     ShaderProgram shader("data/shaders/basic.vert", "data/shaders/basic.frag");
     shader.link();
@@ -92,8 +86,9 @@ int main(void)
     material.setDiffuse(rm->getTexture("data/textures/tiles.jpg"));
     mesh->setMaterial(&material);
 
-    //mesh->setTexture("data/textures/ground061.jpg");
-    //mesh->setTexture("data/textures/tiles.jpg");
+    mesh2->setShader(&shader);
+    mesh2->setMaterial(&material);
+    sg->add(*mesh2);
 
     CameraPerspective *cam = dynamic_cast<CameraPerspective *>(engine->getCamera());
 
@@ -101,7 +96,7 @@ int main(void)
     bool running = true;
     float theta = 0;
     float phi = M_PI / 4;
-    glfwSetMouseWheel(-8000);
+    glfwSetMouseWheel(-1000);
 
     t = glfwGetTime();
     int frames = 0;

@@ -15,13 +15,28 @@ namespace OpenMouleEngine
     class Light
     {
     public:
-        Light(Color color = Color());
+        Light();
         ~Light();
 
         virtual void sendAsUniform(ShaderProgram &program, const std::string &name);
 
     private:
-        Color color;
+        Color3 ambiantColor;
+        Color3 diffuseColor;
+        Color3 specularColor;
+    };
+
+
+    class DirectionalLight: public Light
+    {
+    public:
+        DirectionalLight(const vec3 &direction);
+        ~DirectionalLight();
+
+        void sendAsUniform(ShaderProgram &program, const std::string &name);
+
+    private:
+        vec3 direction;
     };
 } // namespace
 
