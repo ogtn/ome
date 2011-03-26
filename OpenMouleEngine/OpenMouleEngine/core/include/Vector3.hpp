@@ -20,10 +20,8 @@ namespace OpenMouleEngine
 
         Vector3 operator+(Vector3<T> v);
         Vector3 operator-(Vector3<T> v);
-        Vector3 operator*(Vector3<T> v);
         Vector3 operator/(T t);
         Vector3 &normalize();
-        T dot(Vector3<T> v);
         T length();
 
         void sendAsUniform(ShaderProgram &program, const std::string &name);
@@ -43,6 +41,9 @@ namespace OpenMouleEngine
     template <typename T> std::istream &operator>>(std::istream &istr, Vector3<T> &v);
     template <typename T> Vector3<T> operator*(Vector3<T> v, T t);
     template <typename T> Vector3<T> operator*(T t, Vector3<T> v);
+    template <typename T> Vector3<T> operator*(Vector3<T> v1, Vector3<T> v2);
+    template <typename T> Vector3<T> cross(Vector3<T> v1, Vector3<T> v2);
+    template <typename T> T dot(Vector3<T> v1, Vector3<T> v2);
 
     typedef Vector3<GLfloat> vec3;
 

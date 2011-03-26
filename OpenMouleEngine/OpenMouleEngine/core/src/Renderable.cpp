@@ -9,7 +9,7 @@ namespace OpenMouleEngine
 {
     Renderable::Renderable()
         : position(),
-        scaling(),
+        scaling(1.f, 1.f ,1.f),
         rotation()
     {
     }
@@ -28,13 +28,13 @@ namespace OpenMouleEngine
 
     void Renderable::scale(const vec3 &v)
     {
-        scaling = scaling + v;
+        scaling = scaling * v;
     }
 
 
-    void Renderable::rotate(const vec3 &v, float theta)
+    void Renderable::rotate(const vec3 &v)
     {
-        rotation = rotation + v * theta;
+        rotation = rotation + v;
     }
 
 

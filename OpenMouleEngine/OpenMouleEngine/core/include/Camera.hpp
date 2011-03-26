@@ -22,7 +22,8 @@ namespace OpenMouleEngine
         virtual ~Camera();
 
         virtual void updateMatrices() = 0;
-        void sendAsUniform(ShaderProgram &program, const std::string &name);
+        const mat4 &getModelView();
+        const mat4 &getProjection();
 
     protected:
         mat4 projection;

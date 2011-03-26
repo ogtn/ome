@@ -103,7 +103,7 @@ namespace OpenMouleEngine
 
         Mesh *getMesh() const;
         //const std::vector<Mesh *> &getMeshes() const;
-        void render(ShaderProgram &shader) const;
+        void render(ShaderProgram &shader, GLenum mode) const;
 
     private:
         GLuint vbo;

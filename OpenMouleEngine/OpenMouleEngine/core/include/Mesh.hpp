@@ -27,11 +27,13 @@ namespace OpenMouleEngine
         void render() const;    
         void setShader(ShaderProgram *s);
         void setMaterial(Material *mat);
+        void setRenderMode(GLenum m);
         
     private:
         const MeshData *geometry;
         ShaderProgram *shader;
         Material *material;
+        GLenum mode;
     };
 } // namespace
 

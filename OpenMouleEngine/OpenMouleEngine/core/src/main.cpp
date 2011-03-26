@@ -49,6 +49,52 @@ void errorCheck()
 }
 
 
+void makeGrid(int size, int pitch)
+{
+    std::vector<vec3> *positions = new std::vector<vec3>();
+    std::vector<Color> *colors = new std::vector<Color>();
+
+    int begin = -size / 2;
+    int end = size / 2;
+
+    for(int i = begin; i <= end; i += pitch)
+    {
+        // X axis
+        positions->push_back(vec3(i, begin));
+        positions->push_back(vec3(i, end));
+
+        // Y axis
+        positions->push_back(vec3(begin, i));
+        positions->push_back(vec3(end, i));
+
+        // colors
+        for(int j = 0; j < 4; j++)
+        {
+            if(i == 0)
+                colors->push_back(Color(0, 0, 0));
+            else
+                colors->push_back(Color(0.3f, 0.3f, 0.3f));
+        }
+    }
+
+    // creating vertex arrays
+    std::vector<IVertexArray *> vertexArrays;
+    vertexArrays.push_back(new VertexArray<vec3, 3, GL_FLOAT>("a_Vertex", positions));
+    vertexArrays.push_back(new VertexArray<Color, 4, GL_FLOAT>("a_Color", colors));
+
+    MeshData *meshData = new MeshData("grid", vertexArrays);
+
+    ShaderProgram *shader = new ShaderProgram("data/shaders/grid.vert", "data/shaders/grid.frag");
+    shader->link();
+
+    Mesh *mesh = meshData->getMesh();
+    mesh->setShader(shader);
+    mesh->setRenderMode(GL_LINES);
+
+    SceneGraph::getInstance()->add(*mesh);
+}
+
+
 int main(void)
 {
     makeWindow();
@@ -91,6 +137,8 @@ int main(void)
     mesh2->translate(vec3(0, 25));
     sg->add(*mesh2);
 
+    makeGrid(100, 10);
+
     CameraPerspective *cam = dynamic_cast<CameraPerspective *>(engine->getCamera());
 
     // main loop
@@ -118,7 +166,7 @@ int main(void)
             theta += 0.02f;
 
         if(glfwGetKey(GLFW_KEY_SPACE))
-            mesh->translate(vec3(0, 0, 1));
+            mesh->rotate(vec3(1, 2, 3));
 
         // avoid camera being upside down
         if(phi > (M_PI / 2.f - 0.01f))

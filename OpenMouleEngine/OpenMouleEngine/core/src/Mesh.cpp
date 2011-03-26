@@ -11,7 +11,8 @@ namespace OpenMouleEngine
     Mesh::Mesh(const MeshData *geometry, ShaderProgram *shader, Material *material)
         : geometry(geometry),
         shader(shader),
-        material(material)
+        material(material),
+        mode(GL_TRIANGLES)
     {
     }
 
@@ -23,14 +24,27 @@ namespace OpenMouleEngine
 
     void Mesh::sendUniforms() const
     {
-        vec3 pos = getPosition();
+        Camera *camera = Engine::getInstance()->getCamera();
 
-        shader->sendUniform("mdlPosition", pos);
-        shader->sendUniform("camera", *Engine::getInstance()->getCamera());
-        shader->sendUniform("mat", *material);
+        mat4 matrixPos;
+        matrixPos.translate(getPosition());
 
-        DirectionalLight light(vec3(1, 1, 1));
-        shader->sendUniform("light", light);
+        mat4 matrixRot;
+        matrixRot.rotate(getRotation());
+
+        mat4 matrixScal;
+        matrixScal.scale(getScaling());
+
+        mat4 mdlvw = camera->getModelView() * matrixPos * matrixScal * matrixRot;        
+        shader->sendUniform("modelview", mdlvw);
+        shader->sendUniform("projection", camera->getProjection());
+
+        if(material != NULL)
+        {
+            shader->sendUniform("mat", *material);
+            DirectionalLight light(vec3(1, 1, 1));
+            shader->sendUniform("light", light);
+        }
     }
 
 
@@ -38,7 +52,7 @@ namespace OpenMouleEngine
     {
         shader->bind();
         sendUniforms();
-        geometry->render(*shader);
+        geometry->render(*shader, mode);
         shader->unbind();
     }
 
@@ -52,5 +66,11 @@ namespace OpenMouleEngine
     void Mesh::setMaterial(Material *mat)
     {
         material = mat;
+    }
+
+
+    void Mesh::setRenderMode(GLenum m)
+    {
+        mode = m;
     }
 } // namespace

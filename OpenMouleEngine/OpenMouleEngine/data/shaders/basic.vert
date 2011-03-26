@@ -19,7 +19,6 @@ struct DirLight
 
 uniform mat4 projection;
 uniform mat4 modelview;
-uniform vec3 mdlPosition;
 uniform Material mat;
 uniform DirLight light;
 
@@ -36,14 +35,13 @@ out vec3 eyePos;
 void main()
 {
 	// standard vertex transformation
-	vec3 newPosition = a_Vertex + mdlPosition;
-	vec4 pos = modelview * vec4(newPosition, 1.0);
+	vec4 pos = modelview * vec4(a_Vertex, 1.0);
 	gl_Position = projection * pos;
 
 	// normal in eye space
 	mat3x3 normalMatrix = mat3x3(modelview);
 	vec3 normal = normalMatrix * a_Normal;
-
+	
 	// light direction in eye space
 	lightDir = normalize(modelview * vec4(light.direction, 0)).xyz;
 
