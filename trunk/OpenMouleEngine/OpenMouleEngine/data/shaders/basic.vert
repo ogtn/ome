@@ -9,10 +9,19 @@ struct Material
 	float shininess;
 };
 
+struct DirLight
+{
+	vec3 ambiantColor;
+	vec3 diffuseColor;
+	vec3 specularColor;
+	vec3 direction;
+};
+
 uniform mat4 projection;
 uniform mat4 modelview;
 uniform vec3 mdlPosition;
 uniform Material mat;
+uniform DirLight light;
 
 in vec3 a_Vertex;
 in vec3 a_Normal;
@@ -21,48 +30,30 @@ in vec2 a_Coord0;
 out vec3 norm;
 out vec2 coord0;
 out vec3 color;
-
-// temporary
-vec3 lightPos = vec3(0, 0, 1);
+out vec3 lightDir;
+out vec3 eyePos;
 
 void main()
 {
-	vec3 newPosition = a_Vertex + mdlPosition;
-
 	// standard vertex transformation
+	vec3 newPosition = a_Vertex + mdlPosition;
 	vec4 pos = modelview * vec4(newPosition, 1.0);
 	gl_Position = projection * pos;
 
 	// normal in eye space
 	mat3x3 normalMatrix = mat3x3(modelview);
-	vec3 normal = normalize(normalMatrix * a_Normal);
+	vec3 normal = normalMatrix * a_Normal;
 
 	// light direction in eye space
-	vec3 lightDir = normalize(modelview * vec4(lightPos, 0)).xyz;
+	lightDir = normalize(modelview * vec4(light.direction, 0)).xyz;
 
-	float lightAngle = max(dot(normal, lightPos), 0);
+	// eye position in eye space
+	vec3 eyePosition = -pos.xyz;
 
 	// ambiant component
-	color = mat.ambiantColor;
+	color = mat.ambiantColor * light.ambiantColor;
 
-	if(lightAngle > 0)
-	{
-		// diffuse component
-		//color += vec3(1, 1, 1) * lightAngle;
-
-		// eye position in eye space
-		vec3 eyePosition = -pos.xyz;
-
-		// calculating half vector
-		vec3 halfVector = normalize(lightDir + eyePosition);
-
-		// angle between half vector and the normal
-		float halfAngle = max(dot(normal, halfVector), 0);
-
-		// specular component
-		color += mat.specularColor * pow(halfAngle, mat.shininess);
-	}
-
+	eyePos = eyePosition;
 	norm = normal;
 	coord0 = a_Coord0;
 }

@@ -56,6 +56,9 @@ namespace OpenMouleEngine
         shader->sendUniform("mdlPosition", pos);
         shader->sendUniform("camera", *Engine::getInstance()->getCamera());
         shader->sendUniform("mat", *material);
+
+        DirectionalLight light(vec3(1, 1, 1));
+        shader->sendUniform("light", light);
     }
 
 
