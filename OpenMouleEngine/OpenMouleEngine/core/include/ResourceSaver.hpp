@@ -27,7 +27,7 @@ namespace OpenMouleEngine
     public:
         MeshSaver() {}
         ~MeshSaver() {}
-
+        /*
         void saveAs(const std::string &fileName, Resource &resource)
         {
             const Mesh &mesh = (const Mesh &)resource;
@@ -49,7 +49,7 @@ namespace OpenMouleEngine
                 file.write((char *)&size, sizeof(size));
                 file.write(arrays[i]->data(), size);
             }
-        }
+        }*/
     };
 
 } // namespace

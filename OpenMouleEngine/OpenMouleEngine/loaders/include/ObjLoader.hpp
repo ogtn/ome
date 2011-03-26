@@ -8,18 +8,18 @@
 #define HPP_OBJLOADER
 
 #include "ResourceLoader.hpp"
-#include "Mesh.hpp"
+#include "MeshData.hpp"
 #include <fstream>
 
 namespace OpenMouleEngine
 {
-    class ObjLoader: public ResourceLoader<Mesh>
+    class ObjLoader: public ResourceLoader<MeshData>
     {
     public:
         ObjLoader();
         ~ObjLoader();
 
-        Mesh *loadFromFile(const std::string &fileName);
+        MeshData *loadFromFile(const std::string &fileName);
     };
 
 

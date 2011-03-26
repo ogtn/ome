@@ -61,33 +61,34 @@ int main(void)
     rm->add(new VertexShaderLoader(), "vert");
     rm->add(new FragmentShaderLoader(), "frag");
     rm->add(new ObjLoader(), "obj");
-    rm->add(new MeshLoader(), "msh");
-    rm->add(new MD2Loader(), "md2");
     rm->add(DevILLoader::getInstance(), "jpg");
+    rm->add(DevILLoader::getInstance(), "png");
+    //rm->add(new MeshLoader(), "msh");
+    //rm->add(new MD2Loader(), "md2");
 
     // setting savers
-    rm->add(new MeshSaver(), "msh");
-
-    // creating a mesh
-    Mesh *mesh, *mesh2;
-    double t;
-
-    t = glfwGetTime();
-    mesh = rm->getMesh("data/obj/chamfer.obj");
-    mesh2 = rm->getMesh("data/obj/dragon.obj");
-    cout << "Temps de chargement du .obj: " << glfwGetTime() - t << " secondes." << endl;
+    //rm->add(new MeshSaver(), "msh");
 
     ShaderProgram shader("data/shaders/basic.vert", "data/shaders/basic.frag");
     shader.link();
-    mesh->setShader(&shader);
-    sg->add(*mesh);
 
     Material material("noname");
-    material.setDiffuse(rm->getTexture("data/textures/tiles.jpg"));
+    material.setDiffuse(rm->getTexture("data/textures/smb3.png"));
+    material.setShininess(32.f);
+
+    double t = glfwGetTime();
+    Mesh *mesh = rm->getMesh("data/obj/chamfer.obj");
+    Mesh *mesh2 = rm->getMesh("data/obj/chamfer.obj");
+    cout << "Temps de chargement du .obj: " << glfwGetTime() - t << " secondes." << endl;
+
+    mesh->setShader(&shader);
     mesh->setMaterial(&material);
+    mesh->translate(vec3(0, -25));
+    sg->add(*mesh);
 
     mesh2->setShader(&shader);
     mesh2->setMaterial(&material);
+    mesh2->translate(vec3(0, 25));
     sg->add(*mesh2);
 
     CameraPerspective *cam = dynamic_cast<CameraPerspective *>(engine->getCamera());
@@ -96,7 +97,7 @@ int main(void)
     bool running = true;
     float theta = 0;
     float phi = M_PI / 4;
-    glfwSetMouseWheel(-1000);
+    glfwSetMouseWheel(-1500);
 
     t = glfwGetTime();
     int frames = 0;
