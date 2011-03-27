@@ -38,15 +38,15 @@ void makeWindow()
 }
 
 
-#pragma comment(lib, "glu32.lib")
-void errorCheck()
-{
-    GLenum err = glGetError();
-    if(err != GL_NO_ERROR)
-        cout << gluErrorString(err) << endl;
-    else
-        cout << "Jusqu'ici, tout va bien..." << endl;
-}
+//#pragma comment(lib, "glu32.lib")
+//void errorCheck()
+//{
+//    GLenum err = glGetError();
+//    if(err != GL_NO_ERROR)
+//        cout << gluErrorString(err) << endl;
+//    else
+//        cout << "Jusqu'ici, tout va bien..." << endl;
+//}
 
 
 void makeGrid(int size, int pitch)
@@ -90,9 +90,6 @@ void makeGrid(int size, int pitch)
     Mesh *mesh = meshData->getMesh();
     mesh->setShader(shader);
     mesh->setRenderMode(GL_LINES);
-
-    //Material *material = new Material("prout");
-    //material->setDiffuse(ResourceManager::getInstance()->getTexture("data/textures/particle.png"));
     
     SceneGraph::getInstance()->add(*mesh);
 }
@@ -112,8 +109,8 @@ int main(void)
     rm->add(new ObjLoader(), "obj");
     rm->add(DevILLoader::getInstance(), "jpg");
     rm->add(DevILLoader::getInstance(), "png");
-    //rm->add(new MeshLoader(), "msh");
-    //rm->add(new MD2Loader(), "md2");
+    rm->add(new MeshLoader(), "msh");
+    rm->add(new MD2Loader(), "md2");
 
     // setting savers
     //rm->add(new MeshSaver(), "msh");
@@ -131,7 +128,7 @@ int main(void)
     mesh->translate(vec3(0, -25));
     sg->add(*mesh);
 
-    Mesh *mesh2 = rm->getMesh("data/obj/dragon.obj");
+    Mesh *mesh2 = rm->getMesh("data/obj/chamfer.obj");
     ShaderProgram shader2("data/shaders/point.vert", "data/shaders/point.frag");
     shader2.link();
     mesh2->setShader(&shader2);
@@ -148,8 +145,8 @@ int main(void)
     // main loop
     bool running = true;
     float theta = 0;
-    float phi = M_PI / 4;
-    glfwSetMouseWheel(-1500);
+    float phi = pi / 4.f;
+    //glfwSetMouseWheel(10);
 
     while(running)
     {
@@ -170,22 +167,19 @@ int main(void)
             mesh->rotate(vec3(1, 2, 3));
 
         // avoid camera being upside down
-        if(phi > (M_PI / 2.f - 0.01f))
-            phi = M_PI / 2.f - 0.01f;
+        if(phi > (pi / 2.f - 0.01f))
+            phi = pi / 2.f - 0.01f;
 
-        if(phi < (-M_PI / 2.f + 0.01f))
-            phi = -M_PI / 2.f + 0.01f;
+        if(phi < (-pi / 2.f + 0.01f))
+            phi = -pi / 2.f + 0.01f;
 
         // avoid negative zoom
-        if(glfwGetMouseWheel() >= 0)
+        if(glfwGetMouseWheel() > -1)
             glfwSetMouseWheel(-1);
 
         // camera update
-        cam->lookAt(vec3(
-            cos(phi) * cos(theta),              // x
-            cos(phi) * sin(theta),              // y
-            sin(phi))                           // z
-            * (-glfwGetMouseWheel() / 20.f));   // zoom
+        vec3 camPos(cos(phi) * cos(theta), cos(phi) * sin(theta), sin(phi));
+        cam->lookAt(camPos * (glfwGetMouseWheel() * glfwGetMouseWheel() * 0.01f));
 
         // display
         engine->clearColorBuffer();
