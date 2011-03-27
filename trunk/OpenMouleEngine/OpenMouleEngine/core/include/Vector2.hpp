@@ -7,11 +7,7 @@
 #ifndef HPP_VECTOR2
 #define HPP_VECTOR2
 
-#include <cmath>
-#ifndef M_PI
-#define M_PI 3.141592653589793238462643
-#endif
-
+#include "MathTools.hpp"
 #include "ShaderProgram.hpp"
 #include <iostream>
 #include <GL/glew.h>

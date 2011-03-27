@@ -132,7 +132,7 @@ template <typename T>
 Matrix4x4<T> &Matrix4x4<T>::rotate(const Vector3<T> &axis, T theta)
 {
     Vector3<T> v(axis);
-    theta *= T(M_PI) / 180;
+    theta = degToRad(theta);
     T ct = cos(theta), st = sin(theta);
     Matrix4x4<T> m;
     

@@ -140,6 +140,9 @@
     <None Include="data\shaders\point.vert">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="core\inline\MathTools.inl">
+      <Filter>Inline Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\include\Camera.hpp">
@@ -224,6 +227,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="core\include\MeshData.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\include\MathTools.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

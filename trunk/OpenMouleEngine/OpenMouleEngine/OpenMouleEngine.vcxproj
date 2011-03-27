@@ -148,6 +148,7 @@
     <ClCompile Include="core\src\Texture2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="core\inline\MathTools.inl" />
     <None Include="cpp.template" />
     <None Include="data\shaders\basic.frag" />
     <None Include="data\shaders\basic.vert" />
@@ -169,6 +170,7 @@
     <ClInclude Include="core\include\Camera.hpp" />
     <ClInclude Include="core\include\Color.hpp" />
     <ClInclude Include="core\include\Material.hpp" />
+    <ClInclude Include="core\include\MathTools.hpp" />
     <ClInclude Include="core\include\MeshData.hpp" />
     <ClInclude Include="loaders\include\DevILLoader.hpp" />
     <ClInclude Include="core\include\Engine.hpp" />
