@@ -30,7 +30,7 @@ namespace OpenMouleEngine
         ilGenImages(1, &il_id);
         ilBindImage(il_id);
 
-        if(ilLoadImage((wchar_t *) fileName.c_str()) == IL_FALSE)
+        if(ilLoadImage((const ILstring) fileName.c_str()) == IL_FALSE)
         {
             ilDeleteImage(il_id);
             std::cerr << "Impossible de charger: " + fileName << std::endl;
