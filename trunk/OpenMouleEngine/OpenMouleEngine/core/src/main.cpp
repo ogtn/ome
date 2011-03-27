@@ -91,6 +91,9 @@ void makeGrid(int size, int pitch)
     mesh->setShader(shader);
     mesh->setRenderMode(GL_LINES);
 
+    //Material *material = new Material("prout");
+    //material->setDiffuse(ResourceManager::getInstance()->getTexture("data/textures/particle.png"));
+    
     SceneGraph::getInstance()->add(*mesh);
 }
 
@@ -115,29 +118,30 @@ int main(void)
     // setting savers
     //rm->add(new MeshSaver(), "msh");
 
+    makeGrid(100, 10);
+
+    Mesh *mesh = rm->getMesh("data/obj/chamfer.obj");
     ShaderProgram shader("data/shaders/basic.vert", "data/shaders/basic.frag");
     shader.link();
-
-    Material material("noname");
+    mesh->setShader(&shader);
+    Material material("smbCube");
     material.setDiffuse(rm->getTexture("data/textures/smb3.png"));
     material.setShininess(32.f);
-
-    double t = glfwGetTime();
-    Mesh *mesh = rm->getMesh("data/obj/chamfer.obj");
-    Mesh *mesh2 = rm->getMesh("data/obj/chamfer.obj");
-    cout << "Temps de chargement du .obj: " << glfwGetTime() - t << " secondes." << endl;
-
-    mesh->setShader(&shader);
     mesh->setMaterial(&material);
     mesh->translate(vec3(0, -25));
     sg->add(*mesh);
 
-    mesh2->setShader(&shader);
-    mesh2->setMaterial(&material);
+    Mesh *mesh2 = rm->getMesh("data/obj/dragon.obj");
+    ShaderProgram shader2("data/shaders/point.vert", "data/shaders/point.frag");
+    shader2.link();
+    mesh2->setShader(&shader2);
+    Material material2("pointSprite");
+    material2.setDiffuse(rm->getTexture("data/textures/particle.png"));
+    mesh2->setMaterial(&material2);
     mesh2->translate(vec3(0, 25));
+    mesh2->setRenderMode(GL_POINTS);
+    mesh2->setPointSize(100);
     sg->add(*mesh2);
-
-    makeGrid(100, 10);
 
     CameraPerspective *cam = dynamic_cast<CameraPerspective *>(engine->getCamera());
 
@@ -146,9 +150,6 @@ int main(void)
     float theta = 0;
     float phi = M_PI / 4;
     glfwSetMouseWheel(-1500);
-
-    t = glfwGetTime();
-    int frames = 0;
 
     while(running)
     {
@@ -193,10 +194,8 @@ int main(void)
 
         glfwSwapBuffers();
         glfwSleep(0.016);
-        frames++;
     }
-
-    cout << frames << " frames in " << glfwGetTime() - t << " seconds: " << frames / (glfwGetTime() - t) << " fps" << endl;
+   
     glfwTerminate();
 
     return EXIT_SUCCESS;

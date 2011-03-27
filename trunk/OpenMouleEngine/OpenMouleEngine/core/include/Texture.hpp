@@ -20,7 +20,7 @@ namespace OpenMouleEngine
         Texture(const std::string &name, GLuint id, GLenum type);
         virtual ~Texture() = 0;
 
-        void bind(int textureUnit);
+        void bind(int textureUnit) const;
         void sendAsUniform(ShaderProgram &program, const std::string &name, GLint texUnit = 0) const;
 
     private:

@@ -28,12 +28,14 @@ namespace OpenMouleEngine
         void setShader(ShaderProgram *s);
         void setMaterial(Material *mat);
         void setRenderMode(GLenum m);
+        void setPointSize(float size);
         
     private:
         const MeshData *geometry;
         ShaderProgram *shader;
         Material *material;
         GLenum mode;
+        float pointSize;
     };
 } // namespace
 

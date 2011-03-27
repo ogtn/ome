@@ -24,7 +24,7 @@ namespace OpenMouleEngine
     }
 
 
-    void Texture::bind(int textureUnit)
+    void Texture::bind(int textureUnit) const
     {
         glActiveTexture(GL_TEXTURE0 + textureUnit);
         glBindTexture(type, id);
@@ -33,6 +33,7 @@ namespace OpenMouleEngine
 
     void Texture::sendAsUniform(ShaderProgram &program, const std::string &name, GLint texUnit) const
     {
+        bind(texUnit);
         glUniform1i(program.getUniformLocation(name), texUnit);
     }
 } // namespace

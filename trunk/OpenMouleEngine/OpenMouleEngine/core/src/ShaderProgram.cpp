@@ -94,10 +94,7 @@ namespace OpenMouleEngine
             GLint location = glGetUniformLocation(program, name.c_str());
 
             if(location == -1)
-            {
                 std::cerr << "Error: aucune variable uniforme " + name + " dans le shader." << std::endl;
-                return -1;
-            }
 
             locations[name] = location;
         }
@@ -113,10 +110,7 @@ namespace OpenMouleEngine
             GLint location = glGetAttribLocation(program, name.c_str());
 
             if(location == -1)
-            {
                 std::cerr << "Error: aucun attribut de vertex " + name + " dans le shader." << std::endl;
-                return -1;
-            }
 
             locations[name] = location;
         }

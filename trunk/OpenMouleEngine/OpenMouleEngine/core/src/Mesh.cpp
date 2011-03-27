@@ -12,7 +12,8 @@ namespace OpenMouleEngine
         : geometry(geometry),
         shader(shader),
         material(material),
-        mode(GL_TRIANGLES)
+        mode(GL_TRIANGLES),
+        pointSize(640.f)
     {
     }
 
@@ -24,6 +25,7 @@ namespace OpenMouleEngine
 
     void Mesh::sendUniforms() const
     {
+        // apply mesh transformation to the modelview
         Camera *camera = Engine::getInstance()->getCamera();
 
         mat4 matrixPos;
@@ -35,13 +37,23 @@ namespace OpenMouleEngine
         mat4 matrixScal;
         matrixScal.scale(getScaling());
 
-        mat4 mdlvw = camera->getModelView() * matrixPos * matrixScal * matrixRot;        
+        mat4 mdlvw = camera->getModelView() * matrixPos * matrixScal * matrixRot;
+
+        // sending modelview and projection matrices to the shader
         shader->sendUniform("modelview", mdlvw);
         shader->sendUniform("projection", camera->getProjection());
 
+        // send material if available
         if(material != NULL)
-        {
             shader->sendUniform("mat", *material);
+
+        // if using pointsprites, send the size to the shader
+        if(mode == GL_POINTS)
+            glUniform1f(shader->getUniformLocation("pointSize"), pointSize);
+
+        // temporary
+        if(material != NULL && material->name.name == "smbCube")
+        {
             DirectionalLight light(vec3(1, 1, 1));
             shader->sendUniform("light", light);
         }
@@ -72,5 +84,11 @@ namespace OpenMouleEngine
     void Mesh::setRenderMode(GLenum m)
     {
         mode = m;
+    }
+
+
+    void Mesh::setPointSize(float size)
+    {
+        pointSize = size;
     }
 } // namespace

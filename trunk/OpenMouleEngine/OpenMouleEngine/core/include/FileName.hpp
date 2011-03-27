@@ -21,7 +21,7 @@ namespace OpenMouleEngine
         const std::string path() const;
         const std::string extension() const;
 
-    private:
+    public:
         std::string name;
     };
 } // namespace
