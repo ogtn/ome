@@ -19,7 +19,7 @@ namespace OpenMouleEngine
 
         void saveAs(const std::string &name);
 
-    private:
+    public:
         FileName name;
     };
 } // namespace

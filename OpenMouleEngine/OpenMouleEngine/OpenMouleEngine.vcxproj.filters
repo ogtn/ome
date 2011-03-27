@@ -134,6 +134,12 @@
     <None Include="data\shaders\grid.vert">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="data\shaders\point.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="data\shaders\point.vert">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\include\Camera.hpp">

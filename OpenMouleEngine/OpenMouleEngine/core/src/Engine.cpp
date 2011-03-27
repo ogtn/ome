@@ -37,12 +37,17 @@ namespace OpenMouleEngine
         // OpenGL initialisation
         glClearColor(0.1, 0.1, 0.1, 1);
         glEnable(GL_DEPTH_TEST);
-        //glEnable(GL_BLEND);
-        //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         //glEnable(GL_ALPHA_TEST);
-
         //glEnable(GL_BGR_EXT);
         //glAlphaFunc(GL_GREATER, 0.1);
+
+        // point sprites
+        glEnable(GL_POINT_SPRITE);
+        glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);
+        glTexEnvi(GL_POINT_SPRITE,  GL_COORD_REPLACE, GL_TRUE);
+        glPointSize(64);
     }
 
     
