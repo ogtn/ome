@@ -143,6 +143,9 @@
     <None Include="core\inline\MathTools.inl">
       <Filter>Inline Files</Filter>
     </None>
+    <None Include="core\inline\MeshData.inl">
+      <Filter>Inline Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\include\Camera.hpp">

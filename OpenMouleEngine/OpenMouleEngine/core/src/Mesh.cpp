@@ -8,7 +8,7 @@
 
 namespace OpenMouleEngine
 {
-    Mesh::Mesh(const MeshData *geometry, ShaderProgram *shader, Material *material)
+    Mesh::Mesh(MeshData *geometry, ShaderProgram *shader, Material *material)
         : geometry(geometry),
         shader(shader),
         material(material),

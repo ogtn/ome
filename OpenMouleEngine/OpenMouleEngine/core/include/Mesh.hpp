@@ -20,7 +20,7 @@ namespace OpenMouleEngine
     class Mesh: public SceneNode
     {
     public:
-        Mesh(const MeshData *geometry, ShaderProgram *shader = NULL, Material *material = NULL);
+        Mesh(MeshData *geometry, ShaderProgram *shader = NULL, Material *material = NULL);
         ~Mesh();
 
         virtual void sendUniforms() const;
@@ -32,7 +32,7 @@ namespace OpenMouleEngine
         const MeshData *data() const;
 
     private:
-        const MeshData *geometry;
+        MeshData *geometry;
         ShaderProgram *shader;
         Material *material;
         GLenum mode;
