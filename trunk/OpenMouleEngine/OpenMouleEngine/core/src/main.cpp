@@ -72,23 +72,26 @@ void makeGrid(int size, int pitch)
         {
             if(i == 0)
                 colors->push_back(Color(0, 0, 0));
+            else if((i % 5) == 0)
+                colors->push_back(Color(0.5f, 0.5f, 0.5f));
             else
                 colors->push_back(Color(0.3f, 0.3f, 0.3f));
         }
     }
 
-    // creating vertex arrays
-    VertexArray *va = new VertexArray("a_Vertex", positions);
-    va->addSubArray("a_Color", colors);
+    // creating mesh data
+    MeshData *meshData = new MeshData("grid", "a_Vertex", positions);
+    meshData->addSubArray("a_Color", colors);
+    meshData->finalize();
 
-    MeshData *md = new MeshData("grid", va);
-    Mesh *m = md->getMesh();
+    // generating mesh
+    Mesh *mesh = meshData->getMesh();
 
     ShaderProgram *shader = new ShaderProgram("data/shaders/grid.vert", "data/shaders/grid.frag");
     shader->link();
-    m->setShader(shader);
-    m->setRenderMode(GL_LINES);
-    SceneGraph::getInstance()->add(*m);
+    mesh->setShader(shader);
+    mesh->setRenderMode(GL_LINES);
+    SceneGraph::getInstance()->add(*mesh);
 }
 
 
@@ -112,9 +115,9 @@ int main(void)
     // setting savers
     rm->add(new MeshSaver(), "msh");
 
-    makeGrid(100, 10);
+    makeGrid(100, 2);
 
-    /*Mesh *mesh = rm->getMesh("data/obj/chamfer.obj");
+    Mesh *mesh = rm->getMesh("data/obj/chamfer.obj");
     ShaderProgram shader("data/shaders/basic.vert", "data/shaders/basic.frag");
     shader.link();
     mesh->setShader(&shader);
@@ -137,7 +140,7 @@ int main(void)
     mesh2->translate(vec3(0, 25));
     mesh2->setRenderMode(GL_POINTS);
     mesh2->setPointSize(100);
-    sg->add(*mesh2);*/
+    sg->add(*mesh2);
 
     CameraPerspective *cam = dynamic_cast<CameraPerspective *>(engine->getCamera());
 
@@ -163,7 +166,7 @@ int main(void)
             theta += 0.02f;
 
         //if(glfwGetKey(GLFW_KEY_SPACE))
-            //mesh->rotate(vec3(1, 2, 3));
+            mesh->rotate(vec3(0.5f, 1.f, 1.5f));
 
         // avoid camera being upside down
         if(phi > (PI / 2.f - 0.01f))

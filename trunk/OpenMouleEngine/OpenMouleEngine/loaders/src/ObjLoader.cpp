@@ -22,7 +22,7 @@ namespace OpenMouleEngine
 
     MeshData *ObjLoader::loadFromFile(const std::string &fileName)
     {
-        /*std::ifstream file(fileName.c_str());
+        std::ifstream file(fileName.c_str());
 
         if(!file)
         {
@@ -126,16 +126,11 @@ namespace OpenMouleEngine
             pos[i] = pos[i] + diff;
 
         // gather all arrays
-        std::vector<IVertexArray *> vertexArrays;
-        vertexArrays.push_back(new VertexArray<vec3, 3, GL_FLOAT>("a_Vertex", positions));
-        vertexArrays.push_back(new VertexArray<vec3, 3, GL_FLOAT>("a_Normal", normals));
-        vertexArrays.push_back(new VertexArray<vec2, 2, GL_FLOAT>("a_Coord0", coordinates));
+        MeshData *meshData = new MeshData(fileName, "a_Vertex", positions);
+        meshData->addSubArray("a_Normal", normals);
+        meshData->addSubArray("a_Coord0", coordinates);
+        meshData->finalize();
 
-
-        std::ifstream file2("test.obj");
-        
-
-        
-        return new MeshData(fileName, vertexArrays);*/ return NULL;
+        return meshData;
     }
 } // namespace

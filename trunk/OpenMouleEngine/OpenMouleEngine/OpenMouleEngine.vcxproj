@@ -149,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="core\inline\MathTools.inl" />
+    <None Include="core\inline\MeshData.inl" />
     <None Include="cpp.template" />
     <None Include="data\shaders\basic.frag" />
     <None Include="data\shaders\basic.vert" />

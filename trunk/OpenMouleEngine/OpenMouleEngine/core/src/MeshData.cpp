@@ -8,34 +8,16 @@
 
 namespace OpenMouleEngine
 {
-    MeshData::MeshData(const std::string &name, VertexArray *vertexArray)
-        : Resource(name),
-        vertexArray(vertexArray),
-        meshes()
-    {
-        // creating VBO
-        glGenBuffers(1, &vbo);
-        glBindBuffer(GL_ARRAY_BUFFER, vbo);
-
-        // allocate memory for the VBO
-        vertexArray->finalize();
-        glBufferData(GL_ARRAY_BUFFER, vertexArray->size(), NULL, GL_STATIC_DRAW);
-
-        // vertex arrays initialisation
-        vertexArray->updateVBO();
-    }
-
-
     MeshData::~MeshData()
     {
-        // destroy the VBO
+        // destroying VBO
         glDeleteBuffers(1, &vbo);
 
         std::cerr << "il manque un truc la..." << std::endl;
     }
 
 
-    Mesh *MeshData::getMesh() const
+    Mesh *MeshData::getMesh()
     {
         return new Mesh(this);
     }
@@ -47,11 +29,75 @@ namespace OpenMouleEngine
     //}
 
 
-    void MeshData::render(ShaderProgram &shader, GLenum mode) const
+    void MeshData::render(ShaderProgram &shader, GLenum mode)
     {
+        if(!finalized)
+            finalize();
+
+        AttribIterator it;
+        GLint location;
+
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        vertexArray->enable(shader);
-        glDrawArrays(mode, 0, vertexArray->nbElements());
-        vertexArray->disable(shader);
+
+        // enabling vertex attribues
+        for(it = vertexAttribs.begin(); it != vertexAttribs.end(); ++it)
+        {
+            location = shader.getAttribLocation(it->first);
+
+            glVertexAttribPointer(location, it->second.nbSubElements, it->second.type.glType, GL_FALSE, 0, BUFFER_OFFSET(it->second.offset));
+            glEnableVertexAttribArray(location);
+        }
+
+
+        glDrawArrays(mode, 0, nbVertices);
+
+        // disabling vertex attributes
+        for(it = vertexAttribs.begin(); it != vertexAttribs.end(); ++it)
+            glDisableVertexAttribArray(shader.getAttribLocation(it->first));
+    }
+
+
+    void MeshData::finalize()
+    {
+        // allocate memory for the VBO
+        glBufferData(GL_ARRAY_BUFFER, byteSize, NULL, GL_STATIC_DRAW);
+
+        // vertex arrays initialisation
+        AttribIterator it;
+
+        for(it = vertexAttribs.begin(); it != vertexAttribs.end(); ++it)
+            it->second.updateVBO();
+
+        finalized = true;
+    }
+
+
+    MeshData::VertexAttrib::VertexAttrib()
+        : data(NULL),
+        offset(0),
+        type(VOID),
+        nbSubElements(0),
+        nbElements(0)
+    {
+    }
+
+
+    MeshData::VertexAttrib::VertexAttrib(char *data, GLsizeiptr offset, int nbElements, int nbSubElements, DataType type)
+        : type(type),
+        data(data),
+        nbSubElements(nbSubElements),
+        offset(offset),
+        nbElements(nbElements)
+    {
+    }
+
+    MeshData::VertexAttrib::~VertexAttrib()
+    {
+    }
+
+
+    void MeshData::VertexAttrib::updateVBO()
+    {
+        glBufferSubData(GL_ARRAY_BUFFER, offset, nbElements * nbSubElements * type.size, data);
     }
 } // namespace
