@@ -36,6 +36,25 @@ namespace OpenMouleEngine
     }
 
 
+    MeshData::MeshData(const std::string &name, VertexArray2 *va)
+        : Resource(name),
+        va(va),
+        offsets(),
+        meshes()
+    {
+        // creating VBO
+        glGenBuffers(1, &vbo);
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+        // allocate memory for the VBO
+        va->finalize();
+        glBufferData(GL_ARRAY_BUFFER, va->size(), NULL, GL_STATIC_DRAW);
+
+        // vertex arrays initialisation
+        va->updateVBO();
+    }
+
+
     MeshData::~MeshData()
     {
         // destroy the VBO
@@ -61,6 +80,9 @@ namespace OpenMouleEngine
 
     void MeshData::render(ShaderProgram &shader, GLenum mode) const
     {
+        if(name.name == "grid2")
+            return render2(shader, mode);
+
         // buffers
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
@@ -73,5 +95,20 @@ namespace OpenMouleEngine
         // buffer
         for(unsigned int i = 0; i < vertexArrays.size(); i++)
             vertexArrays[i]->disable(shader);
+    }
+
+
+    void MeshData::render2(ShaderProgram &shader, GLenum mode) const
+    {
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        va->enable(shader);
+        glDrawArrays(mode, 0, va->nbElements());
+        va->disable(shader);
+    }
+
+
+    const std::vector<IVertexArray *> &MeshData::arrays() const
+    {
+        return vertexArrays;
     }
 } // namespace

@@ -29,7 +29,7 @@ namespace OpenMouleEngine
         void add(ResourceLoader<T> *loader, const std::string &extensions);
 
         void add(ResourceSaver *saver, const std::string &extensions);
-        void saveAs(Resource &resource, const std::string &fileName);
+        void saveAs(const Resource &resource, const std::string &fileName);
 
         MeshData *getMeshData(const std::string &name);
         Mesh *getMesh(const std::string &name);

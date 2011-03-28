@@ -19,7 +19,7 @@ namespace OpenMouleEngine
         ResourceSaver() {}
         virtual ~ResourceSaver() {};
 
-        virtual void saveAs(const std::string &fileName, Resource &resource) = 0;
+        virtual void saveAs(const std::string &fileName, const Resource &resource) = 0;
     };
 
     class MeshSaver: public ResourceSaver
@@ -27,10 +27,10 @@ namespace OpenMouleEngine
     public:
         MeshSaver() {}
         ~MeshSaver() {}
-        /*
-        void saveAs(const std::string &fileName, Resource &resource)
+
+        void saveAs(const std::string &fileName, const Resource &resource)
         {
-            const Mesh &mesh = (const Mesh &)resource;
+            const MeshData &meshData = dynamic_cast<const MeshData &>(resource);
 
             std::ofstream file(fileName.c_str(), std::ofstream::binary | std::ios::out | std::ios::trunc);
 
@@ -41,7 +41,7 @@ namespace OpenMouleEngine
             }
 
             unsigned int size;
-            const std::vector<IVertexArray *> &arrays = mesh.getArrays();
+            const std::vector<IVertexArray *> &arrays = meshData.arrays();
 
             for(unsigned int i = 0; i < arrays.size(); i++)
             {
@@ -49,7 +49,7 @@ namespace OpenMouleEngine
                 file.write((char *)&size, sizeof(size));
                 file.write(arrays[i]->data(), size);
             }
-        }*/
+        }
     };
 
 } // namespace

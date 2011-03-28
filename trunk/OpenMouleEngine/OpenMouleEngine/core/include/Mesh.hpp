@@ -29,7 +29,8 @@ namespace OpenMouleEngine
         void setMaterial(Material *mat);
         void setRenderMode(GLenum m);
         void setPointSize(float size);
-        
+        const MeshData *data() const;
+
     private:
         const MeshData *geometry;
         ShaderProgram *shader;

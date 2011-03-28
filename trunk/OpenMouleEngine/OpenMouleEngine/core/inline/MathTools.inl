@@ -6,11 +6,11 @@
 template <typename T>
 T degToRad(T angle)
 {
-    return angle * T(pi) / 180;
+    return angle * T(PI) / 180;
 }
 
 template <typename T>
 T radToDeg(T angle)
 {
-    return angle / T(pi) * 180;
+    return angle / T(PI) * 180;
 }

@@ -11,7 +11,7 @@
 
 namespace OpenMouleEngine
 {
-    const double pi = 3.141592653589793238462643;
+    const double PI = 3.141592653589793238462643;
 
     template <typename T>
     T degToRad(T angle);
