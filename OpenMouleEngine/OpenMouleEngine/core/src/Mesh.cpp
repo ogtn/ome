@@ -91,4 +91,10 @@ namespace OpenMouleEngine
     {
         pointSize = size;
     }
+
+
+    const MeshData *Mesh::data() const
+    {
+        return geometry;
+    }
 } // namespace

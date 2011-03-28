@@ -15,7 +15,7 @@ namespace OpenMouleEngine
     {
     public:
         Resource(const std::string &name);
-        ~Resource();
+        virtual ~Resource();
 
         void saveAs(const std::string &name);
 

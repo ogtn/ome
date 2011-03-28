@@ -130,6 +130,11 @@ namespace OpenMouleEngine
         vertexArrays.push_back(new VertexArray<vec3, 3, GL_FLOAT>("a_Vertex", positions));
         vertexArrays.push_back(new VertexArray<vec3, 3, GL_FLOAT>("a_Normal", normals));
         vertexArrays.push_back(new VertexArray<vec2, 2, GL_FLOAT>("a_Coord0", coordinates));
+
+
+        std::ifstream file2("test.obj");
+        
+
         
         return new MeshData(fileName, vertexArrays);
     }

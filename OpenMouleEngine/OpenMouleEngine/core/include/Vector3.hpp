@@ -26,6 +26,10 @@ namespace OpenMouleEngine
 
         void sendAsUniform(ShaderProgram &program, const std::string &name);
 
+        // needed for VertexArray?
+        //static int nbElements();
+        //static GLenum GLType();
+
         union
         {
             struct

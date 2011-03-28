@@ -122,3 +122,27 @@ T dot(Vector3<T> v1, Vector3<T> v2)
 {
     return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
 }
+
+/*
+template <typename T> 
+static int Vector3<T>::nbElements()
+{
+    return 3;
+}
+
+
+template <> 
+static GLenum Vector3<GLfloat>::GLType()
+{
+    return GL_FLOAT;
+}
+*/
+
+//GL_BYTE
+//GL_UNSIGNED_BYTE
+//GL_SHORT
+//GL_UNSIGNED_SHORT
+//GL_INT
+//GL_UNSIGNED_INT
+//GL_FLOAT
+//GL_DOUBLE

@@ -92,6 +92,16 @@ void makeGrid(int size, int pitch)
     mesh->setRenderMode(GL_LINES);
     
     SceneGraph::getInstance()->add(*mesh);
+
+    // creating vertex array 2
+    VertexArray2 *va = new VertexArray2("a_Vertex", positions);
+    va->addSubArray("a_Color", colors);
+    MeshData *md = new MeshData("grid2", va);
+    Mesh *m = md->getMesh();
+    m->setShader(shader);
+    m->setRenderMode(GL_LINES);
+    m->rotate(vec3(90));
+    SceneGraph::getInstance()->add(*m);
 }
 
 
@@ -113,7 +123,7 @@ int main(void)
     rm->add(new MD2Loader(), "md2");
 
     // setting savers
-    //rm->add(new MeshSaver(), "msh");
+    rm->add(new MeshSaver(), "msh");
 
     makeGrid(100, 10);
 
@@ -127,6 +137,8 @@ int main(void)
     mesh->setMaterial(&material);
     mesh->translate(vec3(0, -25));
     sg->add(*mesh);
+
+    //rm->saveAs(*mesh->data(), "test.msh");
 
     Mesh *mesh2 = rm->getMesh("data/obj/chamfer.obj");
     ShaderProgram shader2("data/shaders/point.vert", "data/shaders/point.frag");
@@ -145,8 +157,8 @@ int main(void)
     // main loop
     bool running = true;
     float theta = 0;
-    float phi = pi / 4.f;
-    //glfwSetMouseWheel(10);
+    float phi = PI / 4.f;
+    glfwSetMouseWheel(-100);
 
     while(running)
     {
@@ -163,15 +175,15 @@ int main(void)
         else if(glfwGetKey(GLFW_KEY_RIGHT))
             theta += 0.02f;
 
-        if(glfwGetKey(GLFW_KEY_SPACE))
+        //if(glfwGetKey(GLFW_KEY_SPACE))
             mesh->rotate(vec3(1, 2, 3));
 
         // avoid camera being upside down
-        if(phi > (pi / 2.f - 0.01f))
-            phi = pi / 2.f - 0.01f;
+        if(phi > (PI / 2.f - 0.01f))
+            phi = PI / 2.f - 0.01f;
 
-        if(phi < (-pi / 2.f + 0.01f))
-            phi = -pi / 2.f + 0.01f;
+        if(phi < (-PI / 2.f + 0.01f))
+            phi = -PI / 2.f + 0.01f;
 
         // avoid negative zoom
         if(glfwGetMouseWheel() > -1)
