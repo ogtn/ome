@@ -30,7 +30,7 @@ namespace OpenMouleEngine
 
         void saveAs(const std::string &fileName, const Resource &resource)
         {
-            const MeshData &meshData = dynamic_cast<const MeshData &>(resource);
+            /*const MeshData &meshData = dynamic_cast<const MeshData &>(resource);
 
             std::ofstream file(fileName.c_str(), std::ofstream::binary | std::ios::out | std::ios::trunc);
 
@@ -48,7 +48,7 @@ namespace OpenMouleEngine
                 size = arrays[i]->bytes();
                 file.write((char *)&size, sizeof(size));
                 file.write(arrays[i]->data(), size);
-            }
+            }*/
         }
     };
 

@@ -22,7 +22,7 @@ namespace OpenMouleEngine
 
     MeshData *ObjLoader::loadFromFile(const std::string &fileName)
     {
-        std::ifstream file(fileName.c_str());
+        /*std::ifstream file(fileName.c_str());
 
         if(!file)
         {
@@ -136,6 +136,6 @@ namespace OpenMouleEngine
         
 
         
-        return new MeshData(fileName, vertexArrays);
+        return new MeshData(fileName, vertexArrays);*/ return NULL;
     }
 } // namespace
