@@ -78,29 +78,16 @@ void makeGrid(int size, int pitch)
     }
 
     // creating vertex arrays
-    std::vector<IVertexArray *> vertexArrays;
-    vertexArrays.push_back(new VertexArray<vec3, 3, GL_FLOAT>("a_Vertex", positions));
-    vertexArrays.push_back(new VertexArray<Color, 4, GL_FLOAT>("a_Color", colors));
+    VertexArray *va = new VertexArray("a_Vertex", positions);
+    va->addSubArray("a_Color", colors);
 
-    MeshData *meshData = new MeshData("grid", vertexArrays);
+    MeshData *md = new MeshData("grid", va);
+    Mesh *m = md->getMesh();
 
     ShaderProgram *shader = new ShaderProgram("data/shaders/grid.vert", "data/shaders/grid.frag");
     shader->link();
-
-    Mesh *mesh = meshData->getMesh();
-    mesh->setShader(shader);
-    mesh->setRenderMode(GL_LINES);
-    
-    SceneGraph::getInstance()->add(*mesh);
-
-    // creating vertex array 2
-    VertexArray2 *va = new VertexArray2("a_Vertex", positions);
-    va->addSubArray("a_Color", colors);
-    MeshData *md = new MeshData("grid2", va);
-    Mesh *m = md->getMesh();
     m->setShader(shader);
     m->setRenderMode(GL_LINES);
-    m->rotate(vec3(90));
     SceneGraph::getInstance()->add(*m);
 }
 
@@ -127,7 +114,7 @@ int main(void)
 
     makeGrid(100, 10);
 
-    Mesh *mesh = rm->getMesh("data/obj/chamfer.obj");
+    /*Mesh *mesh = rm->getMesh("data/obj/chamfer.obj");
     ShaderProgram shader("data/shaders/basic.vert", "data/shaders/basic.frag");
     shader.link();
     mesh->setShader(&shader);
@@ -150,7 +137,7 @@ int main(void)
     mesh2->translate(vec3(0, 25));
     mesh2->setRenderMode(GL_POINTS);
     mesh2->setPointSize(100);
-    sg->add(*mesh2);
+    sg->add(*mesh2);*/
 
     CameraPerspective *cam = dynamic_cast<CameraPerspective *>(engine->getCamera());
 
@@ -176,7 +163,7 @@ int main(void)
             theta += 0.02f;
 
         //if(glfwGetKey(GLFW_KEY_SPACE))
-            mesh->rotate(vec3(1, 2, 3));
+            //mesh->rotate(vec3(1, 2, 3));
 
         // avoid camera being upside down
         if(phi > (PI / 2.f - 0.01f))
