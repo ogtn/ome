@@ -53,6 +53,7 @@ void makeGrid(int size, int pitch)
 {
     std::vector<vec3> *positions = new std::vector<vec3>();
     std::vector<Color> *colors = new std::vector<Color>();
+    std::vector<GLfloat> *posNcol = new std::vector<GLfloat>();
 
     int begin = -size / 2;
     int end = size / 2;
@@ -63,9 +64,21 @@ void makeGrid(int size, int pitch)
         positions->push_back(vec3(i, begin));
         positions->push_back(vec3(i, end));
 
+        // interleaved X axis and color
+        posNcol->push_back(i); posNcol->push_back(begin); posNcol->push_back(0);
+        posNcol->push_back(0.5); posNcol->push_back(0.6); posNcol->push_back(0.7); posNcol->push_back(0.8);
+        posNcol->push_back(i); posNcol->push_back(end); posNcol->push_back(0);
+        posNcol->push_back(0.5); posNcol->push_back(0.6); posNcol->push_back(0.7); posNcol->push_back(0.8);
+
         // Y axis
         positions->push_back(vec3(begin, i));
         positions->push_back(vec3(end, i));
+
+        // interleaved Y axis and color
+        posNcol->push_back(begin); posNcol->push_back(i); posNcol->push_back(0);
+        posNcol->push_back(0.5); posNcol->push_back(0.6); posNcol->push_back(0.7); posNcol->push_back(0.8);
+        posNcol->push_back(end); posNcol->push_back(i); posNcol->push_back(0);
+        posNcol->push_back(0.5); posNcol->push_back(0.6); posNcol->push_back(0.7); posNcol->push_back(0.8);
 
         // colors
         for(int j = 0; j < 4; j++)
@@ -80,9 +93,13 @@ void makeGrid(int size, int pitch)
     }
 
     // creating mesh data
-    MeshData *meshData = new MeshData("grid", "a_Vertex", positions);
-    meshData->addSubArray("a_Color", colors);
+    //MeshData *meshData = new MeshData("grid", "a_Vertex", positions);
+    //meshData->addSubArray("a_Color", colors);
+    MeshData *meshData = new MeshData("grid", &(*posNcol)[0], positions->size());
+    meshData->addSubArray("a_Vertex");
+    meshData->addSubArray("a_Color", 4);
     meshData->finalize();
+    meshData->print();
 
     // generating mesh
     Mesh *mesh = meshData->getMesh();

@@ -9,7 +9,12 @@ MeshData::MeshData(const std::string &name, const std::string &attribName, std::
     meshes(),
     vertexAttribs(),
     nbVertices(),
+<<<<<<< .mine
+    tmpData(NULL),
+    offset(0),
+=======
     byteSize(0),
+>>>>>>> .r59
     interleaved(false),
     finalized(false)
 {
@@ -30,7 +35,12 @@ MeshData::MeshData(const std::string &name, const std::string &attribName, T *da
     meshes(),
     vertexAttribs(),
     nbVertices(nbVertices),
+<<<<<<< .mine
+    tmpData(NULL),
+    offset(0),
+=======
     byteSize(0),
+>>>>>>> .r59
     interleaved(false),
     finalized(false)
 {
@@ -41,6 +51,29 @@ MeshData::MeshData(const std::string &name, const std::string &attribName, T *da
     // creating the first vertex attribute
     vertexAttribs[attribName] = VertexAttrib(data, byteSize, sizeof(T) / type.size, type);
     byteSize += nbVertices * sizeof(T);
+}
+
+
+template <typename T> 
+MeshData::MeshData(const std::string &name, T *data, int nbVertices)
+    : Resource(name),
+    meshes(),
+    vertexAttribs(),
+    nbVertices(nbVertices),
+    tmpData((char *)data),
+    offset(0),
+    interleaved(true),
+    finalized(false),
+    byteSize(0)
+{
+    // creating VBO
+    glGenBuffers(1, &vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+    float *f = (float *) data;
+    for(int i = 0; i < 10; i++)
+        std::cout << f[i] << '\t';
+    std::cout << endl << "##################################" << std::endl;
 }
 
 
@@ -84,5 +117,5 @@ T *MeshData::rawData(const std::string &name)
         std::cerr << "l'attribut " + name + " n'existe pas" << std::endl;
     }
 
-    return reinterpret_cast<T*>(vertexAttribs[name].data);
+    return reinterpret_cast<T *>(vertexAttribs[name].data);
 }

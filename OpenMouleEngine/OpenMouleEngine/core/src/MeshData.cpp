@@ -17,6 +17,32 @@ namespace OpenMouleEngine
     }
 
 
+    void MeshData::addSubArray(const std::string &attribName, int nbSubElements, DataType type)
+    {
+        if(finalized)
+        {
+            std::cerr << "addSubArray(): impossible d'ajouter dans un vertex array finalise" << std::endl;
+            return;
+        }
+
+        if(!interleaved)
+        {
+            std::cerr << "addSubArray(): impossible d'ajouter dans un vertex array non entrelace" << std::endl;
+            return;
+        }
+
+        if(vertexAttribs.find(attribName) != vertexAttribs.end())
+        {
+            std::cerr << "addSubArray(): impossible d'ecraser des donnees" << std::endl;
+            return;
+        }
+
+        vertexAttribs[attribName] = VertexAttrib(tmpData, offset, nbVertices, nbSubElements, type);
+        byteSize += nbVertices * nbSubElements * type.size;
+        offset += nbSubElements * type.size;
+    }
+
+
     Mesh *MeshData::getMesh()
     {
         return new Mesh(this);
@@ -44,7 +70,11 @@ namespace OpenMouleEngine
         {
             location = shader.getAttribLocation(it->first);
 
-            glVertexAttribPointer(location, it->second.nbSubElements, it->second.type.glType, GL_FALSE, 0, BUFFER_OFFSET(it->second.offset));
+            if(interleaved)
+                glVertexAttribPointer(location, it->second.nbSubElements, it->second.type.glType, GL_FALSE, offset, BUFFER_OFFSET(it->second.offset));
+            else
+                glVertexAttribPointer(location, it->second.nbSubElements, it->second.type.glType, GL_FALSE, 0, BUFFER_OFFSET(it->second.offset));
+                
             glEnableVertexAttribArray(location);
         }
 
