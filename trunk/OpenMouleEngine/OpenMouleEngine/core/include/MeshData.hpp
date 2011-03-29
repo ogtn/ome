@@ -53,9 +53,9 @@ namespace OpenMouleEngine
 
             void updateVBO();
 
+            DataType type;
             char *data;
             GLsizeiptr offset;
-            DataType type;
             int nbSubElements;
             int nbElements;
         };
