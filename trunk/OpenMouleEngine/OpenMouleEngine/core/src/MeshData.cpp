@@ -37,7 +37,7 @@ namespace OpenMouleEngine
             return;
         }
 
-        vertexAttribs[attribName] = VertexAttrib(tmpData, offset, nbVertices, nbSubElements, type);
+        vertexAttribs[attribName] = VertexAttrib(interleavedData, offset, nbVertices, nbSubElements, type);
         byteSize += nbVertices * nbSubElements * type.size;
         offset += nbSubElements * type.size;
     }
@@ -74,7 +74,7 @@ namespace OpenMouleEngine
                 glVertexAttribPointer(location, it->second.nbSubElements, it->second.type.glType, GL_FALSE, offset, BUFFER_OFFSET(it->second.offset));
             else
                 glVertexAttribPointer(location, it->second.nbSubElements, it->second.type.glType, GL_FALSE, 0, BUFFER_OFFSET(it->second.offset));
-                
+
             glEnableVertexAttribArray(location);
         }
 
@@ -89,14 +89,22 @@ namespace OpenMouleEngine
 
     void MeshData::finalize()
     {
+        if(finalized)
+            return;
+
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
         // allocate memory for the VBO
         glBufferData(GL_ARRAY_BUFFER, byteSize, NULL, GL_STATIC_DRAW);
 
         // vertex arrays initialisation
         AttribIterator it;
 
-        for(it = vertexAttribs.begin(); it != vertexAttribs.end(); ++it)
-            it->second.updateVBO();
+        if(interleaved)
+            glBufferSubData(GL_ARRAY_BUFFER, 0, byteSize, interleavedData);
+        else
+            for(it = vertexAttribs.begin(); it != vertexAttribs.end(); ++it)
+                it->second.updateVBO();
 
         finalized = true;
     }

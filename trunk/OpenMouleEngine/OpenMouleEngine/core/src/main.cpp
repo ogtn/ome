@@ -67,6 +67,7 @@ void makeGrid(int size, int pitch)
         // interleaved X axis and color
         posNcol->push_back(i); posNcol->push_back(begin); posNcol->push_back(0);
         posNcol->push_back(0.5); posNcol->push_back(0.6); posNcol->push_back(0.7); posNcol->push_back(0.8);
+        
         posNcol->push_back(i); posNcol->push_back(end); posNcol->push_back(0);
         posNcol->push_back(0.5); posNcol->push_back(0.6); posNcol->push_back(0.7); posNcol->push_back(0.8);
 
@@ -77,6 +78,7 @@ void makeGrid(int size, int pitch)
         // interleaved Y axis and color
         posNcol->push_back(begin); posNcol->push_back(i); posNcol->push_back(0);
         posNcol->push_back(0.5); posNcol->push_back(0.6); posNcol->push_back(0.7); posNcol->push_back(0.8);
+        
         posNcol->push_back(end); posNcol->push_back(i); posNcol->push_back(0);
         posNcol->push_back(0.5); posNcol->push_back(0.6); posNcol->push_back(0.7); posNcol->push_back(0.8);
 
@@ -84,7 +86,7 @@ void makeGrid(int size, int pitch)
         for(int j = 0; j < 4; j++)
         {
             if(i == 0)
-                colors->push_back(Color(0, 0, 0));
+                colors->push_back(Color(0.8f, 0.8f, 0.8f));
             else if((i % 5) == 0)
                 colors->push_back(Color(0.5f, 0.5f, 0.5f));
             else
@@ -97,9 +99,7 @@ void makeGrid(int size, int pitch)
     //meshData->addSubArray("a_Color", colors);
     MeshData *meshData = new MeshData("grid", &(*posNcol)[0], positions->size());
     meshData->addSubArray("a_Vertex");
-    meshData->addSubArray("a_Color", 4);
-    meshData->finalize();
-    meshData->print();
+    meshData->addSubArray("a_Color", 4); 
 
     // generating mesh
     Mesh *mesh = meshData->getMesh();
@@ -167,6 +167,9 @@ int main(void)
     float phi = PI / 4.f;
     glfwSetMouseWheel(-100);
 
+    int frames = 0;
+    double t = glfwGetTime();
+
     while(running)
     {
         // check for exit
@@ -207,9 +210,15 @@ int main(void)
 
         glfwSwapBuffers();
         glfwSleep(0.016);
+        frames++;
     }
    
+    double t2 = glfwGetTime();
+
     glfwTerminate();
+
+    cout << "Total: " << frames << " frames en " << t2 - t << "s, soit " << frames / (t2 - t ) << " fps" << endl;
+    getchar();
 
     return EXIT_SUCCESS;
 }

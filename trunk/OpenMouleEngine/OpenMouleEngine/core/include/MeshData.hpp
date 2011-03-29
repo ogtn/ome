@@ -111,16 +111,7 @@ namespace OpenMouleEngine
             for(it = vertexAttribs.begin(); it != vertexAttribs.end(); ++it)
             {
                 std::cerr << it->first << " avec " << it->second.nbSubElements;
-                std::cerr << " sous elements de taille " << it->second.type.size;
-                
-                float *f = rawData<float>(it->first);
-
-                std::cout << std::endl;
-
-                for(int i = 0; i < 50; i++)
-                    std::cout << f[i] << '\t';
-
-                std::cout << std::endl;
+                std::cerr << " sous elements de taille " << it->second.type.size << std::endl;
             }
         }
 
@@ -135,7 +126,7 @@ namespace OpenMouleEngine
         AttribMap vertexAttribs;
         unsigned int nbVertices;
         unsigned int byteSize;
-        char *tmpData;
+        char *interleavedData;
         GLsizeiptr offset;
         bool interleaved;
         bool finalized;

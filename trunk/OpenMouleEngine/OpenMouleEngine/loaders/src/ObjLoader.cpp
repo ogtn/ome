@@ -129,7 +129,6 @@ namespace OpenMouleEngine
         MeshData *meshData = new MeshData(fileName, "a_Vertex", positions);
         meshData->addSubArray("a_Normal", normals);
         meshData->addSubArray("a_Coord0", coordinates);
-        meshData->finalize();
 
         return meshData;
     }
