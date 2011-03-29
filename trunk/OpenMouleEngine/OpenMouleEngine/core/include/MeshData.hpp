@@ -68,8 +68,8 @@ namespace OpenMouleEngine
         template <typename T>
         MeshData(const std::string &name, const std::string &attribName, T *data, unsigned int nbVertices, DataType type = FLOAT);
         
-        //template <typename T> 
-        //MeshData(const std::string &name, T *data, int nbVertices);   
+        template <typename T> 
+        MeshData(const std::string &name, T *data, int nbVertices);
         
         ~MeshData();
 
@@ -79,8 +79,7 @@ namespace OpenMouleEngine
         //template <typename T> 
         //void addSubArray(const std::string &attribName, T *data, int nbVertices, GLenum type = GL_FLOAT);
 
-        //template <typename T>
-        //void addSubArray(const std::string &attribName, int nbSubElements = 3, GLenum type = GL_FLOAT);
+        void addSubArray(const std::string &attribName, int nbSubElements = 3, DataType type = FLOAT);
 
         template <typename T>
         T *rawData(const std::string &name);
@@ -90,32 +89,40 @@ namespace OpenMouleEngine
         void render(ShaderProgram &shader, GLenum mode);
         void finalize();
 
-        //void print()
-        //{
-        //    std::cerr << "Le VBO contient " << nbVertices << " sommets, pour un total de " << byteSize << " octets" << std::endl;
-        //
-        //    if(finalized)
-        //        std::cerr << "Il est finalise" << std::endl;
-        //    else
-        //        std::cerr << "Il n'est pas finalise" << std:: endl;
+        void print()
+        {
+            std::cerr << "Le VBO contient " << nbVertices << " sommets, pour un total de " << byteSize << " octets" << std::endl;
+        
+            if(finalized)
+                std::cerr << "Il est finalise" << std::endl;
+            else
+                std::cerr << "Il n'est pas finalise" << std:: endl;
 
-        //    if(interleaved)
-        //        std::cerr << "Il est entrelace" << std::endl;
-        //    else
-        //        std::cerr << "Il n'est pas entrelace" << std:: endl;
+            if(interleaved)
+                std::cerr << "Il est entrelace" << std::endl;
+            else
+                std::cerr << "Il n'est pas entrelace" << std:: endl;
 
 
-        //    std::cerr << "Il est constitue de:" << std::endl;
+            std::cerr << "Il est constitue de:" << std::endl;
 
-        //    std::map<std::string, VertexAttrib>::iterator it;
+            std::map<std::string, VertexAttrib>::iterator it;
 
-        //    for(it = vertexAttribs.begin(); it != vertexAttribs.end(); ++it)
-        //    {
-        //        std::cerr << it->first << " avec " << it->second.nbSubElements;
-        //        std::cerr << " sous elements de taille " << it->second.type.size;
-        //        std::cerr << ", d'offset " << it->second.offset << std::endl;
-        //    }
-        //}
+            for(it = vertexAttribs.begin(); it != vertexAttribs.end(); ++it)
+            {
+                std::cerr << it->first << " avec " << it->second.nbSubElements;
+                std::cerr << " sous elements de taille " << it->second.type.size;
+                
+                float *f = rawData<float>(it->first);
+
+                std::cout << std::endl;
+
+                for(int i = 0; i < 50; i++)
+                    std::cout << f[i] << '\t';
+
+                std::cout << std::endl;
+            }
+        }
 
     private:
         typedef std::map<std::string, VertexAttrib> AttribMap;
@@ -128,6 +135,8 @@ namespace OpenMouleEngine
         AttribMap vertexAttribs;
         unsigned int nbVertices;
         unsigned int byteSize;
+        char *tmpData;
+        GLsizeiptr offset;
         bool interleaved;
         bool finalized;
     };
