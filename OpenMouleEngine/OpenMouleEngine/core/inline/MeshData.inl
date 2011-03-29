@@ -9,7 +9,7 @@ MeshData::MeshData(const std::string &name, const std::string &attribName, std::
     meshes(),
     vertexAttribs(),
     nbVertices(),
-    tmpData(NULL),
+    interleavedData(NULL),
     offset(0),
     byteSize(0),
     interleaved(false),
@@ -23,6 +23,7 @@ MeshData::MeshData(const std::string &name, const std::string &attribName, std::
     nbVertices = data->size();
     vertexAttribs[attribName] = VertexAttrib((char *)(&(*data)[0]), byteSize, nbVertices, sizeof(T) / type.size, type);
     byteSize += data->size() * sizeof(T);
+    offset += sizeof(T);
 }
 
 
@@ -32,7 +33,7 @@ MeshData::MeshData(const std::string &name, const std::string &attribName, T *da
     meshes(),
     vertexAttribs(),
     nbVertices(nbVertices),
-    tmpData(NULL),
+    interleavedData(NULL),
     offset(0),
     byteSize(0),
     interleaved(false),
@@ -43,7 +44,7 @@ MeshData::MeshData(const std::string &name, const std::string &attribName, T *da
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
     // creating the first vertex attribute
-    vertexAttribs[attribName] = VertexAttrib(data, byteSize, sizeof(T) / type.size, type);
+    vertexAttribs[attribName] = VertexAttrib(data, 0, sizeof(T) / type.size, type);
     byteSize += nbVertices * sizeof(T);
 }
 
@@ -54,7 +55,7 @@ MeshData::MeshData(const std::string &name, T *data, int nbVertices)
     meshes(),
     vertexAttribs(),
     nbVertices(nbVertices),
-    tmpData((char *)data),
+    interleavedData((char *)data),
     offset(0),
     byteSize(0),
     interleaved(true),
@@ -63,11 +64,6 @@ MeshData::MeshData(const std::string &name, T *data, int nbVertices)
     // creating VBO
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-
-    float *f = (float *) data;
-    for(int i = 0; i < 10; i++)
-        std::cout << f[i] << '\t';
-    std::cout << endl << "##################################" << std::endl;
 }
 
 
@@ -100,6 +96,7 @@ void MeshData::addSubArray(const std::string &attribName, std::vector<T> *data, 
 
     vertexAttribs[attribName] = VertexAttrib((char *)(&(*data)[0]), byteSize, nbVertices, sizeof(T) / type.size, type);
     byteSize += data->size() * sizeof(T);
+    offset += sizeof(T);
 }
 
 
