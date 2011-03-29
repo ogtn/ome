@@ -73,9 +73,9 @@ namespace OpenMouleEngine
 
 
     MeshData::VertexAttrib::VertexAttrib()
-        : data(NULL),
+        : type(VOID),
+        data(NULL),
         offset(0),
-        type(VOID),
         nbSubElements(0),
         nbElements(0)
     {
@@ -85,8 +85,8 @@ namespace OpenMouleEngine
     MeshData::VertexAttrib::VertexAttrib(char *data, GLsizeiptr offset, int nbElements, int nbSubElements, DataType type)
         : type(type),
         data(data),
-        nbSubElements(nbSubElements),
         offset(offset),
+        nbSubElements(nbSubElements),
         nbElements(nbElements)
     {
     }

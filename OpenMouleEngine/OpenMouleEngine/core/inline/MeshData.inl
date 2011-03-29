@@ -9,9 +9,9 @@ MeshData::MeshData(const std::string &name, const std::string &attribName, std::
     meshes(),
     vertexAttribs(),
     nbVertices(),
+    byteSize(0),
     interleaved(false),
-    finalized(false),
-    byteSize(0)
+    finalized(false)
 {
     // creating VBO
     glGenBuffers(1, &vbo);
@@ -30,9 +30,9 @@ MeshData::MeshData(const std::string &name, const std::string &attribName, T *da
     meshes(),
     vertexAttribs(),
     nbVertices(nbVertices),
+    byteSize(0),
     interleaved(false),
-    finalized(false),
-    byteSize(0)
+    finalized(false)
 {
     // creating VBO
     glGenBuffers(1, &vbo);
