@@ -132,6 +132,7 @@
     <ClCompile Include="core\src\Color.cpp" />
     <ClCompile Include="core\src\Material.cpp" />
     <ClCompile Include="core\src\MeshData.cpp" />
+    <ClCompile Include="core\src\SuperPointer.cpp" />
     <ClCompile Include="loaders\src\DevILLoader.cpp" />
     <ClCompile Include="core\src\Engine.cpp" />
     <ClCompile Include="core\src\FileName.cpp" />
@@ -154,6 +155,7 @@
   <ItemGroup>
     <None Include="core\inline\MathTools.inl" />
     <None Include="core\inline\MeshData.inl" />
+    <None Include="core\inline\SuperPointer.inl" />
     <None Include="cpp.template" />
     <None Include="data\shaders\basic.frag" />
     <None Include="data\shaders\basic.vert" />
@@ -177,6 +179,7 @@
     <ClInclude Include="core\include\Material.hpp" />
     <ClInclude Include="core\include\MathTools.hpp" />
     <ClInclude Include="core\include\MeshData.hpp" />
+    <ClInclude Include="core\include\SuperPointer.hpp" />
     <ClInclude Include="loaders\include\DevILLoader.hpp" />
     <ClInclude Include="core\include\Engine.hpp" />
     <ClInclude Include="core\include\FileName.hpp" />
