@@ -7,8 +7,9 @@
 
 namespace OpenMouleEngine
 {
-    Renderable::Renderable()
-        : position(),
+    Renderable::Renderable(const std::string &name)
+        : name(name),
+        position(),
         scaling(1.f, 1.f ,1.f),
         rotation()
     {

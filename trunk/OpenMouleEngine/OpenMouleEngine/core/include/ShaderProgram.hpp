@@ -7,14 +7,16 @@
 #ifndef HPP_SHADERPROGRAM
 #define HPP_SHADERPROGRAM
 
-#include "Texture.hpp"
-#include "Shader.hpp"
 #include <GL/glew.h>
 #include <string>
 #include <map>
 
 namespace OpenMouleEngine
 {
+    // forward declaration
+    class Shader;
+    class Texture;
+
     class ShaderProgram
     {
     public:

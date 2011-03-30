@@ -5,6 +5,7 @@
 
 #include "MeshData.hpp"
 #include "Mesh.hpp"
+#include <sstream>
 
 namespace OpenMouleEngine
 {
@@ -45,7 +46,9 @@ namespace OpenMouleEngine
 
     Mesh *MeshData::getMesh()
     {
-        return new Mesh(this);
+        std::ostringstream ost;
+        ost << name.baseName() << "_" << nbMeshes++;
+        return new Mesh(ost.str(), this);
     }
 
 
@@ -137,5 +140,32 @@ namespace OpenMouleEngine
     void MeshData::VertexAttrib::updateVBO()
     {
         glBufferSubData(GL_ARRAY_BUFFER, offset, nbElements * nbSubElements * type.size, data);
+    }
+
+
+    void MeshData::print()
+    {
+        std::cerr << "Le VBO contient " << nbVertices << " sommets, pour un total de " << byteSize << " octets" << std::endl;
+
+        if(finalized)
+            std::cerr << "Il est finalise" << std::endl;
+        else
+            std::cerr << "Il n'est pas finalise" << std:: endl;
+
+        if(interleaved)
+            std::cerr << "Il est entrelace" << std::endl;
+        else
+            std::cerr << "Il n'est pas entrelace" << std:: endl;
+
+
+        std::cerr << "Il est constitue de:" << std::endl;
+
+        std::map<std::string, VertexAttrib>::iterator it;
+
+        for(it = vertexAttribs.begin(); it != vertexAttribs.end(); ++it)
+        {
+            std::cerr << it->first << " avec " << it->second.nbSubElements;
+            std::cerr << " sous elements de taille " << it->second.type.size << std::endl;
+        }
     }
 } // namespace

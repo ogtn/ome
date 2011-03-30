@@ -15,7 +15,7 @@ namespace OpenMouleEngine
     class SceneNode: public Renderable
     {
     public:
-        SceneNode();
+        SceneNode(const std::string &name);
         virtual ~SceneNode();
 
         void add(SceneNode &node);

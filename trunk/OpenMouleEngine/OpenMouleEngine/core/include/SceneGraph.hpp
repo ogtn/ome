@@ -8,10 +8,13 @@
 #define HPP_SCENEGRAPH
 
 #include "Singleton.hpp"
-#include "SceneNode.hpp"
+#include <set>
 
 namespace OpenMouleEngine
 {
+    // forward declaration
+    class SceneNode;
+
     class SceneGraph: public Singleton<SceneGraph>
     {
     private:

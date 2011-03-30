@@ -4,6 +4,8 @@
 ////////////////////////////////////////////////////////////////////////
 
 #include "Material.hpp"
+#include "Texture.hpp"
+#include "ShaderProgram.hpp"
 
 namespace OpenMouleEngine
 {

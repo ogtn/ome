@@ -31,6 +31,11 @@
 #include "DevILLoader.hpp"
 #include "ResourceSaver.hpp"
 #include "MD2Loader.hpp"
+#include "Color.hpp"
+#include "SceneGraph.hpp"
+#include "ResourceManager.hpp"
+#include "Material.hpp"
+#include "Camera.hpp"
 
 namespace OpenMouleEngine
 {

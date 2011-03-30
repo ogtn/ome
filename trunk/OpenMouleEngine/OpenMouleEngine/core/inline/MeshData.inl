@@ -12,6 +12,7 @@ MeshData::MeshData(const std::string &name, const std::string &attribName, std::
     interleavedData(NULL),
     offset(0),
     byteSize(0),
+    nbMeshes(0),
     interleaved(false),
     finalized(false)
 {
@@ -36,6 +37,7 @@ MeshData::MeshData(const std::string &name, const std::string &attribName, T *da
     interleavedData(NULL),
     offset(0),
     byteSize(0),
+    nbMeshes(0),
     interleaved(false),
     finalized(false)
 {
@@ -58,6 +60,7 @@ MeshData::MeshData(const std::string &name, T *data, int nbVertices)
     interleavedData((char *)data),
     offset(0),
     byteSize(0),
+    nbMeshes(0),
     interleaved(true),
     finalized(false)
 {

@@ -8,11 +8,12 @@
 #define HPP_RESOURCESAVER
 
 #include <string>
-#include <fstream>
-#include "Resource.hpp"
 
 namespace OpenMouleEngine
 {
+    // forward declaration
+    class Resource;
+
     class ResourceSaver
     {
     public:

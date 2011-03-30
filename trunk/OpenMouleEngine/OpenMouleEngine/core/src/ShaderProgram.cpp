@@ -6,6 +6,7 @@
 #include "ShaderProgram.hpp"
 #include "ResourceManager.hpp"
 #include <cstdio>
+#include <iostream>
 
 namespace OpenMouleEngine
 {

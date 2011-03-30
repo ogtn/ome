@@ -4,6 +4,9 @@
 ////////////////////////////////////////////////////////////////////////
 
 #include "ResourceManager.hpp"
+#include "MeshData.hpp"
+#include "ResourceSaver.hpp"
+#include <iostream>
 
 namespace OpenMouleEngine
 {

@@ -53,7 +53,6 @@ void makeGrid(int size, int pitch)
 {
     std::vector<vec3> *positions = new std::vector<vec3>();
     std::vector<Color> *colors = new std::vector<Color>();
-    std::vector<GLfloat> *posNcol = new std::vector<GLfloat>();
 
     int begin = -size / 2;
     int end = size / 2;
@@ -64,29 +63,15 @@ void makeGrid(int size, int pitch)
         positions->push_back(vec3(i, begin));
         positions->push_back(vec3(i, end));
 
-        // interleaved X axis and color
-        posNcol->push_back(i); posNcol->push_back(begin); posNcol->push_back(0);
-        posNcol->push_back(0.5); posNcol->push_back(0.6); posNcol->push_back(0.7); posNcol->push_back(0.8);
-        
-        posNcol->push_back(i); posNcol->push_back(end); posNcol->push_back(0);
-        posNcol->push_back(0.5); posNcol->push_back(0.6); posNcol->push_back(0.7); posNcol->push_back(0.8);
-
         // Y axis
         positions->push_back(vec3(begin, i));
         positions->push_back(vec3(end, i));
-
-        // interleaved Y axis and color
-        posNcol->push_back(begin); posNcol->push_back(i); posNcol->push_back(0);
-        posNcol->push_back(0.5); posNcol->push_back(0.6); posNcol->push_back(0.7); posNcol->push_back(0.8);
-        
-        posNcol->push_back(end); posNcol->push_back(i); posNcol->push_back(0);
-        posNcol->push_back(0.5); posNcol->push_back(0.6); posNcol->push_back(0.7); posNcol->push_back(0.8);
 
         // colors
         for(int j = 0; j < 4; j++)
         {
             if(i == 0)
-                colors->push_back(Color(0.8f, 0.8f, 0.8f));
+                colors->push_back(Color(0.7f, 0.7f, 0.7f));
             else if((i % 5) == 0)
                 colors->push_back(Color(0.5f, 0.5f, 0.5f));
             else
@@ -95,11 +80,8 @@ void makeGrid(int size, int pitch)
     }
 
     // creating mesh data
-    //MeshData *meshData = new MeshData("grid", "a_Vertex", positions);
-    //meshData->addSubArray("a_Color", colors);
-    MeshData *meshData = new MeshData("grid", &(*posNcol)[0], positions->size());
-    meshData->addSubArray("a_Vertex");
-    meshData->addSubArray("a_Color", 4); 
+    MeshData *meshData = new MeshData("grid", "a_Vertex", positions);
+    meshData->addSubArray("a_Color", colors);
 
     // generating mesh
     Mesh *mesh = meshData->getMesh();
@@ -134,30 +116,29 @@ int main(void)
 
     makeGrid(100, 2);
 
-    Mesh *mesh = rm->getMesh("data/obj/chamfer.obj");
     ShaderProgram shader("data/shaders/basic.vert", "data/shaders/basic.frag");
     shader.link();
-    mesh->setShader(&shader);
     Material material("smbCube");
     material.setDiffuse(rm->getTexture("data/textures/smb3.png"));
-    material.setShininess(32.f);
+
+    /*for(int i = 0; i < 5; i++)
+    {
+        for(int j = 0; j < 5; j++)
+        {
+            Mesh *mesh = rm->getMesh("data/obj/chamfer.obj");
+            mesh->setShader(&shader);
+            mesh->setMaterial(&material);
+            mesh->translate(vec3(-100 + 50 * i, -100 + 50 * j));
+            sg->add(*mesh);
+        }
+    }
+    */
+
+    Mesh *mesh = rm->getMesh("data/obj/chamfer.obj");
+    mesh->setShader(&shader);
     mesh->setMaterial(&material);
-    mesh->translate(vec3(0, -25));
     sg->add(*mesh);
-
     //rm->saveAs(*mesh->data(), "test.msh");
-
-    Mesh *mesh2 = rm->getMesh("data/obj/chamfer.obj");
-    ShaderProgram shader2("data/shaders/point.vert", "data/shaders/point.frag");
-    shader2.link();
-    mesh2->setShader(&shader2);
-    Material material2("pointSprite");
-    material2.setDiffuse(rm->getTexture("data/textures/particle.png"));
-    mesh2->setMaterial(&material2);
-    mesh2->translate(vec3(0, 25));
-    mesh2->setRenderMode(GL_POINTS);
-    mesh2->setPointSize(100);
-    sg->add(*mesh2);
 
     CameraPerspective *cam = dynamic_cast<CameraPerspective *>(engine->getCamera());
 
@@ -185,8 +166,8 @@ int main(void)
         else if(glfwGetKey(GLFW_KEY_RIGHT))
             theta += 0.02f;
 
-        //if(glfwGetKey(GLFW_KEY_SPACE))
-            mesh->rotate(vec3(0.5f, 1.f, 1.5f));
+        if(glfwGetKey(GLFW_KEY_SPACE))
+            mesh->rotate(vec3(.5f, 1.f, 1.5f));
 
         // avoid camera being upside down
         if(phi > (PI / 2.f - 0.01f))

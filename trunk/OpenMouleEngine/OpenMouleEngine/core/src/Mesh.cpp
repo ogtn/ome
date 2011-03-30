@@ -4,12 +4,17 @@
 ////////////////////////////////////////////////////////////////////////
 
 #include "Mesh.hpp"
+#include "Light.hpp"
 #include "Engine.hpp"
+#include "Camera.hpp"
+#include "Material.hpp"
+#include "MeshData.hpp"
 
 namespace OpenMouleEngine
 {
-    Mesh::Mesh(MeshData *geometry, ShaderProgram *shader, Material *material)
-        : geometry(geometry),
+    Mesh::Mesh(const std::string &name, MeshData *geometry, ShaderProgram *shader, Material *material)
+        : SceneNode(name),
+        geometry(geometry),
         shader(shader),
         material(material),
         mode(GL_TRIANGLES),

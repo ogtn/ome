@@ -7,20 +7,18 @@
 #ifndef HPP_MESH
 #define HPP_MESH
 
-#include "ShaderProgram.hpp"
-#include "Renderable.hpp"
 #include "SceneNode.hpp"
-#include "Texture2D.hpp"
-#include "MeshData.hpp"
-#include "Material.hpp"
-#include "Color.hpp"
 
 namespace OpenMouleEngine
 {
+    // forward declarations
+    class MeshData;
+    class Material;
+
     class Mesh: public SceneNode
     {
     public:
-        Mesh(MeshData *geometry, ShaderProgram *shader = NULL, Material *material = NULL);
+        Mesh(const std::string &name, MeshData *geometry, ShaderProgram *shader = NULL, Material *material = NULL);
         ~Mesh();
 
         virtual void sendUniforms() const;
