@@ -8,10 +8,12 @@
 #define HPP_SHADERLOADER
 
 #include "ResourceLoader.hpp"
-#include "Shader.hpp"
 
 namespace OpenMouleEngine
 {
+    // forward declaration
+    class Shader;
+
     class VertexShaderLoader: public ResourceLoader<Shader>
     {
     public:

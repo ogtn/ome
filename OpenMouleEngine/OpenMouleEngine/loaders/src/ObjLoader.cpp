@@ -4,6 +4,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 #include "ObjLoader.hpp"
+#include "Vector3.hpp"
 #include <fstream>
 #include <sstream>
 #include <algorithm>

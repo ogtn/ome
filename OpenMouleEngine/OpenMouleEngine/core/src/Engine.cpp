@@ -4,6 +4,10 @@
 ////////////////////////////////////////////////////////////////////////
 
 #include "Engine.hpp"
+#include "Camera.hpp"
+#include "SceneGraph.hpp"
+#include "ResourceManager.hpp"
+#include <GL/glew.h>
 #include <iostream>
 
 namespace OpenMouleEngine

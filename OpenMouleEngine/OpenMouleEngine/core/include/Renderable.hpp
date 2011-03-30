@@ -14,7 +14,7 @@ namespace OpenMouleEngine
     class Renderable
     {
     public:
-        Renderable();
+        Renderable(const std::string &name);
         virtual ~Renderable();
         
         virtual void render() const = 0;        
@@ -26,6 +26,9 @@ namespace OpenMouleEngine
         const vec3 &getPosition() const;
         const vec3 &getScaling() const;
         const vec3 &getRotation() const;
+
+    protected:
+        std::string name;
 
     private:
         vec3 position;

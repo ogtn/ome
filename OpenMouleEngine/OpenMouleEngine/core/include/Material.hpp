@@ -7,14 +7,15 @@
 #ifndef HPP_MATERIAL
 #define HPP_MATERIAL
 
-#include "ShaderProgram.hpp"
-#include "Resource.hpp"
-#include "Texture.hpp"
 #include "Color.hpp"
+#include "Resource.hpp"
 #include <string>
 
 namespace OpenMouleEngine
 {
+    // forward declaration
+    class Texture;
+
     class Material: public Resource
     {
     public:

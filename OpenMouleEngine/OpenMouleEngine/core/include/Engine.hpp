@@ -7,15 +7,18 @@
 #ifndef HPP_ENGINE
 #define HPP_ENGINE
 
-
-#include "Light.hpp"
-#include "Camera.hpp"
-#include "SceneGraph.hpp"
-#include "ResourceManager.hpp"
 #include <vector>
+#include "Singleton.hpp"
 
 namespace OpenMouleEngine
-{    
+{
+    // forward declarations
+    class Light;
+    class Mesh;
+    class Camera;
+    class SceneGraph;
+    class ResourceManager;
+
     class Engine: public Singleton<Engine>
     {
     private:

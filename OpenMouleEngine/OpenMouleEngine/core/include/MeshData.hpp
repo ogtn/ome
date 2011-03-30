@@ -7,14 +7,16 @@
 #ifndef HPP_MESHDATA
 #define HPP_MESHDATA
 
-#include "ShaderProgram.hpp"
 #include "Resource.hpp"
-#include "Vector3.hpp"
+#include <GL/glew.h>
 #include <vector>
 #include <map>
 
 namespace OpenMouleEngine
 {
+    //forward declarations
+    class ShaderProgram;
+
     struct DataType
     {
         DataType(int size, GLenum glType)
@@ -88,32 +90,7 @@ namespace OpenMouleEngine
         //const std::vector<Mesh *> &getMeshes() const;
         void render(ShaderProgram &shader, GLenum mode);
         void finalize();
-
-        void print()
-        {
-            std::cerr << "Le VBO contient " << nbVertices << " sommets, pour un total de " << byteSize << " octets" << std::endl;
-        
-            if(finalized)
-                std::cerr << "Il est finalise" << std::endl;
-            else
-                std::cerr << "Il n'est pas finalise" << std:: endl;
-
-            if(interleaved)
-                std::cerr << "Il est entrelace" << std::endl;
-            else
-                std::cerr << "Il n'est pas entrelace" << std:: endl;
-
-
-            std::cerr << "Il est constitue de:" << std::endl;
-
-            std::map<std::string, VertexAttrib>::iterator it;
-
-            for(it = vertexAttribs.begin(); it != vertexAttribs.end(); ++it)
-            {
-                std::cerr << it->first << " avec " << it->second.nbSubElements;
-                std::cerr << " sous elements de taille " << it->second.type.size << std::endl;
-            }
-        }
+        void print();
 
     private:
         typedef std::map<std::string, VertexAttrib> AttribMap;
@@ -128,6 +105,7 @@ namespace OpenMouleEngine
         unsigned int byteSize;
         char *interleavedData;
         GLsizeiptr offset;
+        int nbMeshes;
         bool interleaved;
         bool finalized;
     };

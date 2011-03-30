@@ -7,7 +7,9 @@
 
 namespace OpenMouleEngine
 {
-    SceneNode::SceneNode(): Renderable(), subNodes()
+    SceneNode::SceneNode(const std::string &name)
+        : Renderable(name),
+        subNodes()
     {
     }
 

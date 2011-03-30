@@ -4,6 +4,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 #include "ShaderLoader.hpp"
+#include "Shader.hpp"
 #include <iostream>
 #include <fstream>
 

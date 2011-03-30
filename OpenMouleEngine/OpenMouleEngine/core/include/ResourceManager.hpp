@@ -9,15 +9,19 @@
 
 #include <map>
 #include <string>
-#include "Mesh.hpp"
 #include "Shader.hpp"
 #include "Texture.hpp"
 #include "Singleton.hpp"
-#include "ResourceSaver.hpp"
 #include "ResourceLoader.hpp"
 
 namespace OpenMouleEngine
 {
+    // forward declarations
+    class ResourceSaver;
+    class Resource;
+    class MeshData;
+    class Mesh;
+
     class ResourceManager: public Singleton<ResourceManager>
     {
     private:

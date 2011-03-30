@@ -9,7 +9,6 @@
 
 #include "Resource.hpp"
 #include <GL/glew.h>
-#include <string>
 
 namespace OpenMouleEngine
 {
