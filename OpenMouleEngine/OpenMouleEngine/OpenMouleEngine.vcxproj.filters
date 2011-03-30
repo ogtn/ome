@@ -90,6 +90,9 @@
     <ClCompile Include="core\src\MeshData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="core\src\SuperPointer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="licence.txt">
@@ -144,6 +147,9 @@
       <Filter>Inline Files</Filter>
     </None>
     <None Include="core\inline\MeshData.inl">
+      <Filter>Inline Files</Filter>
+    </None>
+    <None Include="core\inline\SuperPointer.inl">
       <Filter>Inline Files</Filter>
     </None>
   </ItemGroup>
@@ -233,6 +239,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="core\include\MathTools.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\include\SuperPointer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
