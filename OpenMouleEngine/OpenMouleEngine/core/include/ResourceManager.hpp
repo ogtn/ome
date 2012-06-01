@@ -9,6 +9,7 @@
 
 #include <map>
 #include <string>
+#include <iostream>
 #include "Shader.hpp"
 #include "Texture.hpp"
 #include "Singleton.hpp"
