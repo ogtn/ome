@@ -7,6 +7,8 @@
 #ifndef HPP_SUPERPOINTER
 #define HPP_SUPERPOINTER
 
+#include <iostream>
+
 namespace OpenMouleEngine
 {
     class SuperPointerBase

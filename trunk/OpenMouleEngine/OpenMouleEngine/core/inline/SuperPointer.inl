@@ -106,7 +106,7 @@ SuperPointer<T> &SuperPointer<T>::operator =(U *p)
     }
     else
     {
-        std::cerr << "kernel panic!!!" << endl;
+        std::cerr << "kernel panic!!!" << std::endl;
     }
 
     return *this;
@@ -117,7 +117,7 @@ template <typename T>
 template <typename U>
 SuperPointer<T> &SuperPointer<T>::operator =(SuperPointer<U> &sp)
 {
-    // on empeche l'auto affectation
+    // avoid self affectation
     if(*this != sp)
     {
         if(dynamic_cast<T*>(sp.getPtr()))
